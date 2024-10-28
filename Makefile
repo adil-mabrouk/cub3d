@@ -1,30 +1,22 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/10/22 10:25:25 by amabrouk          #+#    #+#              #
-#    Updated: 2024/10/26 18:56:13 by amabrouk         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = cub3d
 
 CC = cc
 
-CFLAGS = -Werror -Wextra -Wall -g -Iinclude # -Ofast -fsanitize=address
-DFLAGS = libmlx42.a -lglfw -L /Users/amabrouk/.brew/opt/glfw/lib # -framework Cocoa -framework OpenGL -framework IOKit
+CFLAGS = -Werror -Wextra -Wall -I/Users/isrkik/Desktop/MLX42/include -g -fsanitize=address
 
-SRC = cub3d.c
+DFLAGS = -framework Cocoa -framework OpenGL -framework IOKit
+
+SRC = parsing/main.c parsing/utils.c parsing/gnl.c
 
 OBJ = $(SRC:.c=.o)
 
+%.o : %.c cub3d.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
 all: $(NAME)
 
-$(NAME): $(OBJ) cub3d.h
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(DFLAGS)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ)  -L/Users/isrkik/brew/opt/glfw/lib /Users/isrkik/Desktop/MLX42/libmlx42.a -lglfw  $(DFLAGS) -o $(NAME)
 
 clean:
 	rm -f $(OBJ)
@@ -33,3 +25,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: fclean all clean re
