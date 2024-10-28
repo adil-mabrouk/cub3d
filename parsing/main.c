@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:30:56 by isrkik            #+#    #+#             */
-/*   Updated: 2024/10/28 19:49:03 by isrkik           ###   ########.fr       */
+/*   Updated: 2024/10/28 20:33:17 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,29 +96,24 @@ void	skip_spaces(char *line, int *i)
 // 	}
 // }
 
-void	valid_colors(char *line, int *i)
+void valid_colors(char *line, int *i)
 {
-	char	temp[4];
-	int	b;
+    unsigned int temp[3];
+    int b;
 
-	temp[0] = '\0';
-	temp[1] = '\0';
-	temp[2] = '\0';
-	temp[3] = '\0';
-	skip_spaces(line, i);
-	while (line[*i])
-	{
-		b = 0;
-		while (line[*i] != ',' && line[*i] != '\n')
-		{
-			temp[b] = line[*i];
-			b++;
-			(*i)++;
-		}
-		if (ft_strcmp(temp, "255") > 0)
-			ft_error("colors out of range\n", 2);
-		(*i)++;
-	}
+	b = 0;
+    skip_spaces(line, i);
+    while (b < 3 && line[*i])
+    {
+        temp[b] = atoi(&line[*i]);
+        if (temp[b] > 255)
+            ft_error("Color out of range (must be between 0 and 255)\n", 2);
+        while (line[*i] && line[*i] != ',' && line[*i] != '\n')
+            (*i)++;
+        if (line[*i] == ',')
+            (*i)++;
+        b++;
+    }
 }
 
 void	check_colors(char *line, int *i)
