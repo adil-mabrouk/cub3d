@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:37:30 by isrkik            #+#    #+#             */
-/*   Updated: 2024/10/28 18:43:51 by isrkik           ###   ########.fr       */
+/*   Updated: 2024/10/29 12:23:00 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,21 @@ typedef struct s_game
 	int			colums;
 }	t_game;
 
+typedef struct s_utils
+{
+	int	flag_ea;
+	int	flag_we;
+	int	flag_so;
+	int	flag_no;
+}	t_utils;
+
 typedef struct s_pars
 {
 	char	*north;
 	char	*west;
 	char	*east;
 	char	*south;
+	t_utils flag_utils;
 }	t_pars;
 
 
@@ -64,5 +73,13 @@ char	*get_next_line(int fd);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_substr(char *s, int start, int len);
 int		ft_isdigit(int c);
+int		ft_atoi(const char	*str);
+int		ft_isspace(int c);
+void	valid_colors(char *line, int *i);
+int		first_half(char *av, t_pars	*pars);
+void	skip_spaces(char *line, int *i);
+void	check_colors(char *line, int *i);
+void	copy_to_2d(int len, char ***line, int fd2);
+void	pars_file(char **line, t_pars *pars);
 
 #endif

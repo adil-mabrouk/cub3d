@@ -1,96 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 11:22:39 by isrkik            #+#    #+#             */
-/*   Updated: 2024/10/28 18:43:39 by isrkik           ###   ########.fr       */
+/*   Created: 2024/10/29 09:38:40 by isrkik            #+#    #+#             */
+/*   Updated: 2024/10/29 09:39:18 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
-
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
-char	*ft_substr(char *s, int start, int len)
-{
-	char	*sub;
-	int		i;
-
-	if (!s)
-		return (NULL);
-	if (len > ft_strlen(s) - start)
-		len = ft_strlen(s) - start;
-	if (start >= ft_strlen(s))
-		return (ft_strdup("\0"));
-	sub = (char *)malloc((len + 1) * sizeof(char));
-	if (!sub)
-		return (NULL);
-	i = 0;
-	while (s[start] && len > 0)
-	{
-		sub[i] = s[start];
-		start++;
-		i++;
-		len--;
-	}
-	sub[i] = '\0';
-	return (sub);
-}
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	if (!s1 || !s2)
-		return (-1);
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
-}
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	if (!str)
-		return (-1);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-void    ft_putchar_fd(char c, int fd)
-{
-    write (fd, &c, 1);
-}
-
-void    ft_putstr_fd(char *str, int fd)
-{
-    int i;
-
-    i = 0;
-    while (str[i])
-    {
-        ft_putchar_fd(str[i], fd);
-        i++;
-    }
-}
-
-void    ft_error(char *str, int fd)
-{
-    ft_putstr_fd(str, fd);
-    exit(EXIT_FAILURE);
-}
+#include "../../cub3d.h"
 
 char	*ft_strdup(char *str)
 {
@@ -182,4 +102,11 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	tmp[lens1] = '\0';
 	return (free(s1), tmp);
+}
+
+int	ft_isspace(int c)
+{
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\v')
+		return (1);
+	return (0);
 }

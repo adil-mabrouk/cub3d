@@ -6,11 +6,11 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:30:56 by isrkik            #+#    #+#             */
-/*   Updated: 2024/10/28 20:33:17 by isrkik           ###   ########.fr       */
+/*   Updated: 2024/10/29 11:45:56 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 int	parse_name(char *av)
 {
@@ -65,119 +65,6 @@ void	copy_to_2d(int len, char ***line, int fd2)
 	close(fd2);
 }
 
-int	ft_isspace(int c)
-{
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\v')
-		return (1);
-	return (0);
-}
-
-void	skip_spaces(char *line, int *i)
-{
-	while (line[*i])
-	{
-		if (ft_isspace(line[*i]))
-			(*i)++;
-		else
-			break ;
-	}
-}
-
-// void	store_direction(char *temp, char *line, int i, t_pars *pars)
-// {
-// 	int	start;
-
-// 	start = i;
-// 	if (ft_strcmp(temp, "NO") == 0)
-// 	{
-// 		while (line[i])
-// 			i++;
-// 		pars->north = ft_substr(line, start, i - start);
-// 	}
-// }
-
-void valid_colors(char *line, int *i)
-{
-    unsigned int temp[3];
-    int b;
-
-	b = 0;
-    skip_spaces(line, i);
-    while (b < 3 && line[*i])
-    {
-        temp[b] = atoi(&line[*i]);
-        if (temp[b] > 255)
-            ft_error("Color out of range (must be between 0 and 255)\n", 2);
-        while (line[*i] && line[*i] != ',' && line[*i] != '\n')
-            (*i)++;
-        if (line[*i] == ',')
-            (*i)++;
-        b++;
-    }
-}
-
-void	check_colors(char *line, int *i)
-{
-	if (line[*i] == 'F')
-	{
-		(*i)++;
-		if (ft_isspace(line[*i]) == 1 && line[*i] != '\0')
-			valid_colors(line, i);
-		else
-			ft_error("invalid colors\n", 2);
-	}
-	else if (line[*i] == 'C')
-	{
-		(*i)++;
-		if (ft_isspace(line[*i]) == 1 && line[*i] != '\0')
-			valid_colors(line, i);
-		else
-			ft_error("invalid colors\n", 2);
-	}
-	
-}
-
-void	pars_line(char *line, t_pars *pars)
-{
-	int		i;
-	char	temp[3];
-	
-	(void)pars;
-	i = 0;
-	temp[2] = '\0';
-	skip_spaces(line, &i);
-	if (line[i] == '\0')
-		return ;
-	check_colors(line, &i);
-	if (line[i] && line[i + 1])
-	{
-		temp[0] = line[i];
-		temp[1] = line[i + 1];
-	}
-	if (ft_strcmp("NO", temp) != 0 && ft_strcmp("SO", temp) != 0
-		&& ft_strcmp("EA", temp) != 0 && ft_strcmp("WE", temp) != 0)
-		ft_error("invalid direction\n", 2);
-	if (line[i] == '\0')
-		ft_error("invalid direction\n", 2);
-	skip_spaces(line, &i);
-	if (line[i] == '\0')
-		ft_error("invalid direction\n", 2);
-}
-
-void	pars_file(char **line, t_pars *pars)
-{
-	int	i;
-
-	i = 0;
-	while (line && line[i])
-	{
-		if (line[i][0] == '\n')
-			i++;
-		pars_line(line[i], pars);
-		i++;
-	}
-}
-
 int	first_half(char *av, t_pars	*pars)
 {
 	char	*temp;
@@ -186,6 +73,7 @@ int	first_half(char *av, t_pars	*pars)
 	int		fd2;
 	int		len;
 
+	(void)pars;
 	len = 0;
 	fd = open(av, O_RDWR);
 	if (fd < 0)

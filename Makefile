@@ -2,11 +2,15 @@ NAME = cub3d
 
 CC = cc
 
-CFLAGS = -Werror -Wextra -Wall -I/Users/isrkik/Desktop/MLX42/include -g -fsanitize=address
+CFLAGS = -Werror -Wextra -Wall -I/Users/$(USER)/Desktop/MLX42/include -g -fsanitize=address
 
-DFLAGS = -framework Cocoa -framework OpenGL -framework IOKit
+DFLAGS = /Users/$(USER)/Desktop/MLX42/libmlx42.a -lglfw \
+		 -framework Cocoa -framework OpenGL -framework IOKit
 
-SRC = parsing/main.c parsing/utils.c parsing/gnl.c
+SRC = parsing/main/main.c parsing/utils/utils.c \
+	  parsing/gnl.c parsing/utils/utils2.c \
+	  parsing/utils/utils3.c parsing/main/first_part.c \
+	  
 
 OBJ = $(SRC:.c=.o)
 
@@ -16,7 +20,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ)  -L/Users/isrkik/brew/opt/glfw/lib /Users/isrkik/Desktop/MLX42/libmlx42.a -lglfw  $(DFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ)  -L/Users/$(USER)/brew/opt/glfw/lib $(DFLAGS) -o $(NAME)
 
 clean:
 	rm -f $(OBJ)
