@@ -11,35 +11,35 @@ void	draw_map(t_game *game)
 		while (++col < game->colums)
 		{
 			int tile = game->map[r][col];
-			int x = col * game->tile_size;
-			int y = r * game->tile_size;
+			int x = col * TILE_SIZE;
+			int y = r * TILE_SIZE;
 			int color = tile == 1 ? 0x000000FF : 0x0000FF00;
 			int i = -1;
-			while (++i < game->tile_size)
+			while (++i < TILE_SIZE)
 			{
 				int j = -1;
-				while (++j < game->tile_size)
+				while (++j < TILE_SIZE)
 					mlx_put_pixel(game->img, x + i, y + j, color);
 			}
 		}
 	}
 }
 
-void	draw_line(t_game *game, int x0, int y0, int x1, int y1)
+void	draw_line(t_game *game, int x1, int y1, int color)
 {
-	float	dx = x1 - x0;
-	float	dy = y1 - y0;
-	int	steps = fabsf(dx) > fabsf(dy) ? fabsf(dx) : fabsf(dy); // Determine the number of steps
+	double	dx = x1 - game->player.x;
+	double	dy = y1 - game->player.y;
+	int	steps = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy); // Determine the number of steps
 
-	float	x_inc = dx / steps; // Calculate the increment in x for each step
-	float	y_inc = dy / steps; // Calculate the increment in y for each step
+	double	x_inc = dx / steps; // Calculate the increment in x for each step
+	double	y_inc = dy / steps; // Calculate the increment in y for each step
 
-	float	x = x0;
-	float	y = y0;
+	double	x = game->player.x;
+	double	y = game->player.y;
 
 	for (int i = 0; i <= steps; i++)
 	{
-		mlx_put_pixel(game->img, x, y, 0xFFFF00FF); // Plot the pixel
+		mlx_put_pixel(game->img, x, y, color); // Plot the pixel
 		x += x_inc; // Increment x-coordinate by x_inc
 		y += y_inc; // Increment y-coordinate by y_inc
 	}
@@ -57,23 +57,24 @@ void	draw_player(t_game *game, int line_length)
 	}
 	int	line_x = game->player.x + line_length * cos(game->player.angle);
 	int	line_y = game->player.y + line_length * sin(game->player.angle);
-	draw_line(game, game->player.x, game->player.y, line_x, line_y);
+	draw_line(game, line_x, line_y, 0xFFFF00FF);
+	ft_raycast(game);
 }
 
-int	has_wall(t_game *game, double	new_x, double	new_y)
+int	collision_with_wall(t_game *game, double new_x, double new_y)
 {
-	double x = new_x -10;
-	double y;
+	double x = new_x - 11;
+	double y; 
 	int	grid_x;
 	int	grid_y;
 
-	while (x <= new_x + 10)
+	while (x <= new_x + 11)
 	{
-		y = new_y - 10;
-		while (y <= new_y + 10)
+		y = new_y - 11;
+		while (y <= new_y + 11)
 		{
-			grid_x = x / game->tile_size;
-			grid_y = y / game->tile_size;
+			grid_x = x / TILE_SIZE;
+			grid_y = y / TILE_SIZE;
 			if (game->map[grid_y][grid_x] == 1)
 				return 1;
 			y++;
@@ -92,22 +93,22 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 	game = (t_game *)param;
 	player = &game->player;
-	if (keydata.key == MLX_KEY_W && keydata.action == 1 && !has_wall(game, player->x + 2 * cos(player->angle), player->y + 2 * sin(player->angle)))
+	if (keydata.key == MLX_KEY_W && !collision_with_wall(game, player->x + 2 * cos(player->angle), player->y + 2 * sin(player->angle)))
 	{
 		player->x += 2 * cos(player->angle);
 		player->y += 2 * sin(player->angle);
 	}
-	else if (keydata.key == MLX_KEY_S && keydata.action == 1 && !has_wall(game, player->x - 2 * cos(player->angle), player->y - 2 * sin(player->angle)))
+	else if (keydata.key == MLX_KEY_S && !collision_with_wall(game, player->x - 2 * cos(player->angle), player->y - 2 * sin(player->angle)))
 	{
 		player->x -= 2 * cos(player->angle);
 		player->y -= 2 * sin(player->angle);
 	}
-	else if (keydata.key == MLX_KEY_A && keydata.action == 1 && !has_wall(game, player->x - 2 * cos(player->angle + M_PI_2), player->y - 2 * sin(player->angle + M_PI_2)))
+	else if (keydata.key == MLX_KEY_A && !collision_with_wall(game, player->x - 2 * cos(player->angle + M_PI_2), player->y - 2 * sin(player->angle + M_PI_2)))
 	{
 		player->x -= 2 * cos(player->angle + M_PI_2);
 		player->y -= 2 * sin(player->angle + M_PI_2);
 	}
-	else if (keydata.key == MLX_KEY_D && keydata.action == 1 && !has_wall(game, player->x + 2 * cos(player->angle + M_PI_2), player->y + 2 * sin(player->angle + M_PI_2)))
+	else if (keydata.key == MLX_KEY_D && !collision_with_wall(game, player->x + 2 * cos(player->angle + M_PI_2), player->y + 2 * sin(player->angle + M_PI_2)))
 	{
 		player->x += 2 * cos(player->angle + M_PI_2);
 		player->y += 2 * sin(player->angle + M_PI_2);
@@ -119,7 +120,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	else
 		return ;
 	mlx_delete_image(game->mlx, game->img);
-	game->img = mlx_new_image(game->mlx, game->width, game->height);
+	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	draw_map(game);
 	draw_player(game, 40);
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
@@ -128,43 +129,40 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 void	init_game(t_game *game)
 {
 	int temp_map[15][20] = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1},
-    {1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1},
-    {1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
-    {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-    {1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-};
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+	};
 
 	for (int i = 0; i < 15; i++)
 		for (int j = 0; j < 20; j++)
 			game->map[i][j] = temp_map[i][j];
-	game->tile_size = 32;
 	game->rows = 15;
 	game->colums = 20;
-	game->width = (game->tile_size * game->colums);
-	game->height = (game->tile_size * game->rows);
-	game->player.x = (game->width / 2);
-	game->player.y = (game->height / 2);
+	game->player.x = (WIDTH / 2);
+	game->player.y = (HEIGHT / 2);
 	game->player.radius = 10;
-	game->player.angle = 0;
-	game->mlx = mlx_init(game->width, game->height, "Adil's Map", true);
+	game->player.angle = 3 * M_PI_2;
+	// game->wall_strip_width = 1;
+	// game->num_rays = WIDTH / game->wall_strip_width;
+	game->mlx = mlx_init(WIDTH, HEIGHT, "Adil's Map", true);
 }
 
 int main()
 {
 	t_game	game;
 	init_game(&game);
-	game.img = mlx_new_image(game.mlx, game.width, game.height);
+	game.img = mlx_new_image(game.mlx, WIDTH, HEIGHT);
 	draw_map(&game);
 	draw_player(&game, 40);
 	mlx_image_to_window(game.mlx, game.img, 0, 0);

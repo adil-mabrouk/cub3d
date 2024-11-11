@@ -6,7 +6,7 @@
 #    By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:25:25 by amabrouk          #+#    #+#              #
-#    Updated: 2024/10/26 18:56:13 by amabrouk         ###   ########.fr        #
+#    Updated: 2024/11/10 16:12:14 by amabrouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = cc
 CFLAGS = -Werror -Wextra -Wall -g -Iinclude # -Ofast -fsanitize=address
 DFLAGS = libmlx42.a -lglfw -L /Users/amabrouk/.brew/opt/glfw/lib # -framework Cocoa -framework OpenGL -framework IOKit
 
-SRC = cub3d.c
+SRC = cub3d.c raycasting.c
 
 OBJ = $(SRC:.c=.o)
 
