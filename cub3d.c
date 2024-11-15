@@ -5,10 +5,10 @@ void	draw_map(t_game *game)
 	int r = -1;
 	int	col;
 
-	while (++r < game->rows)
+	while (++r < ROWS)
 	{
 		col = -1;
-		while (++col < game->colums)
+		while (++col < COLUMS)
 		{
 			int tile = game->map[r][col];
 			int x = col * TILE_SIZE;
@@ -45,7 +45,7 @@ void	draw_line(t_game *game, int x1, int y1, int color)
 	}
 }
 
-void	draw_player(t_game *game, int line_length)
+void	draw_player(t_game *game)
 {
 	int i = -game->player.radius;
 	while (++i < game->player.radius)
@@ -55,9 +55,9 @@ void	draw_player(t_game *game, int line_length)
 			if (i * i + j * j <= game->player.radius * game->player.radius)
 				mlx_put_pixel(game->img, game->player.x + i, game->player.y + j, 0xFF0000FF);
 	}
-	int	line_x = game->player.x + line_length * cos(game->player.angle);
-	int	line_y = game->player.y + line_length * sin(game->player.angle);
-	draw_line(game, line_x, line_y, 0xFFFF00FF);
+	// int	line_x = game->player.x + line_length * cos(game->player.angle);
+	// int	line_y = game->player.y + line_length * sin(game->player.angle);
+	// draw_line(game, line_x, line_y, 0xFFFF00FF);
 	ft_raycast(game);
 }
 
@@ -122,37 +122,39 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	mlx_delete_image(game->mlx, game->img);
 	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	draw_map(game);
-	draw_player(game, 40);
+	draw_player(game);
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
 }
 
 void	init_game(t_game *game)
 {
-	int temp_map[15][20] = {
-		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1, 1, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-	};
+	int temp_map[ROWS][COLUMS] = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1},
+    {1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+};
 
 	for (int i = 0; i < 15; i++)
 		for (int j = 0; j < 20; j++)
 			game->map[i][j] = temp_map[i][j];
-	game->rows = 15;
-	game->colums = 20;
+	// ROWS = 15;
+	// COLUMS = 20;
 	game->player.x = (WIDTH / 2);
 	game->player.y = (HEIGHT / 2);
 	game->player.radius = 10;
-	game->player.angle = 3 * M_PI_2;
+	game->player.angle = 0;
 	// game->wall_strip_width = 1;
 	// game->num_rays = WIDTH / game->wall_strip_width;
 	game->mlx = mlx_init(WIDTH, HEIGHT, "Adil's Map", true);
@@ -164,7 +166,7 @@ int main()
 	init_game(&game);
 	game.img = mlx_new_image(game.mlx, WIDTH, HEIGHT);
 	draw_map(&game);
-	draw_player(&game, 40);
+	draw_player(&game);
 	mlx_image_to_window(game.mlx, game.img, 0, 0);
 	mlx_key_hook(game.mlx, key_hook, &game);
 	mlx_loop(game.mlx);

@@ -6,10 +6,12 @@
 # include <math.h>
 # include <stdio.h>
 
+# define ROWS 15
+# define COLUMS 20
 # define TILE_SIZE 32
 # define WIDTH 640
 # define HEIGHT 480
-# define FOV 60
+# define FOV M_PI / 3
 
 typedef struct s_player {
 	double		x;
@@ -37,10 +39,11 @@ typedef struct s_ray
 	int		is_facing_left;
 	double	hor_wall_hit_x;
 	double	hor_wall_hit_y;
-	int		horz;
+	double	horz;
+	double	vert;
 }				t_ray;
 
 void	ft_raycast(t_game *game);
-void	draw_line(t_game *game, int x1, int y1, int color);
+// void	draw_line(t_game *game, int x1, int y1, int color);
 
 #endif
