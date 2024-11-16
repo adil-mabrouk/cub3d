@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:37:30 by isrkik            #+#    #+#             */
-/*   Updated: 2024/10/29 12:23:00 by isrkik           ###   ########.fr       */
+/*   Updated: 2024/11/15 15:34:36 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_utils
 	int	flag_we;
 	int	flag_so;
 	int	flag_no;
+	int	colors;
+	int	half;
 }	t_utils;
 
 typedef struct s_pars
@@ -75,11 +77,12 @@ char	*ft_substr(char *s, int start, int len);
 int		ft_isdigit(int c);
 int		ft_atoi(const char	*str);
 int		ft_isspace(int c);
-void	valid_colors(char *line, int *i);
+void	valid_colors(char *line, int *i, t_pars	*pars);
 int		first_half(char *av, t_pars	*pars);
 void	skip_spaces(char *line, int *i);
-void	check_colors(char *line, int *i);
+void	check_colors(char *line, int *i, t_pars *pars);
 void	copy_to_2d(int len, char ***line, int fd2);
 void	pars_file(char **line, t_pars *pars);
+int		ft_strnewline(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:38:40 by isrkik            #+#    #+#             */
-/*   Updated: 2024/10/29 09:39:18 by isrkik           ###   ########.fr       */
+/*   Updated: 2024/11/15 15:34:27 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,17 @@ char	*ft_strjoin(char *s1, char *s2)
 
 int	ft_isspace(int c)
 {
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\v')
+	if (c == ' ' || c == '\t')
 		return (1);
 	return (0);
+}
+
+int	ft_strnewline(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	return (i);
 }
