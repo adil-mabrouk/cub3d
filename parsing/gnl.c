@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: i61mail <i61mail@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 16:47:08 by isrkik            #+#    #+#             */
-/*   Updated: 2024/10/28 16:48:33 by isrkik           ###   ########.fr       */
+/*   Updated: 2024/11/17 17:26:35 by i61mail          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*store;
 
-	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = malloc(sizeof(char));
 	if (!line)

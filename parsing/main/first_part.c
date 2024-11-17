@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   first_part.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: i61mail <i61mail@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:40:00 by isrkik            #+#    #+#             */
-/*   Updated: 2024/11/16 00:03:54 by isrkik           ###   ########.fr       */
+/*   Updated: 2024/11/17 19:37:02 by i61mail          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,38 +141,51 @@ void	check_right(char **line, int i)
 	}
 }
 
-void	count_biggest_len(char **line, int i)
+
+int	count_biggest_len(char **line, int i)
 {
 	int	j;
 
 	j = 0;
 	while (line[i] && line[i][0] != '\n')
 	{
-		while (line[])
-		{
-			
-		}
+		if (ft_strlen(line[i]) > j)
+			j = ft_strlen(line[i]);
+		i++;
 	}
+	return (j);
 }
 
 
 void	mofm(char **line, int i)
 {
 	char	**temp;
-	int	len;
+	int	len = 0;
 	int	hold;
+	int j;
 
+	j = 0;
 	hold = i;
 	while (line[i] && line[i][0] != '\n')
 	{
 		i++;
 		len++;		
 	}
+	i = hold;
 	temp = malloc(sizeof(char *) * (len + 1));
 	if (!temp)
 		return ;
-	count_biggest_len(line, hold);
-	
+	temp[len] = NULL;
+	j = count_biggest_len(line, hold);
+	int k = j;
+	int n = 0;
+	while (line[hold] && line[hold][0] != '\n')
+	{
+		temp[n] = malloc(sizeof(char) * (j + 1));
+		hold++;
+		n++;
+	}
+	exit(EXIT_SUCCESS);
 }
 
 void	pars_map(char **line, t_pars *pars, int i)
@@ -204,7 +217,7 @@ void	pars_map(char **line, t_pars *pars, int i)
 	else if (line[i] && line[i][0] == '\n')
 		check_below(line, i);//kenchecki biha akhir char f akhir line
 	last_line(line, i);//kanchecki biha akhir line
-	mofm(line, i);
+	mofm(line, hold);
 	exit(EXIT_SUCCESS);
 }
 
