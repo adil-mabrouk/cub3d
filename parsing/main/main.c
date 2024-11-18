@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:30:56 by isrkik            #+#    #+#             */
-/*   Updated: 2024/11/18 16:17:02 by isrkik           ###   ########.fr       */
+/*   Updated: 2024/11/18 16:35:05 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int	first_half(char *av, t_pars	*pars)
 	close(fd);
 	copy_to_2d(len, &line, fd2);
 	pars_file(line, pars);
+	printf("%d\n", pars->c_color);
+	printf("%d\n", pars->f_color);
 	return (0);
 }
 

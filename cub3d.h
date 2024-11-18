@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:37:30 by isrkik            #+#    #+#             */
-/*   Updated: 2024/11/15 15:34:36 by isrkik           ###   ########.fr       */
+/*   Updated: 2024/11/18 16:36:10 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <stdbool.h>
 
 typedef struct s_player {
 	double		x;
@@ -61,6 +62,9 @@ typedef struct s_pars
 	char	*west;
 	char	*east;
 	char	*south;
+	char	**temp;
+	int f_color;
+	int c_color;
 	t_utils flag_utils;
 }	t_pars;
 
@@ -77,7 +81,7 @@ char	*ft_substr(char *s, int start, int len);
 int		ft_isdigit(int c);
 int		ft_atoi(const char	*str);
 int		ft_isspace(int c);
-void	valid_colors(char *line, int *i, t_pars	*pars);
+void	valid_colors(char *line, int *i, t_pars	*pars, bool color);
 int		first_half(char *av, t_pars	*pars);
 void	skip_spaces(char *line, int *i);
 void	check_colors(char *line, int *i, t_pars *pars);

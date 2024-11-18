@@ -6,13 +6,21 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:40:00 by isrkik            #+#    #+#             */
-/*   Updated: 2024/11/18 16:16:48 by isrkik           ###   ########.fr       */
+/*   Updated: 2024/11/18 16:34:24 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void valid_colors(char *line, int *i, t_pars *pars)
+int	create_rgb(int r, int g, int b)
+{
+	int	col;
+
+	col = r << 16 | g << 8 | b;
+	return (col);
+}
+
+void valid_colors(char *line, int *i, t_pars *pars, bool color)
 {
 	unsigned int temp[3];
 	int b;
@@ -35,6 +43,10 @@ void valid_colors(char *line, int *i, t_pars *pars)
 	pars->flag_utils.colors++;
 	if (pars->flag_utils.colors == 3)
 		ft_error("duplicate colors\n", 2);
+	if (color == 0)
+		pars->f_color = create_rgb(temp[0], temp[1], temp[2]);
+	else
+		pars->c_color = create_rgb(temp[0], temp[1], temp[2]);
 	pars->flag_utils.half++;
 }
 
@@ -44,7 +56,7 @@ void	check_colors(char *line, int *i, t_pars *pars)
 	{
 		(*i)++;
 		if (ft_isspace(line[*i]) && line[*i] != '\0')
-			valid_colors(line, i, pars);
+			valid_colors(line, i, pars, 0);
 		else
 			ft_error("invalid colors\n", 2);
 	}
@@ -52,7 +64,7 @@ void	check_colors(char *line, int *i, t_pars *pars)
 	{
 		(*i)++;
 		if (ft_isspace(line[*i]) == 1 && line[*i] != '\0')
-			valid_colors(line, i, pars);
+			valid_colors(line, i, pars, 1);
 		else
 			ft_error("invalid colors\n", 2);
 	}
@@ -157,7 +169,7 @@ int	count_biggest_len(char **line, int i)
 }
 
 
-void	cpy_map(char **line, int hold, char **temp, int length)
+void	cpy_map(char **line, int hold, int length, t_pars *pars)
 {
 	int	n;
 	int	i;
@@ -175,18 +187,18 @@ void	cpy_map(char **line, int hold, char **temp, int length)
 			{
 				while (length > i)
 				{
-					temp[n][i - 1] = ' ';
+					pars->temp[n][i - 1] = ' ';
 					i++;
 				}
-				temp[n][i - 1] = '\n';
+				pars->temp[n][i - 1] = '\n';
 				break ;
 			}
 			else if (i < len_line)
 			{
 				if (line[hold][i] == '\n' && i == length - 1)
-					temp[n][i] = line[hold][i];
+					pars->temp[n][i] = line[hold][i];
 				else if (line[hold][i] != '\n')
-					temp[n][i] = line[hold][i];
+					pars->temp[n][i] = line[hold][i];
 			}
 			i++;
 		}
@@ -203,7 +215,7 @@ int	ft_players(int c)
 	return (0);
 }
 
-void	check_mofm(char **temp)
+void	check_mofm(t_pars *pars)
 {
 	int	i;
 	int	j;
@@ -211,27 +223,27 @@ void	check_mofm(char **temp)
 
 	i = 1;
 	dupl = 0;
-	while (temp[i])
+	while (pars->temp[i])
 	{
 		j = 0;
-		while (temp[i][j])
+		while (pars->temp[i][j])
 		{
-			if (temp[i][j] == '1')
+			if (pars->temp[i][j] == '1')
 				j++;
-			else if (ft_isspace(temp[i][j]))
+			else if (ft_isspace(pars->temp[i][j]))
 				j++;
-			else if (temp[i][j] == '0' || ft_players(temp[i][j]))
+			else if (pars->temp[i][j] == '0' || ft_players(pars->temp[i][j]))
 			{
-				if (ft_players(temp[i][j]))
+				if (ft_players(pars->temp[i][j]))
 					dupl++;
 				if (dupl > 1)
 					ft_error("duplicate players\n", 2);
-				if (temp[i - 1][j] == ' ' || temp[i + 1][j] == ' '
-					|| temp[i][j - 1] == ' ' || temp[i][j + 1] == ' ')
+				if (pars->temp[i - 1][j] == ' ' || pars->temp[i + 1][j] == ' '
+					|| pars->temp[i][j - 1] == ' ' || pars->temp[i][j + 1] == ' ')
 					ft_error("space between 0s\n", 2);
 				j++;
 			}
-			else if (temp[i][j] == '\n')
+			else if (pars->temp[i][j] == '\n')
 				j++;
 			else
 				ft_error("invalid char\n", 2);
@@ -240,9 +252,8 @@ void	check_mofm(char **temp)
 	}
 }
 
-void	mofm(char **line, int i)
+void	mofm(char **line, int i, t_pars *pars)
 {
-	char	**temp;
 	int	len = 0;
 	int	hold;
 	int j;
@@ -250,27 +261,28 @@ void	mofm(char **line, int i)
 
 	j = 0;
 	hold = i;
+	pars->temp = NULL;
 	while (line[hold] && line[hold][0] != '\n')
 	{
 		hold++;
 		len++;		
 	}
 	hold = i;
-	temp = malloc(sizeof(char *) * (len + 1));
-	if (!temp)
+	pars->temp = malloc(sizeof(char *) * (len + 1));
+	if (!pars->temp)
 		return ;
-	temp[len] = NULL;
+	pars->temp[len] = NULL;
 	j = count_biggest_len(line, hold);
 	while (line[hold] && line[hold][0] != '\n')
 	{
-		temp[n] = malloc(sizeof(char) * (j + 2));
-		temp[n][j] = '\0';
-		temp[n][j + 1] = '\0';
+		pars->temp[n] = malloc(sizeof(char) * (j + 2));
+		pars->temp[n][j] = '\0';
+		pars->temp[n][j + 1] = '\0';
 		hold++;
 		n++;
 	}
-	cpy_map(line, i, temp, j);
-	check_mofm(temp);
+	cpy_map(line, i, j, pars);
+	check_mofm(pars);
 }
 
 void	pars_map(char **line, t_pars *pars, int i)
@@ -282,7 +294,6 @@ void	pars_map(char **line, t_pars *pars, int i)
 	j = 0;
 	hold = i;
 	k = i;
-	(void)pars;
 	while (line[i] && line[i][j] && (ft_isspace(line[i][j]) || line[i][j] == '1'))//kantchecki biha line lowl
 		j++;
 	if (line[i++][j] != '\n')
@@ -302,7 +313,7 @@ void	pars_map(char **line, t_pars *pars, int i)
 	else if (line[i] && line[i][0] == '\n')
 		check_below(line, i);//kenchecki biha akhir char f akhir line
 	last_line(line, i);//kanchecki biha akhir line
-	mofm(line, hold);
+	mofm(line, hold, pars);
 }
 
 void	pars_file(char **line, t_pars *pars)
