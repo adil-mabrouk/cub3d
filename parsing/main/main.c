@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:30:56 by isrkik            #+#    #+#             */
-/*   Updated: 2024/11/18 16:35:05 by isrkik           ###   ########.fr       */
+/*   Updated: 2024/11/18 23:30:42 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	first_half(char *av, t_pars	*pars)
 	int		fd2;
 	int		len;
 
-	(void)pars;
 	len = 0;
 	fd = open(av, O_RDWR);
 	if (fd < 0)
@@ -93,15 +92,19 @@ int	first_half(char *av, t_pars	*pars)
 	close(fd);
 	copy_to_2d(len, &line, fd2);
 	pars_file(line, pars);
-	printf("%d\n", pars->c_color);
-	printf("%d\n", pars->f_color);
 	return (0);
+}
+
+void	f()
+{
+	system("leaks cub3d");
 }
 
 int main(int ac, char **av)
 {
 	t_pars	pars;
 
+	atexit(f);
 	if (ac == 2)
 	{
 		if (parse_name(av[1]) == 1)

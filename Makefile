@@ -2,14 +2,14 @@ NAME = cub3d
 
 CC = cc
 
-CFLAGS = -Werror -Wextra -Wall -I/Users/$(USER)/Desktop/MLX42/include -g -fsanitize=address
+CFLAGS = -Werror -Wextra -Wall -I/Users/$(USER)/Desktop/MLX42/include -g #-fsanitize=address
 
 DFLAGS = /Users/$(USER)/Desktop/MLX42/libmlx42.a -lglfw \
 		 -framework Cocoa -framework OpenGL -framework IOKit
 
 SRC = parsing/main/main.c parsing/utils/utils.c \
 	  parsing/gnl.c parsing/utils/utils2.c \
-	  parsing/utils/utils3.c parsing/main/first_part.c \
+	  parsing/utils/utils3.c parsing/main/map_pars.c parsing/main/colors_textures_pars.c\
 	  
 
 OBJ = $(SRC:.c=.o)
