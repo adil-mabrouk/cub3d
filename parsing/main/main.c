@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:30:56 by isrkik            #+#    #+#             */
-/*   Updated: 2024/10/29 11:45:56 by isrkik           ###   ########.fr       */
+/*   Updated: 2024/11/18 16:17:02 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	copy_to_2d(int len, char ***line, int fd2)
 			break ;
 		(*line)[i] = ft_strdup(temp);
 		free(temp);
-		// printf("%s", (*line)[i]);
 		i++;
 	}
 	close(fd2);

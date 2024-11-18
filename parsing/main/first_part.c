@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   first_part.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: i61mail <i61mail@student.42.fr>            +#+  +:+       +#+        */
+/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:40:00 by isrkik            #+#    #+#             */
-/*   Updated: 2024/11/17 19:37:02 by i61mail          ###   ########.fr       */
+/*   Updated: 2024/11/18 16:16:48 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,35 +157,120 @@ int	count_biggest_len(char **line, int i)
 }
 
 
+void	cpy_map(char **line, int hold, char **temp, int length)
+{
+	int	n;
+	int	i;
+	int	len_line;
+
+	i = 0;
+	n = 0;
+	while (line[hold] && line[hold][i] != '\n')
+	{
+		len_line = ft_strlen(line[hold]);
+		i = 0;
+		while (length > i)
+		{
+			if (i >= len_line && len_line < length)
+			{
+				while (length > i)
+				{
+					temp[n][i - 1] = ' ';
+					i++;
+				}
+				temp[n][i - 1] = '\n';
+				break ;
+			}
+			else if (i < len_line)
+			{
+				if (line[hold][i] == '\n' && i == length - 1)
+					temp[n][i] = line[hold][i];
+				else if (line[hold][i] != '\n')
+					temp[n][i] = line[hold][i];
+			}
+			i++;
+		}
+		i = 0;
+		hold++;
+		n++;
+	}
+}
+
+int	ft_players(int c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}
+
+void	check_mofm(char **temp)
+{
+	int	i;
+	int	j;
+	int	dupl;
+
+	i = 1;
+	dupl = 0;
+	while (temp[i])
+	{
+		j = 0;
+		while (temp[i][j])
+		{
+			if (temp[i][j] == '1')
+				j++;
+			else if (ft_isspace(temp[i][j]))
+				j++;
+			else if (temp[i][j] == '0' || ft_players(temp[i][j]))
+			{
+				if (ft_players(temp[i][j]))
+					dupl++;
+				if (dupl > 1)
+					ft_error("duplicate players\n", 2);
+				if (temp[i - 1][j] == ' ' || temp[i + 1][j] == ' '
+					|| temp[i][j - 1] == ' ' || temp[i][j + 1] == ' ')
+					ft_error("space between 0s\n", 2);
+				j++;
+			}
+			else if (temp[i][j] == '\n')
+				j++;
+			else
+				ft_error("invalid char\n", 2);
+		}
+		i++;
+	}
+}
+
 void	mofm(char **line, int i)
 {
 	char	**temp;
 	int	len = 0;
 	int	hold;
 	int j;
+	int n = 0;
 
 	j = 0;
 	hold = i;
-	while (line[i] && line[i][0] != '\n')
+	while (line[hold] && line[hold][0] != '\n')
 	{
-		i++;
+		hold++;
 		len++;		
 	}
-	i = hold;
+	hold = i;
 	temp = malloc(sizeof(char *) * (len + 1));
 	if (!temp)
 		return ;
 	temp[len] = NULL;
 	j = count_biggest_len(line, hold);
-	int k = j;
-	int n = 0;
 	while (line[hold] && line[hold][0] != '\n')
 	{
-		temp[n] = malloc(sizeof(char) * (j + 1));
+		temp[n] = malloc(sizeof(char) * (j + 2));
+		temp[n][j] = '\0';
+		temp[n][j + 1] = '\0';
 		hold++;
 		n++;
 	}
-	exit(EXIT_SUCCESS);
+	cpy_map(line, i, temp, j);
+	check_mofm(temp);
 }
 
 void	pars_map(char **line, t_pars *pars, int i)
@@ -218,7 +303,6 @@ void	pars_map(char **line, t_pars *pars, int i)
 		check_below(line, i);//kenchecki biha akhir char f akhir line
 	last_line(line, i);//kanchecki biha akhir line
 	mofm(line, hold);
-	exit(EXIT_SUCCESS);
 }
 
 void	pars_file(char **line, t_pars *pars)
@@ -239,8 +323,9 @@ void	pars_file(char **line, t_pars *pars)
 		pars_line(line[i], pars);
 		if (pars->flag_utils.half == 6)
 		{
-			while (line[++i] && line[i][0] == '\n') ;
+			while (line[++i] && line[i][0] == '\n');
 			pars_map(line, pars, i);
+			break ;
 		}
 		i++;
 	}
