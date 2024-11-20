@@ -149,14 +149,10 @@ void	init_game(t_game *game)
 	for (int i = 0; i < ROWS; i++)
 		for (int j = 0; j < COLUMNS; j++)
 			game->map[i][j] = temp_map[i][j];
-	// ROWS = 15;
-	// COLUMNS = 20;
 	game->player.x = (WIDTH / 2);
 	game->player.y = (HEIGHT / 2);
 	game->player.radius = 10;
 	game->player.angle = 0;
-	// game->wall_strip_width = 1;
-	// game->num_rays = WIDTH / game->wall_strip_width;
 	game->mlx = mlx_init(WIDTH, HEIGHT, "Adil's Map", true);
 }
 
