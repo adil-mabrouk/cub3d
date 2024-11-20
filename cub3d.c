@@ -8,7 +8,7 @@ void	draw_map(t_game *game)
 	while (++r < ROWS)
 	{
 		col = -1;
-		while (++col < COLUMS)
+		while (++col < COLUMNS)
 		{
 			int tile = game->map[r][col];
 			int x = col * TILE_SIZE;
@@ -64,7 +64,7 @@ void	draw_player(t_game *game)
 int	collision_with_wall(t_game *game, double new_x, double new_y)
 {
 	double x = new_x - 11;
-	double y; 
+	double y;
 	int	grid_x;
 	int	grid_y;
 
@@ -128,7 +128,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 void	init_game(t_game *game)
 {
-	int temp_map[ROWS][COLUMS] = {
+	int temp_map[ROWS][COLUMNS] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1},
@@ -146,11 +146,11 @@ void	init_game(t_game *game)
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 };
 
-	for (int i = 0; i < 15; i++)
-		for (int j = 0; j < 20; j++)
+	for (int i = 0; i < ROWS; i++)
+		for (int j = 0; j < COLUMNS; j++)
 			game->map[i][j] = temp_map[i][j];
 	// ROWS = 15;
-	// COLUMS = 20;
+	// COLUMNS = 20;
 	game->player.x = (WIDTH / 2);
 	game->player.y = (HEIGHT / 2);
 	game->player.radius = 10;

@@ -7,7 +7,7 @@
 # include <stdio.h>
 
 # define ROWS 15
-# define COLUMS 20
+# define COLUMNS 20
 # define TILE_SIZE 32
 # define WIDTH 640
 # define HEIGHT 480
@@ -27,7 +27,7 @@ typedef struct s_game
 	int			map[15][20];
 	t_player	player;
 	int			rows;
-	int			colums;
+	int			columns;
 }	t_game;
 
 typedef struct s_ray
