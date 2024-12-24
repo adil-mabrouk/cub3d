@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:30:56 by isrkik            #+#    #+#             */
-/*   Updated: 2024/12/20 11:40:41 by isrkik           ###   ########.fr       */
+/*   Updated: 2024/12/24 17:09:19 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ int main(int ac, char **av)
 				ft_error("malloc error\n", 2);
 			else
 			{
-				init_game(&game);
+				game.pars = &pars;
+				init_game(&game, &pars);
 			    game.img = mlx_new_image(game.mlx, WIDTH, HEIGHT);
      			draw_map(&game);
        			draw_player(&game);

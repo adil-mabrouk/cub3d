@@ -11,8 +11,6 @@
 # include <stdbool.h>
 
 
-# define ROWS 15
-# define COLUMNS 20
 # define TILE_SIZE 32
 # define WIDTH 640
 # define HEIGHT 480
@@ -29,15 +27,6 @@ typedef struct s_player {
 	double	angle;
 }		t_player;
 
-typedef struct s_game
-{
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	int			map[15][20];
-	t_player	player;
-	int			rows;
-	int			columns;
-}	t_game;
 
 typedef struct s_ray
 {
@@ -76,6 +65,16 @@ typedef struct s_pars
 	t_utils flag_utils;
 }	t_pars;
 
+typedef struct s_game
+{
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	int			map[15][20];
+	t_player	player;
+	int			rows;
+	int			columns;
+	t_pars		*pars;
+}	t_game;
 
 //parsing
 
@@ -103,7 +102,7 @@ int		pars_line(char *line, t_pars *pars);
 //execution
 
 void	ft_raycast(t_game *game);
-void	init_game(t_game *game);
+void	init_game(t_game *game, t_pars *pars);
 void	draw_map(t_game *game);
 void	draw_player(t_game *game);
 void	key_hook(mlx_key_data_t keydata, void *param);
