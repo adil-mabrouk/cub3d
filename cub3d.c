@@ -156,16 +156,3 @@ void	init_game(t_game *game)
 	game->mlx = mlx_init(WIDTH, HEIGHT, "Adil's Map", true);
 }
 
-int main()
-{
-	t_game	game;
-	init_game(&game);
-	game.img = mlx_new_image(game.mlx, WIDTH, HEIGHT);
-	draw_map(&game);
-	draw_player(&game);
-	mlx_image_to_window(game.mlx, game.img, 0, 0);
-	mlx_key_hook(game.mlx, key_hook, &game);
-	mlx_loop(game.mlx);
-	mlx_terminate(game.mlx);
-	return 0;
-}
