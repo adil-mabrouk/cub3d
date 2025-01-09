@@ -5,10 +5,10 @@ void	draw_map(t_game *game)
 	int r = -1;
 	int	col;
 
-	while (++r < game->pars->len_rows)
+	while (++r < ROWS)
 	{
 		col = -1;
-		while (++col < game->pars->len_columns)
+		while (++col < COLUMNS)
 		{
 			int tile = game->map[r][col];
 			int x = col * TILE_SIZE;
@@ -128,14 +128,31 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 void	init_game(t_game *game, t_pars *pars)
 {
-	
-	for (int i = 0; i < pars->len_columns; i++)
-		for (int j = 0; j < pars->len_rows; j++)
-			game->map[i][j] = pars->map[i][j];
+	(void)pars;
+	int temp_map[ROWS][COLUMNS] = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1},
+    {1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+    {1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+    {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+};
+
+	for (int i = 0; i < ROWS; i++)
+		for (int j = 0; j < COLUMNS; j++)
+			game->map[i][j] = temp_map[i][j];
 	game->player.x = (WIDTH / 2);
 	game->player.y = (HEIGHT / 2);
 	game->player.radius = 10;
 	game->player.angle = 0;
-	game->mlx = mlx_init(WIDTH, HEIGHT, "Map", true);
+	game->mlx = mlx_init(WIDTH, HEIGHT, "Adil's Map", true);
 }
-

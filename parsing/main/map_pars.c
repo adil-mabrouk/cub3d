@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:40:00 by isrkik            #+#    #+#             */
-/*   Updated: 2024/11/18 23:38:51 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/09 12:57:32 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,14 +175,14 @@ int	mofm(char **line, int i, t_pars *pars)
 		hold++;
 		len++;
 	}
-	pars->len_columns = len;
+	pars->len_rows = len;
 	hold = i;
 	pars->map = malloc(sizeof(char *) * (len + 1));
 	if (!pars->map)
 		return (-1);
 	pars->map[len] = NULL;
 	j = count_biggest_len(line, hold);
-	pars->len_rows = j;
+	pars->len_columns = j - 1;
 	while (line[hold] && line[hold][0] != '\n')
 	{
 		pars->map[n] = malloc(sizeof(char) * (j + 2));

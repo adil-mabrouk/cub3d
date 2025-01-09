@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:30:56 by isrkik            #+#    #+#             */
-/*   Updated: 2024/12/24 17:09:19 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/09 13:00:13 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,3 +133,4 @@ int main(int ac, char **av)
 		ft_error("not enough args\n", 2);
 	return (0);
 }
+

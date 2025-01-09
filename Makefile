@@ -6,15 +6,15 @@
 #    By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:25:25 by amabrouk          #+#    #+#              #
-#    Updated: 2024/12/24 12:19:24 by isrkik           ###   ########.fr        #
+#    Updated: 2025/01/09 13:01:47 by isrkik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = Cub3d
 
 CC = gcc
 
-CFLAGS = -Werror -Wextra -Wall -I/Users/$(USER)/Desktop/MLX42/include/MLX42/ -g #-fsanitize=address
+CFLAGS = -Werror -Wextra -Wall -I/Users/$(USER)/Desktop/MLX42/include/MLX42/  #-fsanitize=address
 
 DFLAGS = ./libmlx42.a -lglfw \
 		 #-framework Cocoa -framework OpenGL -framework IOKit
@@ -28,10 +28,10 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(DFLAGS) -lm -o $(NAME)
+	$(CC) $(CFLAGS) -g $(OBJ) $(DFLAGS) -lm -o $(NAME)
 
 %.o: %.c cub3d.h
-	$(CC) -c $< -o $@ $(CFLAGS)
+	$(CC) -c $< -o $@ $(CFLAGS) -g
 
 clean:
 	rm -f $(OBJ)
@@ -42,4 +42,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: fclean all clean re
-

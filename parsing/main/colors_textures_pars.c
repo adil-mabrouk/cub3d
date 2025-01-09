@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 16:42:03 by isrkik            #+#    #+#             */
-/*   Updated: 2024/12/24 16:23:37 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/08 11:50:09 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,21 +87,56 @@ int	check_colors(char *line, int *i, t_pars *pars)
 int	check_directions(char *line, int i, t_pars *pars)
 {
 	char	temp[3];
+	int		b;
+	int b1;
+	int	fd;
 
+	b1 = 0;
 	temp[2] = '\0';
 	if (line[i] && line[i + 1])
 	{
 		temp[0] = line[i];
 		temp[1] = line[i + 1];
 	}
+	b = i + 2;
+	while (line[b] && ft_isspace(line[b]))
+		b++;
+	b1 = b;
+	while (line[b] && !ft_isspace(line[b]) && line[b] != '\n')
+		b++;
 	if (ft_strcmp("NO", temp) == 0)
+	{
+		pars->north = ft_substr(line, b1, b - b1);
+		fd = open(pars->north, O_RDONLY);
+		if (fd < 0)
+			ft_error("invalid texture\n", 2);
 		pars->flag_utils.flag_no++;
+		
+	}
 	else if (ft_strcmp("EA", temp) == 0)
+	{
+		pars->east = ft_substr(line, b1, b - b1);
+		fd = open(pars->north, O_RDONLY);
+		if (fd < 0)
+			ft_error("invalid texture\n", 2);
 		pars->flag_utils.flag_ea++;
+	}
 	else if (ft_strcmp("WE", temp) == 0)
+	{
+		pars->west = ft_substr(line, b1, b - b1);
+		fd = open(pars->north, O_RDONLY);
+		if (fd < 0)
+			ft_error("invalid texture\n", 2);	
 		pars->flag_utils.flag_we++;
+	}
 	else if (ft_strcmp("SO", temp) == 0)
+	{
+		pars->south = ft_substr(line, b1, b - b1);
+		fd = open(pars->north, O_RDONLY);
+		if (fd < 0)
+			ft_error("invalid texture\n", 2);
 		pars->flag_utils.flag_so++;
+	}
 	if ((ft_strcmp("NO", temp) != 0 && ft_strcmp("SO", temp) != 0
 			&& ft_strcmp("EA", temp) != 0 && ft_strcmp("WE", temp) != 0)
 		|| (pars->flag_utils.flag_no >= 2 || pars->flag_utils.flag_ea >= 2

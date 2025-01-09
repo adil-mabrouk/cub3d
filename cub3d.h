@@ -11,6 +11,8 @@
 # include <stdbool.h>
 
 
+# define ROWS 15
+# define COLUMNS 20
 # define TILE_SIZE 32
 # define WIDTH 640
 # define HEIGHT 480
@@ -19,27 +21,12 @@
 #  define BUFFER_SIZE 4
 # endif
 
-
 typedef struct s_player {
 	double		x;
 	double		y;
 	int 	radius;
 	double	angle;
 }		t_player;
-
-
-typedef struct s_ray
-{
-	double	angle;
-	int		is_facing_down;
-	int		is_facing_up;
-	int		is_facing_right;
-	int		is_facing_left;
-	double	hor_wall_hit_x;
-	double	hor_wall_hit_y;
-	double	horz;
-	double	vert;
-}	t_ray;
 
 typedef struct s_utils
 {
@@ -50,6 +37,14 @@ typedef struct s_utils
 	int	colors;
 	int	half;
 }	t_utils;
+
+typedef struct s_textures {
+    mlx_texture_t *north;
+    mlx_texture_t *south;
+    mlx_texture_t *east;
+    mlx_texture_t *west;
+} t_textures;
+
 
 typedef struct s_pars
 {
@@ -65,16 +60,32 @@ typedef struct s_pars
 	t_utils flag_utils;
 }	t_pars;
 
+
 typedef struct s_game
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	int			map[15][20];
 	t_player	player;
+	t_textures textures;
 	int			rows;
 	int			columns;
 	t_pars		*pars;
 }	t_game;
+
+
+typedef struct s_ray
+{
+	double	angle;
+	int		is_facing_down;
+	int		is_facing_up;
+	int		is_facing_right;
+	int		is_facing_left;
+	double	hor_wall_hit_x;
+	double	hor_wall_hit_y;
+	double	horz;
+	double	vert;
+}				t_ray;
 
 //parsing
 
@@ -107,5 +118,6 @@ void	draw_map(t_game *game);
 void	draw_player(t_game *game);
 void	key_hook(mlx_key_data_t keydata, void *param);
 // void	draw_line(t_game *game, int x1, int y1, int color);
+
 
 #endif
