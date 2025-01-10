@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:40:00 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/09 12:57:32 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/10 17:05:30 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,33 @@ int	check_right(char **line, int i)
 int	count_biggest_len(char **line, int i)
 {
 	int	j;
+	int b = 0;
 
 	j = 0;
 	while (line[i] && line[i][0] != '\n')
 	{
+		if (!line[i + 1])
+		{
+			while (line[i][b] && line[i][b] != '\n')
+				b++;
+			if (line[i][b] == '\0' && ft_strlen(line[i]) > j)
+				j = ft_strlen(line[i]) + 1;
+		}
 		if (ft_strlen(line[i]) > j)
 			j = ft_strlen(line[i]);
 		i++;
 	}
 	return (j);
+}
+
+int	taj(char *str)
+{
+	int i = 0;
+	if (!str)
+		return (-1);
+	while (str[i] && str[i] != '\n')
+		i++;
+	return (i);
 }
 
 void	cpy_map(char **line, int hold, int length, t_pars *pars)
@@ -84,24 +102,24 @@ void	cpy_map(char **line, int hold, int length, t_pars *pars)
 	n = 0;
 	while (line[hold] && line[hold][i] != '\n')
 	{
-		len_line = ft_strlen(line[hold]);
+		len_line = taj(line[hold]) + 1;
 		i = 0;
 		while (length > i)
 		{
-			if (i >= len_line && len_line < length)
+			if (i >= len_line && len_line  < length)
 			{
 				while (length > i)
 				{
 					pars->map[n][i - 1] = ' ';
 					i++;
 				}
-				pars->map[n][i - 1] = '\n';
+				pars->map[n][i - 1] = '\0';
 				break ;
 			}
 			else if (i < len_line)
 			{
 				if (line[hold][i] == '\n' && i == length - 1)
-					pars->map[n][i] = line[hold][i];
+					pars->map[n][i] = '\0';
 				else if (line[hold][i] != '\n')
 					pars->map[n][i] = line[hold][i];
 			}

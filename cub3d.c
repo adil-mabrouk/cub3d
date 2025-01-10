@@ -146,7 +146,6 @@ void	init_game(t_game *game, t_pars *pars)
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 };
-
 	for (int i = 0; i < ROWS; i++)
 		for (int j = 0; j < COLUMNS; j++)
 			game->map[i][j] = temp_map[i][j];
