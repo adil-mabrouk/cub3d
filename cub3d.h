@@ -57,6 +57,8 @@ typedef struct s_pars
 	int 	c_color;
 	int		len_columns;
 	int		len_rows;
+	int		player_x;
+	int		player_y;
 	t_utils flag_utils;
 }	t_pars;
 

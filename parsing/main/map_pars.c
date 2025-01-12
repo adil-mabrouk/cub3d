@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:40:00 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/10 17:05:30 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/12 14:54:15 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,11 @@ int	check_mofm(t_pars *pars)
 			else if (pars->map[i][j] == '0' || ft_players(pars->map[i][j]))
 			{
 				if (ft_players(pars->map[i][j]))
+				{
 					dupl++;
+					pars->player_x = i;
+					pars->player_y = j;
+				}
 				if (dupl > 1)
 					return (-1);
 				if (pars->map[i - 1][j] == ' ' || pars->map[i + 1][j] == ' '
