@@ -16,7 +16,7 @@ int	hit_wall(t_game *game, double x, double y)
 {
 	int tile_x = floor(x / TILE_SIZE);
 	int tile_y = floor(y / TILE_SIZE);
-	if (game->map[tile_y][tile_x] != 0)
+	if (game->pars->map[tile_y][tile_x] != 48)
 		return 1;
 	return 0;
 }
@@ -56,7 +56,7 @@ double	get_vert_dis(t_game *game, t_ray *ray)
 		{
 			ray->hor_wall_hit_x = x_tocheck;
 			ray->hor_wall_hit_y = y_tocheck;
-			// hor_wall_content = game->map[(int)floor(y_tocheck / TILE_SIZE)][(int)floor(x_tocheck / TILE_SIZE)];
+			// hor_wall_content = game->pars->map[(int)floor(y_tocheck / TILE_SIZE)][(int)floor(x_tocheck / TILE_SIZE)];
 			// found_hor_wall_hit = true;
 			break ;
 		}
@@ -104,7 +104,7 @@ double	get_horz_dis(t_game *game, t_ray *ray)
 		{
 			ray->hor_wall_hit_x = x_tocheck;
 			ray->hor_wall_hit_y = y_tocheck;
-			// hor_wall_content = game->map[(int)floor(y_tocheck / TILE_SIZE)][(int)floor(x_tocheck / TILE_SIZE)];
+			// hor_wall_content = game->pars->map[(int)floor(y_tocheck / TILE_SIZE)][(int)floor(x_tocheck / TILE_SIZE)];
 			// found_hor_wall_hit = true;
 			break ;
 		}

@@ -14,7 +14,7 @@ NAME = Cub3d
 
 CC = gcc
 
-CFLAGS = -Werror -Wextra -Wall -I/Users/$(USER)/Desktop/MLX42/include/MLX42/  #-fsanitize=address
+CFLAGS = -Werror -Wextra -Wall -I/Users/$(USER)/Desktop/MLX42/include/MLX42/  -fsanitize=address
 
 DFLAGS = ./libmlx42.a -lglfw \
 		 #-framework Cocoa -framework OpenGL -framework IOKit

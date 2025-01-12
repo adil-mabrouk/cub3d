@@ -5,15 +5,15 @@ void	draw_map(t_game *game)
 	int r = -1;
 	int	col;
 
-	while (++r < ROWS)
+	while (++r < game->pars->len_rows)
 	{
 		col = -1;
-		while (++col < COLUMNS)
+		while (++col < game->pars->len_columns)
 		{
-			int tile = game->map[r][col];
+			int tile = game->pars->map[r][col];
 			int x = col * TILE_SIZE;
 			int y = r * TILE_SIZE;
-			int color = tile == 1 ? 0x000000FF : 0x0000FF00;
+			int color = tile == '1' ? 0x000000FF : 0x0000FF00;
 			int i = -1;
 			while (++i < TILE_SIZE)
 			{
@@ -63,19 +63,19 @@ void	draw_player(t_game *game)
 
 int	collision_with_wall(t_game *game, double new_x, double new_y)
 {
-	double x = new_x - 11;
+	double x = new_x - 7;
 	double y;
 	int	grid_x;
 	int	grid_y;
 
-	while (x <= new_x + 11)
+	while (x <= new_x + 7)
 	{
-		y = new_y - 11;
-		while (y <= new_y + 11)
+		y = new_y - 7;
+		while (y <= new_y + 7)
 		{
 			grid_x = x / TILE_SIZE;
 			grid_y = y / TILE_SIZE;
-			if (game->map[grid_y][grid_x] == 1)
+			if (game->pars->map[grid_y][grid_x] == '1')
 				return 1;
 			y++;
 		}
@@ -129,26 +129,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 void	init_game(t_game *game, t_pars *pars)
 {
 	(void)pars;
-	int temp_map[ROWS][COLUMNS] = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1},
-    {1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1},
-    {1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1},
-    {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-    {1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-};
-	for (int i = 0; i < ROWS; i++)
-		for (int j = 0; j < COLUMNS; j++)
-			game->map[i][j] = temp_map[i][j];
 	game->player.x = (WIDTH / 2);
 	game->player.y = (HEIGHT / 2);
 	game->player.radius = 10;
