@@ -10,7 +10,6 @@
 # include <limits.h>
 # include <stdbool.h>
 
-#define BPP 4
 # define ROWS 15
 # define COLUMNS 20
 # define TILE_SIZE 32
@@ -67,7 +66,6 @@ typedef struct s_game
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	int			map[15][20];
 	t_player	player;
 	t_textures textures;
 	int			rows;
@@ -85,8 +83,8 @@ typedef struct s_ray
 	int		is_facing_left;
 	double	hor_wall_hit_x;
 	double	hor_wall_hit_y;
-	double vert_wall_hit_x;  // Add these two new members
-    double vert_wall_hit_y;
+	double  vert_wall_hit_x;
+    double  vert_wall_hit_y;
 	double	horz;
 	double	vert;
 	mlx_texture_t  *wall_texture;
@@ -122,6 +120,7 @@ void	init_game(t_game *game, t_pars *pars);
 void	draw_map(t_game *game);
 void	draw_player(t_game *game);
 void	key_hook(mlx_key_data_t keydata, void *param);
+void	render_textured_wall(t_game *game, t_ray *ray, int column, double wall_height);
 // void	draw_line(t_game *game, int x1, int y1, int color);
 
 

@@ -6,7 +6,7 @@
 #    By: i61mail <i61mail@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:25:25 by amabrouk          #+#    #+#              #
-#    Updated: 2025/01/13 11:45:38 by i61mail          ###   ########.fr        #
+#    Updated: 2025/01/14 15:16:44 by i61mail          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ DFLAGS = ./libmlx42.a -lglfw \
 SRC = cub3d.c raycasting.c parsing/main/main.c parsing/utils/utils.c \
 	  parsing/gnl.c parsing/utils/utils2.c \
 	  parsing/utils/utils3.c parsing/main/map_pars.c parsing/main/colors_textures_pars.c\
+	  textures.c
 
 OBJ = $(SRC:.c=.o)
 
