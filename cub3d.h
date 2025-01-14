@@ -10,7 +10,7 @@
 # include <limits.h>
 # include <stdbool.h>
 
-
+#define BPP 4
 # define ROWS 15
 # define COLUMNS 20
 # define TILE_SIZE 32
@@ -85,8 +85,11 @@ typedef struct s_ray
 	int		is_facing_left;
 	double	hor_wall_hit_x;
 	double	hor_wall_hit_y;
+	double vert_wall_hit_x;  // Add these two new members
+    double vert_wall_hit_y;
 	double	horz;
 	double	vert;
+	mlx_texture_t  *wall_texture;
 }				t_ray;
 
 //parsing

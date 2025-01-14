@@ -126,12 +126,30 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
 }
 
+void load_texture(mlx_texture_t **texture, char *path)
+{
+    *texture = mlx_load_png(path);
+	if (!*texture)
+	{
+		printf("error loading texture\n");
+		exit(1);
+	}
+}
+
 void	init_game(t_game *game, t_pars *pars)
 {
-	(void)pars;
+	game->mlx = mlx_init(WIDTH, HEIGHT, "Map", true);
+	if (!game->mlx)
+	{
+		printf("error initializing mlx\n");
+		exit(1);
+	}
+	load_texture(&game->textures.north, pars->north);
+    load_texture(&game->textures.south, pars->south);
+    load_texture(&game->textures.east, pars->east);
+    load_texture(&game->textures.west, pars->west);
 	game->player.x = (WIDTH / 2);
 	game->player.y = (HEIGHT / 2);
 	game->player.radius = 10;
 	game->player.angle = 0;
-	game->mlx = mlx_init(WIDTH, HEIGHT, "Adil's Map", true);
 }
