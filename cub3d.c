@@ -93,6 +93,11 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 	game = (t_game *)param;
 	player = &game->player;
+	if (keydata.key == MLX_KEY_ESCAPE)
+    {
+        mlx_terminate(game->mlx);
+        exit(0);
+    }
 	if (keydata.key == MLX_KEY_W && !collision_with_wall(game, player->x + 2 * cos(player->angle), player->y + 2 * sin(player->angle)))
 	{
 		player->x += 2 * cos(player->angle);
