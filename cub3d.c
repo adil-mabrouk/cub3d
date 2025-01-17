@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 10:14:44 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/17 11:57:15 by isrkik           ###   ########.fr       */
+/*   Created: 2025/01/17 13:16:02 by amabrouk          #+#    #+#             */
+/*   Updated: 2025/01/17 13:28:28 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,25 @@ void	draw_map(t_game *game)
 	}
 }
 
-void	draw_line(t_game *game, int x1, int y1, int color)
-{
-	double	dx = x1 - game->pars->player.x;
-	double	dy = y1 - game->pars->player.y;
-	int	steps = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy); // Determine the number of steps
+// void	draw_line(t_game *game, int x1, int y1, int color)
+// {
+// 	double	dx = x1 - game->pars->player.x;
+// 	double	dy = y1 - game->pars->player.y;
+// 	int	steps = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy); // Determine the number of steps
 
-	double	x_inc = dx / steps; // Calculate the increment in x for each step
-	double	y_inc = dy / steps; // Calculate the increment in y for each step
+// 	double	x_inc = dx / steps; // Calculate the increment in x for each step
+// 	double	y_inc = dy / steps; // Calculate the increment in y for each step
 
-	double	x = game->pars->player.x;
-	double	y = game->pars->player.y;
+// 	double	x = game->pars->player.x;
+// 	double	y = game->pars->player.y;
 
-	for (int i = 0; i <= steps; i++)
-	{
-		mlx_put_pixel(game->img, x, y, color); // Plot the pixel
-		x += x_inc; // Increment x-coordinate by x_inc
-		y += y_inc; // Increment y-coordinate by y_inc
-	}
-}
+// 	for (int i = 0; i <= steps; i++)
+// 	{
+// 		mlx_put_pixel(game->img, x, y, color); // Plot the pixel
+// 		x += x_inc; // Increment x-coordinate by x_inc
+// 		y += y_inc; // Increment y-coordinate by y_inc
+// 	}
+// }
 
 void	draw_player(t_game *game)
 {
@@ -67,8 +67,8 @@ void	draw_player(t_game *game)
 			if (i * i + j * j <= game->pars->player.radius * game->pars->player.radius)
 				mlx_put_pixel(game->img, game->pars->player.x + i, game->pars->player.y + j, 0xFF0000FF);
 	}
-	// int	line_x = game->pars->player.x + line_length * cos(game->player.angle);
-	// int	line_y = game->player.y + line_length * sin(game->player.angle);
+	// int	line_x = game->pars->player.x + 50 * cos(game->player.angle);
+	// int	line_y = game->pars->player.y + 50 * sin(game->player.angle);
 	// draw_line(game, line_x, line_y, 0xFFFF00FF);
 	// int r = 0;
 	// while (r < game->pars->len_rows)
@@ -89,15 +89,15 @@ void	draw_player(t_game *game)
 
 int	collision_with_wall(t_game *game, double new_x, double new_y)
 {
-	double x = new_x - 2;
+	double x = new_x;
 	double y;
 	int	grid_x;
 	int	grid_y;
 
-	while (x <= new_x + 2)
+	while (x <= new_x)
 	{
-		y = new_y - 2;
-		while (y <= new_y + 2)
+		y = new_y;
+		while (y <= new_y)
 		{
 			grid_x = x / TILE_SIZE;
 			grid_y = y / TILE_SIZE;
@@ -124,7 +124,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
         mlx_terminate(game->mlx);
         exit(0);
     }
-	if (keydata.key == MLX_KEY_W && !collision_with_wall(game, player->x + 2 * cos(player->angle), player->y + 2 * sin(player->angle)))
+	if (keydata.key == MLX_KEY_W && !collision_with_wall(game, player->x + 3 * cos(player->angle), player->y + 2 * sin(player->angle)))
 	{
 		player->x += 2 * cos(player->angle);
 		player->y += 2 * sin(player->angle);
@@ -180,5 +180,4 @@ void	init_game(t_game *game)
     load_texture(&game->textures.east, game->pars->east);
     load_texture(&game->textures.west, game->pars->west);
 	game->pars->player.radius = 10;
-	game->pars->player.angle = 0;
 }

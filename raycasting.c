@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 01:31:51 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/17 11:40:09 by isrkik           ###   ########.fr       */
+/*   Created: 2025/01/17 13:17:19 by amabrouk          #+#    #+#             */
+/*   Updated: 2025/01/17 13:17:20 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ void	render_floor(t_game *game, int column, double wall_bottom)
 	y = wall_bottom;
 	while (y < HEIGHT)
 	{
-		mlx_put_pixel(game->img, column, y, 0x80808080);
+		mlx_put_pixel(game->img, column, y, game->pars->f_color);
 		y++;
 	}
 }
@@ -192,7 +192,7 @@ void	render_ceiling(t_game *game, int column, double wall_height)
 	screen_bottom = (HEIGHT / 2) - (wall_height / 2);
 	while (y < screen_bottom)
 	{
-		mlx_put_pixel(game->img, column, y, 0xFFFFFF);
+		mlx_put_pixel(game->img, column, y, game->pars->c_color);
 		y++;
 	}
 }

@@ -109,7 +109,7 @@ int	check_directions(char *line, int i, t_pars *pars)
 		pars->north = ft_substr(line, b1, b - b1);
 		fd = open(pars->north, O_RDONLY);
 		if (fd < 0)
-			ft_error("invalid texture\n", 2);
+			ft_error("invalid texture1\n", 2);
 		pars->flag_utils.flag_no++;
 		
 	}
@@ -118,7 +118,7 @@ int	check_directions(char *line, int i, t_pars *pars)
 		pars->east = ft_substr(line, b1, b - b1);
 		fd = open(pars->north, O_RDONLY);
 		if (fd < 0)
-			ft_error("invalid texture\n", 2);
+			ft_error("invalid texture2\n", 2);
 		pars->flag_utils.flag_ea++;
 	}
 	else if (ft_strcmp("WE", temp) == 0)
@@ -126,7 +126,7 @@ int	check_directions(char *line, int i, t_pars *pars)
 		pars->west = ft_substr(line, b1, b - b1);
 		fd = open(pars->north, O_RDONLY);
 		if (fd < 0)
-			ft_error("invalid texture\n", 2);	
+			ft_error("invalid texture3\n", 2);	
 		pars->flag_utils.flag_we++;
 	}
 	else if (ft_strcmp("SO", temp) == 0)
@@ -134,7 +134,7 @@ int	check_directions(char *line, int i, t_pars *pars)
 		pars->south = ft_substr(line, b1, b - b1);
 		fd = open(pars->north, O_RDONLY);
 		if (fd < 0)
-			ft_error("invalid texture\n", 2);
+			ft_error("invalid texture4\n", 2);
 		pars->flag_utils.flag_so++;
 	}
 	if ((ft_strcmp("NO", temp) != 0 && ft_strcmp("SO", temp) != 0

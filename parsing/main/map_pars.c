@@ -135,10 +135,10 @@ int	ft_players(int c, t_pars *pars)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
-		if (c == 'N')
-			pars->player.angle = M_PI_2; // fou9
-		else if (c == 'S')
-			pars->player.angle = 3 * M_PI_2; // ta7t
+		if (c == 'S')
+			pars->player.angle = M_PI_2; // teht
+		else if (c == 'N')
+			pars->player.angle = 3 * M_PI_2; // foo9
 		else if (c == 'E')
 			pars->player.angle = 0; // yamin
 		else if (c == 'W')
