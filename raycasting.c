@@ -16,7 +16,11 @@ int	hit_wall(t_game *game, double x, double y)
 {
 	int tile_x = floor(x / TILE_SIZE);
 	int tile_y = floor(y / TILE_SIZE);
-	if (game->pars->map[tile_y][tile_x] != 48)
+	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+		return 1;
+	if (tile_y < 0 || tile_y >= game->pars->len_rows || tile_x < 0 || tile_x >= game->pars->len_columns)
+		return 1;
+	if (game->pars->map[tile_y][tile_x] == '1')
 		return 1;
 	return 0;
 }
@@ -35,9 +39,9 @@ double	get_vert_dis(t_game *game, t_ray *ray)
 	ray->is_facing_right = ray->angle < M_PI_2 || ray->angle > 3 * M_PI_2;
 	ray->is_facing_left = !ray->is_facing_right;
 
-	x_inter = floor(game->player.x / TILE_SIZE) * TILE_SIZE;
+	x_inter = floor(game->pars->player.x / TILE_SIZE) * TILE_SIZE;
 	x_inter += ray->is_facing_right ? TILE_SIZE : 0;
-	y_inter = game->player.y + (x_inter - game->player.x) * tan(ray->angle);
+	y_inter = game->pars->player.y + (x_inter - game->pars->player.x) * tan(ray->angle);
 
 	x_step = TILE_SIZE;
 	x_step *= ray->is_facing_left ? -1 : 1;
@@ -45,28 +49,28 @@ double	get_vert_dis(t_game *game, t_ray *ray)
 	y_step *= (ray->is_facing_up && y_step > 0) ? -1 : 1;
 	y_step *= (ray->is_facing_down && y_step < 0) ? -1 : 1;
 
-	double next_hor_x = x_inter;
-	double next_hor_y = y_inter;
+	double next_ver_x = x_inter;
+	double next_ver_y = y_inter;
 
-	while (next_hor_x >= 0 && next_hor_x <= WIDTH && next_hor_y >= 0 && next_hor_y <= HEIGHT)
+	while (next_ver_x >= 0 && next_ver_x <= WIDTH && next_ver_y >= 0 && next_ver_y <= HEIGHT)
 	{
-		double x_tocheck = next_hor_x + (ray->is_facing_left ? -1 : 0);
-		double y_tocheck = next_hor_y;
+		double x_tocheck = next_ver_x + (ray->is_facing_left ? -1 : 0);
+		double y_tocheck = next_ver_y;
 		if (hit_wall(game, x_tocheck, y_tocheck))
 		{
-			ray->hor_wall_hit_x = x_tocheck;
-			ray->hor_wall_hit_y = y_tocheck;
+			ray->wall_hit_x = next_ver_x;
+			ray->wall_hit_y = next_ver_y;
 			// hor_wall_content = game->pars->map[(int)floor(y_tocheck / TILE_SIZE)][(int)floor(x_tocheck / TILE_SIZE)];
 			// found_hor_wall_hit = true;
 			break ;
 		}
 		else
 		{
-			next_hor_x += x_step;
-			next_hor_y += y_step;
+			next_ver_x += x_step;
+			next_ver_y += y_step;
 		}
 	}
-	return (sqrt(pow(ray->hor_wall_hit_x - game->player.x, 2) + pow(ray->hor_wall_hit_y - game->player.y, 2)));
+	return (sqrt(pow(ray->wall_hit_x - game->pars->player.x, 2) + pow(ray->wall_hit_y - game->pars->player.y, 2)));
 }
 
 double	get_horz_dis(t_game *game, t_ray *ray)
@@ -83,9 +87,9 @@ double	get_horz_dis(t_game *game, t_ray *ray)
 	ray->is_facing_right = ray->angle < M_PI_2 || ray->angle > 3 * M_PI_2;
 	ray->is_facing_left = !ray->is_facing_right;
 
-	y_inter = floor(game->player.y / TILE_SIZE) * TILE_SIZE;
+	y_inter = floor(game->pars->player.y / TILE_SIZE) * TILE_SIZE;
 	y_inter += ray->is_facing_down ? TILE_SIZE : 0;
-	x_inter = game->player.x + (y_inter - game->player.y) / tan(ray->angle);
+	x_inter = game->pars->player.x + (y_inter - game->pars->player.y) / tan(ray->angle);
 
 	y_step = TILE_SIZE;
 	y_step *= ray->is_facing_up ? -1 : 1;
@@ -102,8 +106,8 @@ double	get_horz_dis(t_game *game, t_ray *ray)
 		double y_tocheck = next_hor_y + (ray->is_facing_up ? -1 : 0);
 		if (hit_wall(game, x_tocheck, y_tocheck))
 		{
-			ray->hor_wall_hit_x = x_tocheck;
-			ray->hor_wall_hit_y = y_tocheck;
+			ray->wall_hit_x = next_hor_x;
+			ray->wall_hit_y = next_hor_y;
 			// hor_wall_content = game->pars->map[(int)floor(y_tocheck / TILE_SIZE)][(int)floor(x_tocheck / TILE_SIZE)];
 			// found_hor_wall_hit = true;
 			break ;
@@ -114,7 +118,7 @@ double	get_horz_dis(t_game *game, t_ray *ray)
 			next_hor_y += y_step;
 		}
 	}
-	return (sqrt(pow(ray->hor_wall_hit_x - game->player.x, 2) + pow(ray->hor_wall_hit_y - game->player.y, 2)));
+	return (sqrt(pow(ray->wall_hit_x - game->pars->player.x, 2) + pow(ray->wall_hit_y - game->pars->player.y, 2)));
 }
 
 double	norm_angle(t_ray *ray)
@@ -127,8 +131,8 @@ double	norm_angle(t_ray *ray)
 
 void	render_ray(t_game *game, double angle, double distance)
 {
-	double	x = game->player.x;
-	double	y = game->player.y;
+	double	x = game->pars->player.x;
+	double	y = game->pars->player.y;
 	double	step = 1.0;
 
 	double	x_step = cos(angle) * step;
@@ -203,7 +207,7 @@ void	cast_ray(t_game *game, t_ray *ray, int column)
 	else
 		distance = ray->vert;
 
-	distance *= cos(ray->angle - game->player.angle);
+	distance *= cos(ray->angle - game->pars->player.angle);
 	wall_height = (TILE_SIZE * (WIDTH / 2) / tan(FOV / 2)) / distance;
 	wall_bottom = (HEIGHT / 2) + (wall_height / 2);
 	render_wall(game, column, wall_bottom, wall_height);
@@ -216,7 +220,7 @@ void	ft_raycast(t_game *game)
 	int		i;
 	t_ray	ray;
 
-	ray.angle = game->player.angle - FOV / 2;
+	ray.angle = game->pars->player.angle - FOV / 2;
 	i = 0;
 	while (i < WIDTH)
 	{

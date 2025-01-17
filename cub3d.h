@@ -48,18 +48,17 @@ typedef struct s_textures {
 
 typedef struct s_pars
 {
-	char	*north;
-	char	*west;
-	char	*east;
-	char	*south;
-	char	**map;
-	int 	f_color;
-	int 	c_color;
-	int		len_columns;
-	int		len_rows;
-	int		player_x;
-	int		player_y;
-	t_utils flag_utils;
+	char		*north;
+	char		*west;
+	char		*east;
+	char		*south;
+	char		**map;
+	int 		f_color;
+	int 		c_color;
+	int			len_columns;
+	int			len_rows;
+	t_player	player;
+	t_utils 	flag_utils;
 }	t_pars;
 
 
@@ -67,11 +66,7 @@ typedef struct s_game
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	int			map[15][20];
-	t_player	player;
 	t_textures textures;
-	int			rows;
-	int			columns;
 	t_pars		*pars;
 }	t_game;
 
@@ -83,8 +78,8 @@ typedef struct s_ray
 	int		is_facing_up;
 	int		is_facing_right;
 	int		is_facing_left;
-	double	hor_wall_hit_x;
-	double	hor_wall_hit_y;
+	double	wall_hit_x;
+	double	wall_hit_y;
 	double	horz;
 	double	vert;
 }				t_ray;
@@ -115,7 +110,7 @@ int		pars_line(char *line, t_pars *pars);
 //execution
 
 void	ft_raycast(t_game *game);
-void	init_game(t_game *game, t_pars *pars);
+void	init_game(t_game *game);
 void	draw_map(t_game *game);
 void	draw_player(t_game *game);
 void	key_hook(mlx_key_data_t keydata, void *param);

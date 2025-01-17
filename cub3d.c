@@ -27,15 +27,15 @@ void	draw_map(t_game *game)
 
 void	draw_line(t_game *game, int x1, int y1, int color)
 {
-	double	dx = x1 - game->player.x;
-	double	dy = y1 - game->player.y;
+	double	dx = x1 - game->pars->player.x;
+	double	dy = y1 - game->pars->player.y;
 	int	steps = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy); // Determine the number of steps
 
 	double	x_inc = dx / steps; // Calculate the increment in x for each step
 	double	y_inc = dy / steps; // Calculate the increment in y for each step
 
-	double	x = game->player.x;
-	double	y = game->player.y;
+	double	x = game->pars->player.x;
+	double	y = game->pars->player.y;
 
 	for (int i = 0; i <= steps; i++)
 	{
@@ -47,42 +47,57 @@ void	draw_line(t_game *game, int x1, int y1, int color)
 
 void	draw_player(t_game *game)
 {
-	int i = -game->player.radius;
-	while (++i < game->player.radius)
+	int i = -game->pars->player.radius;
+	while (++i < game->pars->player.radius)
 	{
-		int	j = -game->player.radius;
-		while (++j < game->player.radius)
-			if (i * i + j * j <= game->player.radius * game->player.radius)
-				mlx_put_pixel(game->img, game->player.x + i, game->player.y + j, 0xFF0000FF);
+		int	j = -game->pars->player.radius;
+		while (++j < game->pars->player.radius)
+			if (i * i + j * j <= game->pars->player.radius * game->pars->player.radius)
+				mlx_put_pixel(game->img, game->pars->player.x + i, game->pars->player.y + j, 0xFF0000FF);
 	}
-	// int	line_x = game->player.x + line_length * cos(game->player.angle);
+	// int	line_x = game->pars->player.x + line_length * cos(game->player.angle);
 	// int	line_y = game->player.y + line_length * sin(game->player.angle);
 	// draw_line(game, line_x, line_y, 0xFFFF00FF);
+	int r = 0;
+	while (r < game->pars->len_rows)
+	{
+		int c = 0;
+		while (c < game->pars->len_columns)
+		{
+			printf("%d  ", game->pars->map[r][c]);
+			c++;
+		}
+		printf("\n");
+		r++;
+	}
+	printf("done map\n");
+	printf("p.x == %f,   p.y == %f\n", game->pars->player.x, game->pars->player.y);
 	ft_raycast(game);
 }
 
 int	collision_with_wall(t_game *game, double new_x, double new_y)
 {
-	double x = new_x - 7;
+	double x = new_x - 2;
 	double y;
 	int	grid_x;
 	int	grid_y;
 
-	while (x <= new_x + 7)
+	while (x <= new_x + 2)
 	{
-		y = new_y - 7;
-		while (y <= new_y + 7)
+		y = new_y - 2;
+		while (y <= new_y + 2)
 		{
 			grid_x = x / TILE_SIZE;
 			grid_y = y / TILE_SIZE;
+			printf("grid_y == %d     grid_x == %d\n", grid_y, grid_x);
 			if (game->pars->map[grid_y][grid_x] == '1')
 				return 1;
 			y++;
 		}
 		x++;
 	}
-	game->player.x = new_x;
-	game->player.y = new_y;
+	game->pars->player.x = new_x;
+	game->pars->player.y = new_y;
 	return 0;
 }
 
@@ -92,7 +107,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	t_player	*player;
 
 	game = (t_game *)param;
-	player = &game->player;
+	player = &game->pars->player;
 	if (keydata.key == MLX_KEY_W && !collision_with_wall(game, player->x + 2 * cos(player->angle), player->y + 2 * sin(player->angle)))
 	{
 		player->x += 2 * cos(player->angle);
@@ -126,12 +141,9 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
 }
 
-void	init_game(t_game *game, t_pars *pars)
+void	init_game(t_game *game)
 {
-	(void)pars;
-	game->player.x = (WIDTH / 2);
-	game->player.y = (HEIGHT / 2);
-	game->player.radius = 10;
-	game->player.angle = 0;
+	game->pars->player.radius = 10;
+	game->pars->player.angle = 0;
 	game->mlx = mlx_init(WIDTH, HEIGHT, "Adil's Map", true);
 }

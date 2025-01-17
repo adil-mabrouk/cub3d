@@ -105,9 +105,7 @@ int main(int ac, char **av)
 	t_pars	pars;
 	t_game	game;
 	//atexit(f);
-	
-	pars.player_x = -1;
-	pars.player_y = -1;
+
 	if (ac == 2)
 	{
 		if (parse_name(av[1]) == 1)
@@ -117,7 +115,7 @@ int main(int ac, char **av)
 			else
 			{
 				game.pars = &pars;
-				init_game(&game, &pars);
+				init_game(&game);
 			    game.img = mlx_new_image(game.mlx, WIDTH, HEIGHT);
      			draw_map(&game);
        			draw_player(&game);

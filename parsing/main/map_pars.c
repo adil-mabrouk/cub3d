@@ -160,8 +160,8 @@ int	check_mofm(t_pars *pars)
 				if (ft_players(pars->map[i][j]))
 				{
 					dupl++;
-					pars->player_x = i;
-					pars->player_y = j;
+					pars->player.x = i * TILE_SIZE;
+					pars->player.y = j * TILE_SIZE;
 				}
 				if (dupl > 1)
 					return (-1);
