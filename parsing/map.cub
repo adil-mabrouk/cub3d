@@ -1,13 +1,13 @@
-NO /home/isrkik/Desktop/cub3d/parsing/tex1.png
-SO /home/isrkik/Desktop/cub3d/parsing/tex1.png
-WE /home/isrkik/Desktop/cub3d/parsing/tex1.png
-EA /home/isrkik/Desktop/cub3d/parsing/tex1.png
+NO /home/isrkik/Desktop/cub3d/parsing/textures/msati.png
+SO /home/isrkik/Desktop/cub3d/parsing/textures/hh.png  
+WE /home/isrkik/Desktop/cub3d/parsing/textures/hero.png 
+EA /home/isrkik/Desktop/cub3d/parsing/textures/asta.png
 
 F 1,0,0
 C 225,1,0
 
-11111
-10001
-10N01
-10001
-11111
+111111
+1N0001
+100001
+100001
+111111

@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:40:00 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/12 14:54:15 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/17 12:03:05 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	count_biggest_len(char **line, int i)
 	return (j);
 }
 
-int	taj(char *str)
+int	taj(char *str) //nbdel liha smya
 {
 	int i = 0;
 	if (!str)
@@ -131,10 +131,20 @@ void	cpy_map(char **line, int hold, int length, t_pars *pars)
 	}
 }
 
-int	ft_players(int c)
+int	ft_players(int c, t_pars *pars)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	{
+		if (c == 'N')
+			pars->player.angle = M_PI_2; // fou9
+		else if (c == 'S')
+			pars->player.angle = 3 * M_PI_2; // ta7t
+		else if (c == 'E')
+			pars->player.angle = 0; // yamin
+		else if (c == 'W')
+			pars->player.angle = M_PI; // yassar
 		return (1);
+	}
 	return (0);
 }
 
@@ -155,9 +165,9 @@ int	check_mofm(t_pars *pars)
 				j++;
 			else if (ft_isspace(pars->map[i][j]))
 				j++;
-			else if (pars->map[i][j] == '0' || ft_players(pars->map[i][j]))
+			else if (pars->map[i][j] == '0' || ft_players(pars->map[i][j], pars))
 			{
-				if (ft_players(pars->map[i][j]))
+				if (ft_players(pars->map[i][j], pars))
 				{
 					dupl++;
 					pars->player.x = i * TILE_SIZE;

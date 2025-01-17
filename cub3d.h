@@ -10,16 +10,11 @@
 # include <limits.h>
 # include <stdbool.h>
 
-
-# define ROWS 15
-# define COLUMNS 20
 # define TILE_SIZE 32
-# define WIDTH 640
-# define HEIGHT 480
+# define WIDTH 1200
+# define HEIGHT 850
 # define FOV M_PI / 3
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 4
-# endif
+# define BUFFER_SIZE 4
 
 typedef struct s_player {
 	double		x;
@@ -78,10 +73,13 @@ typedef struct s_ray
 	int		is_facing_up;
 	int		is_facing_right;
 	int		is_facing_left;
-	double	wall_hit_x;
-	double	wall_hit_y;
+	double	hor_wall_hit_x;
+	double	hor_wall_hit_y;
+	double  vert_wall_hit_x;
+    double  vert_wall_hit_y;
 	double	horz;
 	double	vert;
+	mlx_texture_t  *wall_texture;
 }				t_ray;
 
 //parsing
@@ -114,6 +112,7 @@ void	init_game(t_game *game);
 void	draw_map(t_game *game);
 void	draw_player(t_game *game);
 void	key_hook(mlx_key_data_t keydata, void *param);
+void	render_textured_wall(t_game *game, t_ray *ray, int column, double wall_height);
 // void	draw_line(t_game *game, int x1, int y1, int color);
 
 

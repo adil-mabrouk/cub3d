@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/17 10:14:44 by isrkik            #+#    #+#             */
+/*   Updated: 2025/01/17 11:57:15 by isrkik           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	draw_map(t_game *game)
@@ -58,20 +70,20 @@ void	draw_player(t_game *game)
 	// int	line_x = game->pars->player.x + line_length * cos(game->player.angle);
 	// int	line_y = game->player.y + line_length * sin(game->player.angle);
 	// draw_line(game, line_x, line_y, 0xFFFF00FF);
-	int r = 0;
-	while (r < game->pars->len_rows)
-	{
-		int c = 0;
-		while (c < game->pars->len_columns)
-		{
-			printf("%d  ", game->pars->map[r][c]);
-			c++;
-		}
-		printf("\n");
-		r++;
-	}
-	printf("done map\n");
-	printf("p.x == %f,   p.y == %f\n", game->pars->player.x, game->pars->player.y);
+	// int r = 0;
+	// while (r < game->pars->len_rows)
+	// {
+	// 	int c = 0;
+	// 	while (c < game->pars->len_columns)
+	// 	{
+	// 		printf("%d  ", game->pars->map[r][c]);
+	// 		c++;
+	// 	}
+	// 	printf("\n");
+	// 	r++;
+	// }
+	// printf("done map\n");
+	// printf("p.x == %f,   p.y == %f\n", game->pars->player.x, game->pars->player.y);
 	ft_raycast(game);
 }
 
@@ -89,7 +101,6 @@ int	collision_with_wall(t_game *game, double new_x, double new_y)
 		{
 			grid_x = x / TILE_SIZE;
 			grid_y = y / TILE_SIZE;
-			printf("grid_y == %d     grid_x == %d\n", grid_y, grid_x);
 			if (game->pars->map[grid_y][grid_x] == '1')
 				return 1;
 			y++;
@@ -108,6 +119,11 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 	game = (t_game *)param;
 	player = &game->pars->player;
+	if (keydata.key == MLX_KEY_ESCAPE)
+    {
+        mlx_terminate(game->mlx);
+        exit(0);
+    }
 	if (keydata.key == MLX_KEY_W && !collision_with_wall(game, player->x + 2 * cos(player->angle), player->y + 2 * sin(player->angle)))
 	{
 		player->x += 2 * cos(player->angle);
@@ -141,9 +157,28 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
 }
 
+void load_texture(mlx_texture_t **texture, char *path)
+{
+    *texture = mlx_load_png(path);
+	if (!*texture)
+	{
+		printf("error loading texture\n");
+		exit(1);
+	}
+}
+
 void	init_game(t_game *game)
 {
+	game->mlx = mlx_init(WIDTH, HEIGHT, "Map", true);
+	if (!game->mlx)
+	{
+		printf("error initializing mlx\n");
+		exit(1);
+	}
+	load_texture(&game->textures.north, game->pars->north);
+    load_texture(&game->textures.south, game->pars->south);
+    load_texture(&game->textures.east, game->pars->east);
+    load_texture(&game->textures.west, game->pars->west);
 	game->pars->player.radius = 10;
 	game->pars->player.angle = 0;
-	game->mlx = mlx_init(WIDTH, HEIGHT, "Adil's Map", true);
 }
