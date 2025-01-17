@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:02 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/17 13:28:28 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:20:53 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	draw_player(t_game *game)
 	ft_raycast(game);
 }
 
-int	collision_with_wall(t_game *game, double new_x, double new_y)
+int	collide_with_wall(t_game *game, double new_x, double new_y)
 {
 	double x = new_x;
 	double y;
@@ -124,22 +124,22 @@ void	key_hook(mlx_key_data_t keydata, void *param)
         mlx_terminate(game->mlx);
         exit(0);
     }
-	if (keydata.key == MLX_KEY_W && !collision_with_wall(game, player->x + 3 * cos(player->angle), player->y + 2 * sin(player->angle)))
+	if (keydata.key == MLX_KEY_W && !collide_with_wall(game, player->x + 3 * cos(player->angle), player->y + 3 * sin(player->angle)))
 	{
 		player->x += 2 * cos(player->angle);
 		player->y += 2 * sin(player->angle);
 	}
-	else if (keydata.key == MLX_KEY_S && !collision_with_wall(game, player->x - 2 * cos(player->angle), player->y - 2 * sin(player->angle)))
+	else if (keydata.key == MLX_KEY_S && !collide_with_wall(game, player->x - 3 * cos(player->angle), player->y - 3 * sin(player->angle)))
 	{
 		player->x -= 2 * cos(player->angle);
 		player->y -= 2 * sin(player->angle);
 	}
-	else if (keydata.key == MLX_KEY_A && !collision_with_wall(game, player->x - 2 * cos(player->angle + M_PI_2), player->y - 2 * sin(player->angle + M_PI_2)))
+	else if (keydata.key == MLX_KEY_A && !collide_with_wall(game, player->x - 3 * cos(player->angle + M_PI_2), player->y - 3 * sin(player->angle + M_PI_2)))
 	{
 		player->x -= 2 * cos(player->angle + M_PI_2);
 		player->y -= 2 * sin(player->angle + M_PI_2);
 	}
-	else if (keydata.key == MLX_KEY_D && !collision_with_wall(game, player->x + 2 * cos(player->angle + M_PI_2), player->y + 2 * sin(player->angle + M_PI_2)))
+	else if (keydata.key == MLX_KEY_D && !collide_with_wall(game, player->x + 3 * cos(player->angle + M_PI_2), player->y + 3 * sin(player->angle + M_PI_2)))
 	{
 		player->x += 2 * cos(player->angle + M_PI_2);
 		player->y += 2 * sin(player->angle + M_PI_2);
