@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:02 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/17 17:20:53 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/18 11:52:10 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,9 +167,19 @@ void load_texture(mlx_texture_t **texture, char *path)
 	}
 }
 
+void    x_button(void *param)
+{
+    t_game  *game;
+
+    game = (t_game *)param;
+    mlx_terminate(game->mlx);
+    exit(0);
+}
+
 void	init_game(t_game *game)
 {
 	game->mlx = mlx_init(WIDTH, HEIGHT, "Map", true);
+	mlx_close_hook(game->mlx, &x_button, game);
 	if (!game->mlx)
 	{
 		printf("error initializing mlx\n");
