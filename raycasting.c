@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:19 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/19 18:33:22 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/19 18:51:09 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,40 +132,40 @@ double	norm_angle(t_ray *ray)
 	return (ray->angle);
 }
 
-void	render_ray(t_game *game, double angle, double distance)
-{
-	double	x = game->pars->player.x;
-	double	y = game->pars->player.y;
-	double	step = 1.0;
+// void	render_ray(t_game *game, double angle, double distance)
+// {
+// 	double	x = game->pars->player.x;
+// 	double	y = game->pars->player.y;
+// 	double	step = 1.0;
 
-	double	x_step = cos(angle) * step;
-	double	y_step = sin(angle) * step;
-	while (distance > 0)
-	{
-		mlx_put_pixel(game->img, (int)x, (int)y, 0xFFFF00FF);
-		x += x_step;
-		y += y_step;
-		distance -= step;
-	}
-}
+// 	double	x_step = cos(angle) * step;
+// 	double	y_step = sin(angle) * step;
+// 	while (distance > 0)
+// 	{
+// 		mlx_put_pixel(game->img, (int)x, (int)y, 0xFFFF00FF);
+// 		x += x_step;
+// 		y += y_step;
+// 		distance -= step;
+// 	}
+// }
 
-void	render_wall(t_game *game, int column, double wall_bottom, double wall_height)
-{
-	double	wall_top;
-	int		y;
+// void	render_wall(t_game *game, int column, double wall_bottom, double wall_height)
+// {
+// 	double	wall_top;
+// 	int		y;
 
-	wall_top = (HEIGHT / 2) - (wall_height / 2);
-	if (wall_top < 0)
-		wall_top = 0;
-	if (wall_bottom >= HEIGHT)
-		wall_bottom = HEIGHT - 1;
-	y = (int)wall_top;
-	while (y <= (int)wall_bottom)
-	{
-		mlx_put_pixel(game->img, column, y, 0x000000);
-		y++;
-	}
-}
+// 	wall_top = (HEIGHT / 2) - (wall_height / 2);
+// 	if (wall_top < 0)
+// 		wall_top = 0;
+// 	if (wall_bottom >= HEIGHT)
+// 		wall_bottom = HEIGHT - 1;
+// 	y = (int)wall_top;
+// 	while (y <= (int)wall_bottom)
+// 	{
+// 		mlx_put_pixel(game->img, column, y, 0x000000);
+// 		y++;
+// 	}
+// }
 
 void	render_floor(t_game *game, int column, double wall_bottom)
 {
@@ -216,7 +216,6 @@ void cast_ray(t_game *game, t_ray *ray, int column)
     }
     if (distance == INFINITY || distance < 0.1)
         distance = 0.1;
-    //lprob d fisheye effect, kaybano l7youta mlwyin wla ma3rt
     distance *= cos(ray->angle - game->pars->player.angle);
     wall_height = (TILE_SIZE * (WIDTH / 2) / tan(FOV / 2)) / distance;
     wall_bottom = (HEIGHT / 2) + (wall_height / 2);
