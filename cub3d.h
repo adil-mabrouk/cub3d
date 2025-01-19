@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/17 13:17:55 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/19 18:34:24 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ typedef struct s_game
 	mlx_image_t	*img;
 	t_textures textures;
 	t_pars		*pars;
+	int			width;
+	int			height;
 }	t_game;
 
 
@@ -123,9 +125,7 @@ void	ft_raycast(t_game *game);
 void	init_game(t_game *game);
 void	draw_map(t_game *game);
 void	draw_player(t_game *game);
-void	key_hook(mlx_key_data_t keydata, void *param);
 void	render_textured_wall(t_game *game, t_ray *ray, int column, double wall_height);
-// void	draw_line(t_game *game, int x1, int y1, int color);
-
+void 	loop_hook(void *param);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: i61mail <i61mail@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:30:56 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/12 14:51:55 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/19 14:05:29 by i61mail          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int main(int ac, char **av)
      			draw_map(&game);
        			draw_player(&game);
 				mlx_image_to_window(game.mlx, game.img, 0, 0);
- 				mlx_key_hook(game.mlx, key_hook, &game);
+ 				mlx_loop_hook(game.mlx, loop_hook, &game);
  				mlx_loop(game.mlx);
  				mlx_terminate(game.mlx);
 			}

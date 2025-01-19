@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_pars.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:40:00 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/17 12:03:05 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/19 18:36:31 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	count_biggest_len(char **line, int i)
 	return (j);
 }
 
-int	taj(char *str) //nbdel liha smya
+int	no_newline(char *str)
 {
 	int i = 0;
 	if (!str)
@@ -102,7 +102,7 @@ void	cpy_map(char **line, int hold, int length, t_pars *pars)
 	n = 0;
 	while (line[hold] && line[hold][i] != '\n')
 	{
-		len_line = taj(line[hold]) + 1;
+		len_line = no_newline(line[hold]) + 1;
 		i = 0;
 		while (length > i)
 		{
@@ -170,8 +170,8 @@ int	check_mofm(t_pars *pars)
 				if (ft_players(pars->map[i][j], pars))
 				{
 					dupl++;
-					pars->player.x = i * TILE_SIZE;
-					pars->player.y = j * TILE_SIZE;
+					pars->player.y = i * TILE_SIZE + (TILE_SIZE / 2);
+					pars->player.x = j * TILE_SIZE + (TILE_SIZE / 2);
 				}
 				if (dupl > 1)
 					return (-1);
@@ -188,6 +188,8 @@ int	check_mofm(t_pars *pars)
 		}
 		i++;
 	}
+	if (dupl == 0)
+		return (-1);
 	return (0);
 }
 

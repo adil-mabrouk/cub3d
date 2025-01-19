@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:02 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/18 11:52:10 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/19 18:38:13 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ void	draw_map(t_game *game)
 
 void	draw_player(t_game *game)
 {
-	int i = -game->pars->player.radius;
-	while (++i < game->pars->player.radius)
-	{
-		int	j = -game->pars->player.radius;
-		while (++j < game->pars->player.radius)
-			if (i * i + j * j <= game->pars->player.radius * game->pars->player.radius)
-				mlx_put_pixel(game->img, game->pars->player.x + i, game->pars->player.y + j, 0xFF0000FF);
-	}
+	// int i = -game->pars->player.radius;
+	// while (++i < game->pars->player.radius)
+	// {
+	// 	int	j = -game->pars->player.radius;
+	// 	while (++j < game->pars->player.radius)
+	// 		if (i * i + j * j <= game->pars->player.radius * game->pars->player.radius)
+	// 			mlx_put_pixel(game->img, game->pars->player.x + i, game->pars->player.y + j, 0xFF0000FF);
+	// }
 	// int	line_x = game->pars->player.x + 50 * cos(game->player.angle);
 	// int	line_y = game->pars->player.y + 50 * sin(game->player.angle);
 	// draw_line(game, line_x, line_y, 0xFFFF00FF);
@@ -89,15 +89,15 @@ void	draw_player(t_game *game)
 
 int	collide_with_wall(t_game *game, double new_x, double new_y)
 {
-	double x = new_x;
+	double x = new_x - 2;
 	double y;
 	int	grid_x;
 	int	grid_y;
 
-	while (x <= new_x)
+	while (x <= new_x + 2)
 	{
-		y = new_y;
-		while (y <= new_y)
+		y = new_y - 2;
+		while (y <= new_y + 2)
 		{
 			grid_x = x / TILE_SIZE;
 			grid_y = y / TILE_SIZE;
@@ -112,49 +112,39 @@ int	collide_with_wall(t_game *game, double new_x, double new_y)
 	return 0;
 }
 
-void	key_hook(mlx_key_data_t keydata, void *param)
+void handle_keys(t_game *game)
 {
-	t_game		*game;
-	t_player	*player;
+    t_player *player = &game->pars->player;
 
-	game = (t_game *)param;
-	player = &game->pars->player;
-	if (keydata.key == MLX_KEY_ESCAPE)
+    if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
     {
         mlx_terminate(game->mlx);
         exit(0);
     }
-	if (keydata.key == MLX_KEY_W && !collide_with_wall(game, player->x + 3 * cos(player->angle), player->y + 3 * sin(player->angle)))
-	{
-		player->x += 2 * cos(player->angle);
-		player->y += 2 * sin(player->angle);
-	}
-	else if (keydata.key == MLX_KEY_S && !collide_with_wall(game, player->x - 3 * cos(player->angle), player->y - 3 * sin(player->angle)))
-	{
-		player->x -= 2 * cos(player->angle);
-		player->y -= 2 * sin(player->angle);
-	}
-	else if (keydata.key == MLX_KEY_A && !collide_with_wall(game, player->x - 3 * cos(player->angle + M_PI_2), player->y - 3 * sin(player->angle + M_PI_2)))
-	{
-		player->x -= 2 * cos(player->angle + M_PI_2);
-		player->y -= 2 * sin(player->angle + M_PI_2);
-	}
-	else if (keydata.key == MLX_KEY_D && !collide_with_wall(game, player->x + 3 * cos(player->angle + M_PI_2), player->y + 3 * sin(player->angle + M_PI_2)))
-	{
-		player->x += 2 * cos(player->angle + M_PI_2);
-		player->y += 2 * sin(player->angle + M_PI_2);
-	}
-	else if (keydata.key == MLX_KEY_LEFT && keydata.action == 1)
-		player->angle -= M_PI / 12;
-	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == 1)
-		player->angle += M_PI / 12;
-	else
-		return ;
-	mlx_delete_image(game->mlx, game->img);
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	draw_map(game);
-	draw_player(game);
-	mlx_image_to_window(game->mlx, game->img, 0, 0);
+    if (mlx_is_key_down(game->mlx, MLX_KEY_W) &&
+        !collide_with_wall(game, player->x + 3 * cos(player->angle), player->y + 3 * sin(player->angle))) return ;
+    else if (mlx_is_key_down(game->mlx, MLX_KEY_S) &&
+             !collide_with_wall(game, player->x - 3 * cos(player->angle), player->y - 3 * sin(player->angle)))return ;
+    else if (mlx_is_key_down(game->mlx, MLX_KEY_A) &&
+             !collide_with_wall(game, player->x - 3 * cos(player->angle + M_PI_2), player->y - 3 * sin(player->angle + M_PI_2)))return ;
+    else if (mlx_is_key_down(game->mlx, MLX_KEY_D) &&
+             !collide_with_wall(game, player->x + 3 * cos(player->angle + M_PI_2), player->y + 3 * sin(player->angle + M_PI_2)))return ;
+    if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+        player->angle -= M_PI / 80.0;
+    if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+        player->angle += M_PI / 80.0;
+}
+
+void loop_hook(void *param)
+{
+    t_game *game = (t_game *)param;
+
+    handle_keys(game);
+    mlx_delete_image(game->mlx, game->img);
+    game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+    // draw_map(game);
+    draw_player(game);
+    mlx_image_to_window(game->mlx, game->img, 0, 0);
 }
 
 void load_texture(mlx_texture_t **texture, char *path)
@@ -185,6 +175,8 @@ void	init_game(t_game *game)
 		printf("error initializing mlx\n");
 		exit(1);
 	}
+	game->width = game->pars->len_columns * TILE_SIZE;
+	game->height = game->pars->len_rows * TILE_SIZE;
 	load_texture(&game->textures.north, game->pars->north);
     load_texture(&game->textures.south, game->pars->south);
     load_texture(&game->textures.east, game->pars->east);
