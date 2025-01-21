@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:02 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/21 10:53:03 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/21 11:55:16 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ int	collide_with_wall(t_game *game, double new_x, double new_y)
 		{
 			grid_x = x / TILE_SIZE;
 			grid_y = y / TILE_SIZE;
-			if (game->pars->map[grid_y][grid_x] == '1')
+			if (game->pars->map[grid_y][grid_x] == '1' || 
+                game->pars->map[grid_y][grid_x] == 'D')
 				return 1;
 			y++;
 		}
@@ -110,6 +111,33 @@ int	collide_with_wall(t_game *game, double new_x, double new_y)
 	game->pars->player.x = new_x;
 	game->pars->player.y = new_y;
 	return 0;
+}
+
+void handle_door(t_game *game)
+{
+    double check_x;
+    double check_y;
+    int 	tile_x;
+    int 	tile_y;
+    
+	check_x = game->pars->player.x + cos(game->pars->player.angle) * TILE_SIZE;
+	check_y = game->pars->player.y + sin(game->pars->player.angle) * TILE_SIZE;
+	tile_x = floor(check_x / TILE_SIZE);
+	tile_y = floor(check_y / TILE_SIZE);
+    if (tile_y >= 0 && tile_y < game->pars->len_rows && 
+        tile_x >= 0 && tile_x < game->pars->len_columns)
+    {
+        if (mlx_is_key_down(game->mlx, MLX_KEY_O) && 
+            game->pars->map[tile_y][tile_x] == 'D')
+        {
+            game->pars->map[tile_y][tile_x] = DOOR_OPEN;
+        }
+        else if (mlx_is_key_down(game->mlx, MLX_KEY_C) && 
+                 game->pars->map[tile_y][tile_x] == DOOR_OPEN)
+        {
+            game->pars->map[tile_y][tile_x] = 'D';
+        }
+    }
 }
 
 void handle_keys(t_game *game)
@@ -122,17 +150,22 @@ void handle_keys(t_game *game)
         exit(0);
     }
     if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-        collide_with_wall(game, player->x + 3 * cos(player->angle), player->y + 3 * sin(player->angle));
+        collide_with_wall(game, player->x + 3 * cos(player->angle), 
+                         player->y + 3 * sin(player->angle));
     else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-        collide_with_wall(game, player->x - 3 * cos(player->angle), player->y - 3 * sin(player->angle));
+        collide_with_wall(game, player->x - 3 * cos(player->angle), 
+                         player->y - 3 * sin(player->angle));
     else if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-        collide_with_wall(game, player->x - 3 * cos(player->angle + M_PI_2), player->y - 3 * sin(player->angle + M_PI_2));
+        collide_with_wall(game, player->x - 3 * cos(player->angle + M_PI_2), 
+                         player->y - 3 * sin(player->angle + M_PI_2));
     else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-        collide_with_wall(game, player->x + 3 * cos(player->angle + M_PI_2), player->y + 3 * sin(player->angle + M_PI_2));
+        collide_with_wall(game, player->x + 3 * cos(player->angle + M_PI_2), 
+                         player->y + 3 * sin(player->angle + M_PI_2));
     if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
         player->angle -= M_PI / 80.0;
     if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
         player->angle += M_PI / 80.0;
+    handle_door(game);
 }
 
 void loop_hook(void *param)
@@ -183,4 +216,5 @@ void	init_game(t_game *game)
     load_texture(&game->textures.south, game->pars->south);
     load_texture(&game->textures.east, game->pars->east);
     load_texture(&game->textures.west, game->pars->west);
+	load_texture(&game->textures.door, "/home/isrkik/Desktop/cub3d/bonus/parsing_bonus/textures_bonus/door.png");
 }

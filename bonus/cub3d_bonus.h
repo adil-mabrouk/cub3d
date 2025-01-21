@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/21 10:54:14 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/21 13:18:02 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define HEIGHT 850
 # define FOV M_PI / 3
 # define BUFFER_SIZE 4
+# define DOOR_OPEN 3
 
 typedef struct s_player {
 	double		x;
@@ -50,6 +51,7 @@ typedef struct s_textures {
     mlx_texture_t *south;
     mlx_texture_t *east;
     mlx_texture_t *west;
+	mlx_texture_t *door;
 } t_textures;
 
 
@@ -123,8 +125,8 @@ int		pars_line(char *line, t_pars *pars);
 
 void	ft_raycast(t_game *game);
 void	init_game(t_game *game);
-void	draw_map(t_game *game);
-void	draw_player(t_game *game);
+// void	draw_map(t_game *game);
+// void	draw_player(t_game *game);
 void	render_textured_wall(t_game *game, t_ray *ray, int column, double wall_height);
 void 	loop_hook(void *param);
 

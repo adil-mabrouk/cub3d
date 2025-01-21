@@ -6,7 +6,7 @@
 #    By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:25:25 by amabrouk          #+#    #+#              #
-#    Updated: 2025/01/21 10:52:01 by isrkik           ###   ########.fr        #
+#    Updated: 2025/01/21 11:49:54 by isrkik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ mandatory/%.o: mandatory/%.c mandatory/cub3d.h
 $(BONUS_NAME) : $(OBJ_BONUS)
 	$(CC) $(CFLAGS) -g $(OBJ_BONUS) $(DFLAGS) -lm -o $(BONUS_NAME)
 
-bonus/%.o: bonus/%.c mandatory/cub3d_bonus.h
+bonus/%.o: bonus/%.c bonus/cub3d_bonus.h
 	$(CC) -c $< -o $@ $(CFLAGS) -g
 
 bonus : $(BONUS_NAME)	

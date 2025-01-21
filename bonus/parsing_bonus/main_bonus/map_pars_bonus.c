@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:40:00 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/21 10:56:57 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/21 11:14:51 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,9 +151,9 @@ int	ft_players(int c, t_pars *pars)
 int  check_door(char **map, int i, int j)
 {
   if (map[i - 1][j] == '1' && map[i + 1][j] == '1')
-    return (0);
+	return (0);
   else if (map[i][j - 1] == '1' && map[i][j + 1] == '1')
-    return (0);
+	return (0);
   else
     return (-1);
 }
@@ -175,7 +175,7 @@ int	check_mofm(t_pars *pars)
 				j++;
 			else if (ft_isspace(pars->map[i][j]))
 				j++;
-			else if (pars->map[i][j] == '0' || ft_players(pars->map[i][j], pars))
+			else if (pars->map[i][j] == '0' || ft_players(pars->map[i][j], pars) || pars->map[i][j] == 'D')
 			{
 				if (ft_players(pars->map[i][j], pars))
 				{
@@ -188,7 +188,7 @@ int	check_mofm(t_pars *pars)
 				if (pars->map[i][j] == 'D')
         		{
           			if (check_door(pars->map, i, j) == -1)
-            		return (-1);
+            			return (-1);
         		}
 				if (pars->map[i - 1][j] == ' ' || pars->map[i + 1][j] == ' '
 					|| pars->map[i][j - 1] == ' '

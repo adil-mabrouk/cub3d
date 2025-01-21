@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:19 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/21 10:57:58 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/21 13:17:50 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int	hit_wall(t_game *game, double x, double y)
 	else if (tile_y < 0 || tile_y >= game->pars->len_rows || tile_x < 0 || tile_x >= game->pars->len_columns)
 		return 1;
 	else if (game->pars->map[tile_y][tile_x] == '1')
-		return 1;
+        return 1;
+    else if (game->pars->map[tile_y][tile_x] == 'D')
+        return 1;
 	return 0;
 }
 

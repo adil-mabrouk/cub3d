@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:44 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/21 10:52:48 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/21 13:17:33 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,35 @@
 void get_wall_texture(t_game *game, t_ray *ray, double *tex_x)
 {
     double hit_x;
-
-    if (!game || !ray || !game->textures.north || !game->textures.south || 
-        !game->textures.east || !game->textures.west)
-    {
-        ray->wall_texture = NULL;
-        return;
-    }
+    int tile_x, tile_y;
 
     if (ray->horz < ray->vert)
     {
         hit_x = ray->hor_wall_hit_x;
-
-        if (ray->is_facing_up)
+        tile_x = floor(ray->hor_wall_hit_x / TILE_SIZE);
+        tile_y = floor(ray->hor_wall_hit_y / TILE_SIZE);
+        if (game->pars->map[tile_y][tile_x] == 'D')
+            ray->wall_texture = game->textures.door;
+        else if (ray->is_facing_up)
             ray->wall_texture = game->textures.north;
         else
             ray->wall_texture = game->textures.south;
-
         *tex_x = fmod(hit_x, TILE_SIZE) * (ray->wall_texture->width / TILE_SIZE);
     }
     else
     {
         hit_x = ray->vert_wall_hit_x;
-        if (ray->is_facing_right)
+        tile_x = floor(ray->vert_wall_hit_x / TILE_SIZE);
+        tile_y = floor(ray->vert_wall_hit_y / TILE_SIZE);
+
+        if (game->pars->map[tile_y][tile_x] == 'D')
+            ray->wall_texture = game->textures.door;
+        else if (ray->is_facing_right)
             ray->wall_texture = game->textures.east;
         else
             ray->wall_texture = game->textures.west;
-
-        *tex_x = fmod(ray->vert_wall_hit_y, TILE_SIZE) * (ray->wall_texture->width / TILE_SIZE);
+        *tex_x = fmod(ray->vert_wall_hit_y, TILE_SIZE) * 
+                 (ray->wall_texture->width / TILE_SIZE);
     }
 }
 
