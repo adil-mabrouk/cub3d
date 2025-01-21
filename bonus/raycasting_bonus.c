@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:19 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/19 18:51:09 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/21 10:57:58 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	hit_wall(t_game *game, double x, double y)
 {
@@ -201,21 +201,21 @@ void cast_ray(t_game *game, t_ray *ray, int column)
 
     ray->horz = get_horz_dis(game, ray);
     ray->vert = get_vert_dis(game, ray);
-    if (ray->horz == INFINITY && ray->vert == INFINITY)
-        distance = INFINITY;
-    else if (ray->horz == INFINITY)
-        distance = ray->vert;
-    else if (ray->vert == INFINITY)
-        distance = ray->horz;
-    else
-    {
+    // if (ray->horz == INFINITY && ray->vert == INFINITY)
+    //     distance = INFINITY;
+    // else if (ray->horz == INFINITY)
+    //     distance = ray->vert;
+    // else if (ray->vert == INFINITY)
+    //     distance = ray->horz;
+    // else
+    // {
         if (ray->horz < ray->vert)
             distance = ray->horz;
         else
             distance = ray->vert;
-    }
-    if (distance == INFINITY || distance < 0.1)
-        distance = 0.1;
+    // }
+    // if (distance == INFINITY || distance < 0.1)
+    //     distance = 0.1;
     distance *= cos(ray->angle - game->pars->player.angle);
     wall_height = (TILE_SIZE * (WIDTH / 2) / tan(FOV / 2)) / distance;
     wall_bottom = (HEIGHT / 2) + (wall_height / 2);
