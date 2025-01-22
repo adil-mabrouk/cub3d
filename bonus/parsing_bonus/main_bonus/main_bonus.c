@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:30:56 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/21 10:53:22 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/22 10:54:10 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ int main(int ac, char **av)
 				ft_raycast(&game);
 				mlx_image_to_window(game.mlx, game.img, 0, 0);
  				mlx_loop_hook(game.mlx, loop_hook, &game);
+				mlx_key_hook(game.mlx, &key_handler, &game);
  				mlx_loop(game.mlx);
  				mlx_terminate(game.mlx);
 			}

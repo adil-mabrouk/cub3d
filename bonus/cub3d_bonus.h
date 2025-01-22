@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/21 13:18:02 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/22 11:35:40 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,21 @@
 # define FOV M_PI / 3
 # define BUFFER_SIZE 4
 # define DOOR_OPEN 3
+
+
+typedef struct s_sprite
+{
+	mlx_texture_t *frames[10]; 
+	mlx_texture_t *current;
+    int current_frame;    
+    int frame_counter;
+	bool	show_sprite;
+	unsigned int tex_x;
+    unsigned int tex_y;
+	unsigned int y;
+    unsigned int x;
+	
+} t_sprite;
 
 typedef struct s_player {
 	double		x;
@@ -79,6 +94,7 @@ typedef struct s_game
 	t_pars		*pars;
 	int			width;
 	int			height;
+	t_sprite	sprite;
 }	t_game;
 
 
@@ -129,5 +145,7 @@ void	init_game(t_game *game);
 // void	draw_player(t_game *game);
 void	render_textured_wall(t_game *game, t_ray *ray, int column, double wall_height);
 void 	loop_hook(void *param);
-
+void 	render_sprite(t_game *game);
+void 	init_sprite(t_game *game);
+void 	key_handler(mlx_key_data_t keydata, void *param);
 #endif

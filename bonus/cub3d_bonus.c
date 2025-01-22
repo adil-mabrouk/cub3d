@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:02 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/21 11:55:16 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/22 11:38:55 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ void loop_hook(void *param)
     // draw_map(game);
     // draw_player(game);
 	ft_raycast(game);
+    render_sprite(game);
     mlx_image_to_window(game->mlx, game->img, 0, 0);
 }
 
@@ -189,6 +190,14 @@ void load_texture(mlx_texture_t **texture, char *path)
 		printf("error loading texture\n");
 		exit(1);
 	}
+}
+
+void key_handler(mlx_key_data_t keydata, void *param)
+{
+    t_game *game = (t_game *)param;
+    
+    if (keydata.key == MLX_KEY_Y && keydata.action == MLX_PRESS)
+        game->sprite.show_sprite = !game->sprite.show_sprite;
 }
 
 void    x_button(void *param)
@@ -217,4 +226,5 @@ void	init_game(t_game *game)
     load_texture(&game->textures.east, game->pars->east);
     load_texture(&game->textures.west, game->pars->west);
 	load_texture(&game->textures.door, "/home/isrkik/Desktop/cub3d/bonus/parsing_bonus/textures_bonus/door.png");
+	init_sprite(game);
 }

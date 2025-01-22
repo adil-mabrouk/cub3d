@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:44 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/21 13:55:27 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/21 14:03:55 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void get_wall_texture(t_game *game, t_ray *ray, double *tex_x)
     {
         tile_x = floor(ray->vert_wall_hit_x / TILE_SIZE);
         tile_y = floor(ray->vert_wall_hit_y / TILE_SIZE);
-
         if (game->pars->map[tile_y][tile_x - 1] == 'D' || game->pars->map[tile_y][tile_x] == 'D')
             ray->wall_texture = game->textures.door;
         else if (ray->is_facing_right)

@@ -6,7 +6,7 @@
 #    By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:25:25 by amabrouk          #+#    #+#              #
-#    Updated: 2025/01/21 11:49:54 by isrkik           ###   ########.fr        #
+#    Updated: 2025/01/21 16:59:31 by isrkik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC_MAN = mandatory/cub3d.c mandatory/raycasting.c mandatory/parsing/main/main.c
 SRC_BONUS = bonus/cub3d_bonus.c bonus/raycasting_bonus.c bonus/parsing_bonus/main_bonus/main_bonus.c bonus/parsing_bonus/utils_bonus/utils_bonus.c \
 	  bonus/parsing_bonus/gnl_bonus.c bonus/parsing_bonus/utils_bonus/utils2_bonus.c \
 	  bonus/parsing_bonus/utils_bonus/utils3_bonus.c bonus/parsing_bonus/main_bonus/map_pars_bonus.c bonus/parsing_bonus/main_bonus/colors_textures_pars_bonus.c\
-	  bonus/textures_bonus.c
+	  bonus/textures_bonus.c bonus/sprites.c
 
 OBJ_MAN = $(SRC_MAN:.c=.o)
 
