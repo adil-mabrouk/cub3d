@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: i61mail <i61mail@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/22 11:35:40 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/23 10:29:06 by i61mail          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,4 +148,7 @@ void 	loop_hook(void *param);
 void 	render_sprite(t_game *game);
 void 	init_sprite(t_game *game);
 void 	key_handler(mlx_key_data_t keydata, void *param);
+void 	mouse_hook(double curr_x_pos, double curr_y_pos, void *param);
+
+
 #endif

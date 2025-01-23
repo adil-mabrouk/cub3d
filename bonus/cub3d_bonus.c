@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: i61mail <i61mail@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:02 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/22 11:38:55 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/23 10:28:41 by i61mail          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,18 @@ void handle_keys(t_game *game)
     handle_door(game);
 }
 
+void mouse_hook(double curr_x_pos, double curr_y_pos, void *param)
+{
+	(void)curr_y_pos;
+    static double last_x_pos = 0;
+    t_game *game = (t_game *)param;
+    double delta_x;
+
+	delta_x = curr_x_pos - last_x_pos; // kan7seb delta d lmouse bach n3ref chhal dart lmouse 3la fin kant 9bel hadik hya delta
+    game->pars->player.angle += delta_x * 0.005; // hna kanbdel lih l angel b delta li 7sebt w sor3a bach ghaydor
+    last_x_pos = curr_x_pos; // akhir pos kan fiha kanstoriha
+}
+
 void loop_hook(void *param)
 {
     t_game *game = (t_game *)param;
@@ -225,6 +237,6 @@ void	init_game(t_game *game)
     load_texture(&game->textures.south, game->pars->south);
     load_texture(&game->textures.east, game->pars->east);
     load_texture(&game->textures.west, game->pars->west);
-	load_texture(&game->textures.door, "/home/isrkik/Desktop/cub3d/bonus/parsing_bonus/textures_bonus/door.png");
+	load_texture(&game->textures.door, "/home/i61mail/cub3d/bonus/parsing_bonus/textures_bonus/door.png");
 	init_sprite(game);
 }
