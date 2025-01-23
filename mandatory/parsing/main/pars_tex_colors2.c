@@ -6,26 +6,23 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 11:49:12 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/23 13:21:04 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/23 18:29:42 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-int	create_rgb(int r, int g, int b)
+int	ft_create_trgb(int r, int g, int b)
 {
-	int	col;
-
-	col = r << 16 | g << 8 | b;
-	return (col);
+	return (r << 24 | g << 16 | b << 8 | 255);
 }
 
 void	store_colors(t_pars *pars, int color, unsigned int *temp)
 {
 	if (color == 0)
-		pars->f_color = create_rgb(temp[0], temp[1], temp[2]);
+		pars->f_color = ft_create_trgb(temp[0], temp[1], temp[2]);
 	else
-		pars->c_color = create_rgb(temp[0], temp[1], temp[2]);
+		pars->c_color = ft_create_trgb(temp[0], temp[1], temp[2]);
 }
 
 int	skip_space_color(char *line, int *i)
