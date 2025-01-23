@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:37:57 by isrkik            #+#    #+#             */
-/*   Updated: 2024/11/18 23:14:48 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/23 11:33:32 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,4 @@ int	ft_strcmp(char *s1, char *s2)
 	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
 	return (s1[i] - s2[i]);
-}
-
-void	skip_spaces(char *line, int *i)
-{
-	while (line[*i])
-	{
-		if (ft_isspace(line[*i]))
-			(*i)++;
-		else
-			break ;
-	}
 }

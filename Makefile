@@ -6,7 +6,7 @@
 #    By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:25:25 by amabrouk          #+#    #+#              #
-#    Updated: 2025/01/21 16:59:31 by isrkik           ###   ########.fr        #
+#    Updated: 2025/01/23 14:26:21 by isrkik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,10 @@ DFLAGS = mandatory/libmlx42.a -lglfw \
 
 SRC_MAN = mandatory/cub3d.c mandatory/raycasting.c mandatory/parsing/main/main.c mandatory/parsing/utils/utils.c \
 	  mandatory/parsing/gnl.c mandatory/parsing/utils/utils2.c \
-	  mandatory/parsing/utils/utils3.c mandatory/parsing/main/map_pars.c mandatory/parsing/main/colors_textures_pars.c\
-	  mandatory/textures.c
+	  mandatory/parsing/utils/utils3.c mandatory/parsing/main/map_pars.c mandatory/parsing/main/pars_tex_colors.c\
+	  mandatory/textures.c mandatory/parsing/utils/utils4.c mandatory/parsing/main/pars_tex_colors2.c \
+	  mandatory/parsing/main/map_pars2.c mandatory/parsing/main/map_pars3.c mandatory/parsing/main/map_pars4.c \
+	  
 
 SRC_BONUS = bonus/cub3d_bonus.c bonus/raycasting_bonus.c bonus/parsing_bonus/main_bonus/main_bonus.c bonus/parsing_bonus/utils_bonus/utils_bonus.c \
 	  bonus/parsing_bonus/gnl_bonus.c bonus/parsing_bonus/utils_bonus/utils2_bonus.c \
