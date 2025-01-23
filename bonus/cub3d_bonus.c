@@ -6,7 +6,7 @@
 /*   By: i61mail <i61mail@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:02 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/23 10:28:41 by i61mail          ###   ########.fr       */
+/*   Updated: 2025/01/23 11:06:12 by i61mail          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,30 +87,17 @@
 // 	ft_raycast(game);
 // }
 
-int	collide_with_wall(t_game *game, double new_x, double new_y)
+int collide_with_wall(t_game *game, double new_x, double new_y)
 {
-	double x = new_x - 2;
-	double y;
-	int	grid_x;
-	int	grid_y;
-
-	while (x <= new_x + 2)
-	{
-		y = new_y - 2;
-		while (y <= new_y + 2)
-		{
-			grid_x = x / TILE_SIZE;
-			grid_y = y / TILE_SIZE;
-			if (game->pars->map[grid_y][grid_x] == '1' || 
-                game->pars->map[grid_y][grid_x] == 'D')
-				return 1;
-			y++;
-		}
-		x++;
-	}
-	game->pars->player.x = new_x;
-	game->pars->player.y = new_y;
-	return 0;
+    if (hit_wall(game, new_x, game->pars->player.y)) //horizental
+        new_x = game->pars->player.x;// kan usi lblasa nit d 'y' bach ntchecki biha ghir 'x' rasha
+    if (hit_wall(game, game->pars->player.x, new_y))//vertical
+        new_y = game->pars->player.y;// kan usi lblasa nit d 'x' bach ntchecki biha ghir 'y' rasha
+    if (hit_wall(game, new_x, new_y))
+        return 1;
+    game->pars->player.x = new_x;
+    game->pars->player.y = new_y;
+    return 0;
 }
 
 void handle_door(t_game *game)

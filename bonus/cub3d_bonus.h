@@ -6,7 +6,7 @@
 /*   By: i61mail <i61mail@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/23 10:29:06 by i61mail          ###   ########.fr       */
+/*   Updated: 2025/01/23 10:39:29 by i61mail          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ void 	render_sprite(t_game *game);
 void 	init_sprite(t_game *game);
 void 	key_handler(mlx_key_data_t keydata, void *param);
 void 	mouse_hook(double curr_x_pos, double curr_y_pos, void *param);
+int		hit_wall(t_game *game, double x, double y);
 
 
 #endif
