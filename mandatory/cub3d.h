@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/23 17:48:13 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/23 22:07:45 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@
 # include <limits.h>
 # include <stdbool.h>
 
-# define TILE_SIZE 32
-# define WIDTH 1200
-# define HEIGHT 850
+# define TILE_SIZE 160
+# define WIDTH 1920
+# define HEIGHT 1080
+# define SPEED 50
 # define FOV M_PI / 3
 # define BUFFER_SIZE 4
 
@@ -32,7 +33,6 @@ typedef struct s_player
 {
 	double		x;
 	double		y;
-	int			radius;
 	double		angle;
 }	t_player;
 
@@ -149,8 +149,6 @@ void	cpy_map(char **line, int length, t_pars *pars);
 
 void	ft_raycast(t_game *game);
 void	init_game(t_game *game);
-// void	draw_map(t_game *game);
-// void	draw_player(t_game *game);
 void	render_textured_wall(t_game *game, t_ray *ray,
 			int column, double wall_height);
 void	loop_hook(void *param);

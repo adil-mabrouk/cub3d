@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 11:28:31 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/23 11:34:10 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/23 22:05:33 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,4 @@ void	skip_spaces(char *line, int *i)
 		else
 			break ;
 	}
-}
-
-int	ft_strnewline(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != '\n')
-		i++;
-	return (i);
 }

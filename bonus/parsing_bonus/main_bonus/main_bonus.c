@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:30:56 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/23 16:21:00 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/23 22:32:33 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,10 @@ void	ft_execute(t_game *game, t_pars *pars)
 {
 	game->pars = pars;
 	init_game(game);
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	// draw_map(game);
-	// draw_player(game);
 	ft_raycast(game);
+	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
+	mlx_image_to_window(game->mlx, game->mini_map, 10, 10);
 	mlx_loop_hook(game->mlx, loop_hook, game);
 	mlx_key_hook(game->mlx, &key_handler, game);
 	mlx_cursor_hook(game->mlx, mouse_hook, game);

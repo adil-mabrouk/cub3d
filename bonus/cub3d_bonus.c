@@ -3,89 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:02 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/23 11:22:27 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/23 22:58:19 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-// void	draw_map(t_game *game)
-// {
-// 	int r = -1;
-// 	int	col;
-
-// 	while (++r < game->pars->len_rows)
-// 	{
-// 		col = -1;
-// 		while (++col < game->pars->len_columns)
-// 		{
-// 			int tile = game->pars->map[r][col];
-// 			int x = col * TILE_SIZE;
-// 			int y = r * TILE_SIZE;
-// 			int color = tile == '1' ? 0x000000FF : 0x0000FF00;
-// 			int i = -1;
-// 			while (++i < TILE_SIZE)
-// 			{
-// 				int j = -1;
-// 				while (++j < TILE_SIZE)
-// 					mlx_put_pixel(game->img, x + i, y + j, color);
-// 			}
-// 		}
-// 	}
-// }
-
-// void	draw_line(t_game *game, int x1, int y1, int color)
-// {
-// 	double	dx = x1 - game->pars->player.x;
-// 	double	dy = y1 - game->pars->player.y;
-// 	int	steps = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy); // Determine the number of steps
-
-// 	double	x_inc = dx / steps; // Calculate the increment in x for each step
-// 	double	y_inc = dy / steps; // Calculate the increment in y for each step
-
-// 	double	x = game->pars->player.x;
-// 	double	y = game->pars->player.y;
-
-// 	for (int i = 0; i <= steps; i++)
-// 	{
-// 		mlx_put_pixel(game->img, x, y, color); // Plot the pixel
-// 		x += x_inc; // Increment x-coordinate by x_inc
-// 		y += y_inc; // Increment y-coordinate by y_inc
-// 	}
-// }
-
-// void	draw_player(t_game *game)
-// {
-	// int i = -game->pars->player.radius;
-	// while (++i < game->pars->player.radius)
-	// {
-	// 	int	j = -game->pars->player.radius;
-	// 	while (++j < game->pars->player.radius)
-	// 		if (i * i + j * j <= game->pars->player.radius * game->pars->player.radius)
-	// 			mlx_put_pixel(game->img, game->pars->player.x + i, game->pars->player.y + j, 0xFF0000FF);
-	// }
-	// int	line_x = game->pars->player.x + 50 * cos(game->player.angle);
-	// int	line_y = game->pars->player.y + 50 * sin(game->player.angle);
-	// draw_line(game, line_x, line_y, 0xFFFF00FF);
-	// int r = 0;
-	// while (r < game->pars->len_rows)
-	// {
-	// 	int c = 0;
-	// 	while (c < game->pars->len_columns)
-	// 	{
-	// 		printf("%d  ", game->pars->map[r][c]);
-	// 		c++;
-	// 	}
-	// 	printf("\n");
-	// 	r++;
-	// }
-	// printf("done map\n");
-	// printf("p.x == %f,   p.y == %f\n", game->pars->player.x, game->pars->player.y);
-// 	ft_raycast(game);
-// }
+void	draw_player(t_game *game, int px, int py, int ray)
+{
+	int i = px - ray - 1;
+	while (++i <= px + ray)
+	{
+		int j = py - ray - 1;
+		while (++j <= py + ray)
+		{
+			int dx = i - px;
+			int dy = j - py;
+			if (dx * dx + dy * dy <= ray * ray)
+			{
+				mlx_put_pixel(game->mini_map, i, j, get_rgba(255, 0, 0, 255));
+			}
+		}
+	}
+}
 
 int collide_with_wall(t_game *game, double new_x, double new_y)
 {
@@ -137,21 +80,21 @@ void handle_keys(t_game *game)
         exit(0);
     }
     if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-        collide_with_wall(game, player->x + 3 * cos(player->angle), 
-                         player->y + 3 * sin(player->angle));
+        collide_with_wall(game, player->x + SPEED * cos(player->angle), 
+                         player->y + SPEED * sin(player->angle));
     else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-        collide_with_wall(game, player->x - 3 * cos(player->angle), 
-                         player->y - 3 * sin(player->angle));
+        collide_with_wall(game, player->x - SPEED * cos(player->angle), 
+                         player->y - SPEED * sin(player->angle));
     else if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-        collide_with_wall(game, player->x - 3 * cos(player->angle + M_PI_2), 
-                         player->y - 3 * sin(player->angle + M_PI_2));
+        collide_with_wall(game, player->x - SPEED * cos(player->angle + M_PI_2), 
+                         player->y - SPEED * sin(player->angle + M_PI_2));
     else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-        collide_with_wall(game, player->x + 3 * cos(player->angle + M_PI_2), 
-                         player->y + 3 * sin(player->angle + M_PI_2));
+        collide_with_wall(game, player->x + SPEED * cos(player->angle + M_PI_2), 
+                         player->y + SPEED * sin(player->angle + M_PI_2));
     if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
-        player->angle -= M_PI / 80.0;
+        player->angle -= M_PI / 60.0;
     if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
-        player->angle += M_PI / 80.0;
+        player->angle += M_PI / 60.0;
     handle_door(game);
 }
 
@@ -167,18 +110,33 @@ void mouse_hook(double curr_x_pos, double curr_y_pos, void *param)
     last_x_pos = curr_x_pos; // akhir pos kan fiha kanstoriha
 }
 
+uint32_t	get_rgba(int r, int g, int b, int a)
+{
+	return (r << 24 | g << 16 | b << 8 | a);
+}
+
+void	clear_img(mlx_image_t *img)
+{
+	int	y;
+	int	x;
+
+	y = -1;
+	while (++y < (int)img->height)
+	{
+		x = -1;
+		while (++x < (int)img->width)
+			mlx_put_pixel(img, x, y, get_rgba(255, 255, 255, 0));
+	}
+}
+
 void loop_hook(void *param)
 {
     t_game *game = (t_game *)param;
 
     handle_keys(game);
-    mlx_delete_image(game->mlx, game->img);
-    game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-    // draw_map(game);
-    // draw_player(game);
+	clear_img(game->img);
 	ft_raycast(game);
     render_sprite(game);
-    mlx_image_to_window(game->mlx, game->img, 0, 0);
 }
 
 void load_texture(mlx_texture_t **texture, char *path)
@@ -217,13 +175,14 @@ void	init_game(t_game *game)
 		printf("error initializing mlx\n");
 		exit(1);
 	}
+    game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->mini_map = mlx_new_image(game->mlx, MINI_MAP_WIDTH, MINI_MAP_HEIGHT);
 	game->width = game->pars->len_columns * TILE_SIZE;
 	game->height = game->pars->len_rows * TILE_SIZE;
-	game->pars->player.radius = 10;
 	load_texture(&game->textures.north, game->pars->north);
     load_texture(&game->textures.south, game->pars->south);
     load_texture(&game->textures.east, game->pars->east);
     load_texture(&game->textures.west, game->pars->west);
-	load_texture(&game->textures.door, "/home/isrkik/Desktop/cub3d/bonus/parsing_bonus/textures_bonus/door.png");
+	load_texture(&game->textures.door, "/home/amabrouk/Desktop/cub3d/bonus/parsing_bonus/textures_bonus/door.png");
 	init_sprite(game);
 }

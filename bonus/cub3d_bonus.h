@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/23 16:23:14 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/23 22:52:51 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@
 # include <limits.h>
 # include <stdbool.h>
 
-# define TILE_SIZE 32
-# define WIDTH 1200
-# define HEIGHT 850
+# define TILE_SIZE 160
+# define WIDTH 1920
+# define HEIGHT 1080
+# define MINI_MAP_WIDTH 500
+# define MINI_MAP_HEIGHT 500
+# define SPEED 50
 # define FOV M_PI / 3
 # define BUFFER_SIZE 4
 # define DOOR_OPEN 3
@@ -46,7 +49,6 @@ typedef struct s_player
 {
 	double		x;
 	double		y;
-	int			radius;
 	double		angle;
 }	t_player;
 
@@ -100,6 +102,7 @@ typedef struct s_game
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	mlx_image_t	*mini_map;
 	t_textures	textures;
 	t_pars		*pars;
 	t_sprite	sprite;
@@ -166,8 +169,7 @@ int		check_door(char **map, int i, int j);
 
 void	ft_raycast(t_game *game);
 void	init_game(t_game *game);
-// void	draw_map(t_game *game);
-// void	draw_player(t_game *game);
+void	draw_player(t_game *game, int px, int py, int ray);
 void	render_textured_wall(t_game *game, t_ray *ray,
 			int column, double wall_height);
 void	loop_hook(void *param);
@@ -176,5 +178,6 @@ void	init_sprite(t_game *game);
 void	key_handler(mlx_key_data_t keydata, void *param);
 void	mouse_hook(double curr_x_pos, double curr_y_pos, void *param);
 int		hit_wall(t_game *game, double x, double y);
+uint32_t	get_rgba(int r, int g, int b, int a);
 
 #endif

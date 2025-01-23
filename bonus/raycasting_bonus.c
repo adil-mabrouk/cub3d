@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:19 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/21 13:20:28 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/23 22:51:37 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,41 +132,6 @@ double	norm_angle(t_ray *ray)
 	return (ray->angle);
 }
 
-// void	render_ray(t_game *game, double angle, double distance)
-// {
-// 	double	x = game->pars->player.x;
-// 	double	y = game->pars->player.y;
-// 	double	step = 1.0;
-
-// 	double	x_step = cos(angle) * step;
-// 	double	y_step = sin(angle) * step;
-// 	while (distance > 0)
-// 	{
-// 		mlx_put_pixel(game->img, (int)x, (int)y, 0xFFFF00FF);
-// 		x += x_step;
-// 		y += y_step;
-// 		distance -= step;
-// 	}
-// }
-
-// void	render_wall(t_game *game, int column, double wall_bottom, double wall_height)
-// {
-// 	double	wall_top;
-// 	int		y;
-
-// 	wall_top = (HEIGHT / 2) - (wall_height / 2);
-// 	if (wall_top < 0)
-// 		wall_top = 0;
-// 	if (wall_bottom >= HEIGHT)
-// 		wall_bottom = HEIGHT - 1;
-// 	y = (int)wall_top;
-// 	while (y <= (int)wall_bottom)
-// 	{
-// 		mlx_put_pixel(game->img, column, y, 0x000000);
-// 		y++;
-// 	}
-// }
-
 void	render_floor(t_game *game, int column, double wall_bottom)
 {
 	int	y;
@@ -193,6 +158,56 @@ void	render_ceiling(t_game *game, int column, double wall_height)
 	}
 }
 
+int    get_color(t_game *game, int x, int y)
+{
+    if (y > 0 && x > 0)
+    {
+        x /= TILE_SIZE;
+        y /= TILE_SIZE;
+        if (game->pars->map[y][x] == '1')
+            return (get_rgba(128,128,128,255));
+        else if (game->pars->map[y][x] == 'D')
+            return (get_rgba(0,0,255,255));
+        else if (game->pars->map[y][x] == '0')
+            return (get_rgba(255,255,255,255));
+    }
+    return (get_rgba(128,128,128,255));
+}
+
+bool    ftt_check(t_game *game, int x, int y)
+{
+    if (y > 0 && x > 0 && y < game->pars->len_rows * TILE_SIZE && x < game->pars->len_columns * TILE_SIZE)
+        return (true);
+    return (false);
+}
+
+int	render_minimap(t_game *game)
+{
+	int y_i = -1;
+    double r = 160.0 / (TILE_SIZE * 5);
+    int y = ((int)floor(game->pars->player.y) - TILE_SIZE * 2.5);
+	while (++y_i < (TILE_SIZE * 5) && ++y)
+	{
+		int x = ((int)floor(game->pars->player.x) - TILE_SIZE * 2.5);
+		int x_i = -1;
+		while (++x_i < (TILE_SIZE * 5) && ++x)
+		{
+            int f = ftt_check(game, x, y);
+                mlx_put_pixel(game->mini_map, x_i * r, y_i * r, get_rgba(0, 0, 0, 127));
+			if (f && game->pars->map[y / TILE_SIZE][x / TILE_SIZE] == '1')
+				mlx_put_pixel(game->mini_map, x_i * r, y_i * r, get_rgba(0, 0, 255, 127));
+			else if (f && game->pars->map[y / TILE_SIZE][x / TILE_SIZE] == 'D')
+				mlx_put_pixel(game->mini_map, x_i * r, y_i * r, get_rgba(128, 0, 0, 127));
+			else if (f && game->pars->map[y / TILE_SIZE][x / TILE_SIZE] == 'O')
+				mlx_put_pixel(game->mini_map, x_i * r, y_i * r, get_rgba(255, 255, 255, 127));
+			else
+				mlx_put_pixel(game->mini_map, x_i * r, y_i * r, get_rgba(0, 0, 0, 127));
+		}
+	}
+    draw_player(game, MINI_MAP_WIDTH / 6, MINI_MAP_HEIGHT / 6, 5);
+	return (1);
+}
+
 void cast_ray(t_game *game, t_ray *ray, int column)
 {
     double distance;
@@ -201,31 +216,17 @@ void cast_ray(t_game *game, t_ray *ray, int column)
 
     ray->horz = get_horz_dis(game, ray);
     ray->vert = get_vert_dis(game, ray);
-    // if (ray->horz == INFINITY && ray->vert == INFINITY)
-    //     distance = INFINITY;
-    // else if (ray->horz == INFINITY)
-    //     distance = ray->vert;
-    // else if (ray->vert == INFINITY)
-    //     distance = ray->horz;
-    // else
-    // {
-        if (ray->horz < ray->vert)
-            distance = ray->horz;
-        else
-            distance = ray->vert;
-    // }
-    // if (distance == INFINITY || distance < 0.1)
-    //     distance = 0.1;
+    if (ray->horz < ray->vert)
+        distance = ray->horz;
+    else
+        distance = ray->vert;
     distance *= cos(ray->angle - game->pars->player.angle);
     wall_height = (TILE_SIZE * (WIDTH / 2) / tan(FOV / 2)) / distance;
     wall_bottom = (HEIGHT / 2) + (wall_height / 2);
-    // render_ray(game, ray->angle, distance);
-	// render_wall(game, column, wall_bottom, wall_height);
     render_textured_wall(game, ray, column, wall_height);
     render_floor(game, column, wall_bottom);
     render_ceiling(game, column, wall_height);
 }
-
 
 void	ft_raycast(t_game *game)
 {
@@ -241,5 +242,5 @@ void	ft_raycast(t_game *game)
 		ray.angle += FOV / WIDTH;
 		i++;
 	}
+    render_minimap(game);
 }
-
