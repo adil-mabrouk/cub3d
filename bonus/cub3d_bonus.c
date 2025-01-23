@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: i61mail <i61mail@student.42.fr>            +#+  +:+       +#+        */
+/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:02 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/23 11:06:12 by i61mail          ###   ########.fr       */
+/*   Updated: 2025/01/23 11:22:27 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,6 +224,6 @@ void	init_game(t_game *game)
     load_texture(&game->textures.south, game->pars->south);
     load_texture(&game->textures.east, game->pars->east);
     load_texture(&game->textures.west, game->pars->west);
-	load_texture(&game->textures.door, "/home/i61mail/cub3d/bonus/parsing_bonus/textures_bonus/door.png");
+	load_texture(&game->textures.door, "/home/isrkik/Desktop/cub3d/bonus/parsing_bonus/textures_bonus/door.png");
 	init_sprite(game);
 }

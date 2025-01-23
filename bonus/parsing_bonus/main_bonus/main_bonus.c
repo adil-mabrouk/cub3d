@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: i61mail <i61mail@student.42.fr>            +#+  +:+       +#+        */
+/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:30:56 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/23 10:18:49 by i61mail          ###   ########.fr       */
+/*   Updated: 2025/01/23 16:21:00 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	parse_name(char *av)
 	return (0);
 }
 
-void	copy_to_2d(int len, char ***line, int fd2)
+void	copy_to_2d(int len, char ***line, int fd2, t_pars *pars)
 {
 	char	*temp;
 	int		i;
@@ -52,7 +52,7 @@ void	copy_to_2d(int len, char ***line, int fd2)
 			return ;
 		(*line)[len] = NULL;
 	}
-	while(i < len)
+	while (i < len)
 	{
 		temp = get_next_line(fd2);
 		if (temp == NULL)
@@ -62,6 +62,7 @@ void	copy_to_2d(int len, char ***line, int fd2)
 		i++;
 	}
 	close(fd2);
+	pars_file(*line, pars);
 }
 
 int	first_half(char *av, t_pars	*pars)
@@ -90,21 +91,29 @@ int	first_half(char *av, t_pars	*pars)
 		len++;
 	}
 	close(fd);
-	copy_to_2d(len, &line, fd2);
-	pars_file(line, pars);
-	return (0);
+	return (copy_to_2d(len, &line, fd2, pars), 0);
 }
 
-void	f()
+void	ft_execute(t_game *game, t_pars *pars)
 {
-	system("leaks cub3d");
+	game->pars = pars;
+	init_game(game);
+	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	// draw_map(game);
+	// draw_player(game);
+	ft_raycast(game);
+	mlx_image_to_window(game->mlx, game->img, 0, 0);
+	mlx_loop_hook(game->mlx, loop_hook, game);
+	mlx_key_hook(game->mlx, &key_handler, game);
+	mlx_cursor_hook(game->mlx, mouse_hook, game);
+	mlx_loop(game->mlx);
+	mlx_terminate(game->mlx);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_pars	pars;
 	t_game	game;
-	//atexit(f);
 
 	if (ac == 2)
 	{
@@ -113,20 +122,7 @@ int main(int ac, char **av)
 			if (first_half(av[1], &pars) == -1)
 				ft_error("malloc error\n", 2);
 			else
-			{
-				game.pars = &pars;
-				init_game(&game);
-			    game.img = mlx_new_image(game.mlx, WIDTH, HEIGHT);
-     			// draw_map(&game);
-       			// draw_player(&game);
-				ft_raycast(&game);
-				mlx_image_to_window(game.mlx, game.img, 0, 0);
- 				mlx_loop_hook(game.mlx, loop_hook, &game);
-				mlx_key_hook(game.mlx, &key_handler, &game);
-				mlx_cursor_hook(game.mlx, mouse_hook, &game);
- 				mlx_loop(game.mlx);
- 				mlx_terminate(game.mlx);
-			}
+				ft_execute(&game, &pars);
 			return (0);
 		}
 		else
@@ -136,4 +132,3 @@ int main(int ac, char **av)
 		ft_error("not enough args\n", 2);
 	return (0);
 }
-

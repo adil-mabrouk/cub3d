@@ -1,29 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gnl.c                                              :+:      :+:    :+:   */
+/*   gnl_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 16:47:08 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/21 10:53:42 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/23 15:44:43 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d_bonus.h"
-
-size_t	ft_strnewlen(char *str)
-{
-	size_t	n;
-
-	n = 0;
-	while (*str != '\n')
-	{
-		n++;
-		str++;
-	}
-	return (n);
-}
 
 void	*ft_memset(void *b, int c, size_t len)
 {
@@ -89,7 +76,7 @@ char	*ft_read_join(char **line, char **store, int fd)
 	{
 		bytes = read(fd, stock, BUFFER_SIZE);
 		if (bytes < 0)
-			return (free(stock), free(*line), free(*store), *store = NULL, NULL);
+			return (free(stock), free(*line), free(*store), NULL);
 		stock[bytes] = '\0';
 		*store = ft_strjoin(*store, stock);
 		if (!*store)
@@ -117,7 +104,7 @@ char	*get_next_line(int fd)
 	line[0] = '\0';
 	line = ft_read_join(&line, &store, fd);
 	if (!line)
-		return (free(line), NULL);
+		return (free(line), free(store), NULL);
 	if (line[0] == '\0')
 		return (free(line), free(store), store = NULL, NULL);
 	return (line);

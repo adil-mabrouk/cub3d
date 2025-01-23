@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/23 14:58:37 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/23 15:03:06 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ typedef struct s_tex_utils
 	double	wall_bottom;
 }	t_tex_utils;
 
-typedef struct s_textures {
+typedef struct s_textures
+{
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
 	mlx_texture_t	*east;

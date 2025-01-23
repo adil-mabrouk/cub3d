@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:22:39 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/21 10:53:30 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/23 15:47:06 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,25 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-void    ft_putchar_fd(char c, int fd)
+void	ft_putchar_fd(char c, int fd)
 {
-    write (fd, &c, 1);
+	write (fd, &c, 1);
 }
 
-void    ft_putstr_fd(char *str, int fd)
+void	ft_putstr_fd(char *str, int fd)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str[i])
-    {
-        ft_putchar_fd(str[i], fd);
-        i++;
-    }
+	i = 0;
+	while (str[i])
+	{
+		ft_putchar_fd(str[i], fd);
+		i++;
+	}
 }
 
-void    ft_error(char *str, int fd)
+void	ft_error(char *str, int fd)
 {
-    ft_putstr_fd(str, fd);
-    exit(EXIT_FAILURE);
+	ft_putstr_fd(str, fd);
+	exit(EXIT_FAILURE);
 }

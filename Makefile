@@ -6,7 +6,7 @@
 #    By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:25:25 by amabrouk          #+#    #+#              #
-#    Updated: 2025/01/23 14:26:21 by isrkik           ###   ########.fr        #
+#    Updated: 2025/01/23 16:18:37 by isrkik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,22 @@ SRC_MAN = mandatory/cub3d.c mandatory/raycasting.c mandatory/parsing/main/main.c
 	  mandatory/parsing/main/map_pars2.c mandatory/parsing/main/map_pars3.c mandatory/parsing/main/map_pars4.c \
 	  
 
-SRC_BONUS = bonus/cub3d_bonus.c bonus/raycasting_bonus.c bonus/parsing_bonus/main_bonus/main_bonus.c bonus/parsing_bonus/utils_bonus/utils_bonus.c \
-	  bonus/parsing_bonus/gnl_bonus.c bonus/parsing_bonus/utils_bonus/utils2_bonus.c \
-	  bonus/parsing_bonus/utils_bonus/utils3_bonus.c bonus/parsing_bonus/main_bonus/map_pars_bonus.c bonus/parsing_bonus/main_bonus/colors_textures_pars_bonus.c\
-	  bonus/textures_bonus.c bonus/sprites.c
+SRC_BONUS = bonus/cub3d_bonus.c \
+			bonus/raycasting_bonus.c \
+			bonus/parsing_bonus/gnl_bonus.c \
+			bonus/textures_bonus.c \
+			bonus/sprites.c\
+			bonus/parsing_bonus/main_bonus/main_bonus.c \
+ 			bonus/parsing_bonus/utils_bonus/utils_bonus.c \
+			bonus/parsing_bonus/utils_bonus/utils2_bonus.c \
+			bonus/parsing_bonus/utils_bonus/utils3_bonus.c \
+			bonus/parsing_bonus/utils_bonus/utils4_bonus.c \
+			bonus/parsing_bonus/main_bonus/pars_tex_colors_bonus.c\
+			bonus/parsing_bonus/main_bonus/pars_tex_colors2_bonus.c \
+			bonus/parsing_bonus/main_bonus/map_pars_bonus.c \
+			bonus/parsing_bonus/main_bonus/map_pars2_bonus.c \
+			bonus/parsing_bonus/main_bonus/map_pars3_bonus.c \
+			bonus/parsing_bonus/main_bonus/map_pars4_bonus.c \
 
 OBJ_MAN = $(SRC_MAN:.c=.o)
 
