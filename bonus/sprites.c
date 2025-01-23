@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:30:08 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/23 15:34:57 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/23 18:46:07 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	update_frame_counter(t_game *game)
 	if (game->sprite.show_sprite)
 	{
 		game->sprite.frame_counter++;
-		if (game->sprite.frame_counter >= 6)
+		if (game->sprite.frame_counter >= 4)
 		{
 			game->sprite.current_frame = (game->sprite.current_frame + 1) % 10;
 			game->sprite.frame_counter = 0;
@@ -61,7 +61,7 @@ void	render_sprite(t_game *game)
 	unsigned int	max_width;
 
 	scaling = 0.6;
-	if (!game || !game->img || !game->sprite.frames[game->sprite.current_frame])
+	if (!game || !game->img || !game->sprite.frames[game->sprite.current_frame] || !game->sprite.show_sprite)
 		return ;
 	game->sprite.current = game->sprite.frames[game->sprite.current_frame];
 	max_height = game->sprite.current->height * scaling;
