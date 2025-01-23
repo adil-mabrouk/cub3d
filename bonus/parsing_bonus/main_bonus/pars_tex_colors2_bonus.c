@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:51:08 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/23 16:10:27 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/23 18:38:28 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 int	create_rgb(int r, int g, int b)
 {
-	int	col;
-
-	col = r << 16 | g << 8 | b;
-	return (col);
+	return (r << 24 | g << 16 | b << 8 | 255);
 }
 
 void	store_colors(t_pars *pars, int color, unsigned int *temp)
