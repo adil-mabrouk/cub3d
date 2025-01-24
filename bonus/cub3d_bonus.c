@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:02 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/23 22:58:19 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/24 16:24:39 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	draw_player(t_game *game, int px, int py, int ray)
 			int dy = j - py;
 			if (dx * dx + dy * dy <= ray * ray)
 			{
-				mlx_put_pixel(game->mini_map, i, j, get_rgba(255, 0, 0, 255));
+				mlx_put_pixel(game->mini_map, i, j, create_rgb(255, 0, 0));
 			}
 		}
 	}
@@ -110,11 +110,6 @@ void mouse_hook(double curr_x_pos, double curr_y_pos, void *param)
     last_x_pos = curr_x_pos; // akhir pos kan fiha kanstoriha
 }
 
-uint32_t	get_rgba(int r, int g, int b, int a)
-{
-	return (r << 24 | g << 16 | b << 8 | a);
-}
-
 void	clear_img(mlx_image_t *img)
 {
 	int	y;
@@ -125,7 +120,7 @@ void	clear_img(mlx_image_t *img)
 	{
 		x = -1;
 		while (++x < (int)img->width)
-			mlx_put_pixel(img, x, y, get_rgba(255, 255, 255, 0));
+			mlx_put_pixel(img, x, y, create_rgb(255, 255, 255));
 	}
 }
 

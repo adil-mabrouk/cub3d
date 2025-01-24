@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/23 22:52:51 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/24 16:40:42 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 # include <limits.h>
 # include <stdbool.h>
 
-# define TILE_SIZE 160
+# define TILE_SIZE 32
 # define WIDTH 1920
 # define HEIGHT 1080
-# define MINI_MAP_WIDTH 500
-# define MINI_MAP_HEIGHT 500
-# define SPEED 50
+# define MINI_MAP_WIDTH 160
+# define MINI_MAP_HEIGHT 160
+# define SPEED 5
 # define FOV M_PI / 3
 # define BUFFER_SIZE 4
 # define DOOR_OPEN 3
@@ -178,6 +178,6 @@ void	init_sprite(t_game *game);
 void	key_handler(mlx_key_data_t keydata, void *param);
 void	mouse_hook(double curr_x_pos, double curr_y_pos, void *param);
 int		hit_wall(t_game *game, double x, double y);
-uint32_t	get_rgba(int r, int g, int b, int a);
+int		create_rgb(int r, int g, int b);
 
 #endif
