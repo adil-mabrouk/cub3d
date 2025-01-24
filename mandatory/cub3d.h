@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/23 22:07:45 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/24 10:39:49 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 # define SPEED 50
-# define FOV M_PI / 3
+# define FOV (M_PI / 3)
 # define BUFFER_SIZE 4
 
 typedef struct s_player
@@ -152,5 +152,6 @@ void	init_game(t_game *game);
 void	render_textured_wall(t_game *game, t_ray *ray,
 			int column, double wall_height);
 void	loop_hook(void *param);
+int		create_rgb(int r, int g, int b);
 
 #endif

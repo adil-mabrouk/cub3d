@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:02 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/23 20:19:29 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/24 10:35:46 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,6 @@ void handle_keys(t_game *game)
         player->angle += M_PI / 60.0;
 }
 
-uint32_t	get_rgba(int r, int g, int b, int a)
-{
-	return (r << 24 | g << 16 | b << 8 | a);
-}
-
 void	clear_img(mlx_image_t *img)
 {
 	int	y;
@@ -75,7 +70,7 @@ void	clear_img(mlx_image_t *img)
 	{
 		x = -1;
 		while (++x < (int)img->width)
-			mlx_put_pixel(img, x, y, get_rgba(255, 255, 255, 0));
+			mlx_put_pixel(img, x, y, create_rgb(255, 255, 255));
 	}
 }
 
@@ -84,7 +79,7 @@ void loop_hook(void *param)
     t_game *game = (t_game *)param;
 
     handle_keys(game);
-	clear_img(game->img);
+    clear_img(game->img);
 	ft_raycast(game);
 }
 
@@ -109,7 +104,7 @@ void    x_button(void *param)
 
 void	init_game(t_game *game)
 {
-	game->mlx = mlx_init(WIDTH, HEIGHT, "42 cub3d", true);
+	game->mlx = mlx_init(WIDTH, HEIGHT, "Map", true);
 	mlx_close_hook(game->mlx, &x_button, game);
 	if (!game->mlx)
 	{
