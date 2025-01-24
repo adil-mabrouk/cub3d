@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:19 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/24 16:42:44 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/24 19:28:10 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,24 +184,27 @@ bool    ftt_check(t_game *game, int x, int y)
 int	render_minimap(t_game *game)
 {
 	int y_i = -1;
-    double r = 160.0 / (TILE_SIZE * 5);
+    // double r = 160.0 / (TILE_SIZE * 5);
     int y = ((int)ceil(game->pars->player.y) - TILE_SIZE * 2.5) - 1;
-	while (++y_i < (TILE_SIZE * 5) && ++y)
+	while (++y_i < (TILE_SIZE * 5) && ++y >= INT_MIN)
 	{
 		int x = ((int)ceil(game->pars->player.x) - TILE_SIZE * 2.5) - 1;
 		int x_i = -1;
-		while (++x_i < (TILE_SIZE * 5) && ++x)
+		while (++x_i < (TILE_SIZE * 5) && ++x >= INT_MIN)
 		{
             int f = ftt_check(game, x, y);
-                mlx_put_pixel(game->mini_map, x_i * r, y_i * r, create_rgb(0, 0, 0));
-			if (f && game->pars->map[y / TILE_SIZE][x / TILE_SIZE] == '1')
-				mlx_put_pixel(game->mini_map, x_i * r, y_i * r, create_rgb(0, 0, 255));
+			if (f && (game->pars->map[y / TILE_SIZE][x / TILE_SIZE] == '1'))
+				mlx_put_pixel(game->mini_map, x_i, y_i, create_rgb(0, 0, 255));
 			else if (f && game->pars->map[y / TILE_SIZE][x / TILE_SIZE] == 'D')
-				mlx_put_pixel(game->mini_map, x_i * r, y_i * r, create_rgb(128, 0, 0));
+				mlx_put_pixel(game->mini_map, x_i, y_i, create_rgb(128, 0, 0));
 			else if (f && game->pars->map[y / TILE_SIZE][x / TILE_SIZE] == 'O')
-				mlx_put_pixel(game->mini_map, x_i * r, y_i * r, create_rgb(255, 255, 255));
+				mlx_put_pixel(game->mini_map, x_i, y_i, create_rgb(255, 255, 255));
 			else
-				mlx_put_pixel(game->mini_map, x_i * r, y_i * r, create_rgb(0, 0, 0));
+            {
+                // if (f && x <= 200)
+                //     printf("x: %d, y: %d -> char: %c\n", x, y, game->pars->map[y / TILE_SIZE][x / TILE_SIZE]);
+				mlx_put_pixel(game->mini_map, x_i, y_i, create_rgb(0, 0, 0));
+            }
 		}
 	}
     draw_player(game, MINI_MAP_WIDTH / 2, MINI_MAP_HEIGHT / 2, 4);

@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:02 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/24 16:24:39 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:49:24 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void handle_door(t_game *game)
     double check_y;
     int 	tile_x;
     int 	tile_y;
-    
+        
 	check_x = game->pars->player.x + cos(game->pars->player.angle) * TILE_SIZE;
 	check_y = game->pars->player.y + sin(game->pars->player.angle) * TILE_SIZE;
 	tile_x = floor(check_x / TILE_SIZE);
@@ -124,6 +124,31 @@ void	clear_img(mlx_image_t *img)
 	}
 }
 
+// void	draw_map(t_game *game)
+// {
+// 	int r = -1;
+// 	int	col;
+
+// 	while (++r < game->pars->len_rows)
+// 	{
+// 		col = -1;
+// 		while (++col < game->pars->len_columns)
+// 		{
+// 			int tile = game->pars->map[r][col];
+// 			int x = col * TILE_SIZE;
+// 			int y = r * TILE_SIZE;
+// 			int color = tile == '1' ? 0x000000FF : 0x0000FF00;
+// 			int i = -1;
+// 			while (++i < TILE_SIZE)
+// 			{
+// 				int j = -1;
+// 				while (++j < TILE_SIZE)
+// 					mlx_put_pixel(game->img, x + i, y + j, color);
+// 			}
+// 		}
+// 	}
+// }
+
 void loop_hook(void *param)
 {
     t_game *game = (t_game *)param;
@@ -131,6 +156,7 @@ void loop_hook(void *param)
     handle_keys(game);
 	clear_img(game->img);
 	ft_raycast(game);
+    // draw_map(game);
     render_sprite(game);
 }
 
@@ -147,7 +173,7 @@ void load_texture(mlx_texture_t **texture, char *path)
 void key_handler(mlx_key_data_t keydata, void *param)
 {
     t_game *game = (t_game *)param;
-    
+        
     if (keydata.key == MLX_KEY_Y && keydata.action == MLX_PRESS)
         game->sprite.show_sprite = !game->sprite.show_sprite;
 }
