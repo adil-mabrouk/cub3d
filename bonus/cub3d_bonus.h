@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/24 18:20:41 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/25 14:50:24 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_utils
 	int	first_i;
 	int	n;
 	int	hold;
+	int	fd;
 }	t_utils;
 
 typedef struct s_tex_utils
@@ -164,6 +165,12 @@ int		ft_players(int c, t_pars *pars);
 int		check_player(t_pars *pars, int i, int *j, int *dupl);
 void	cpy_map(char **line, int length, t_pars *pars);
 int		check_door(char **map, int i, int j);
+void	ft_free_all(char **line);
+void	ft_putstr_fd(char *str, int fd);
+void	read_file(int fd2, int len, char ***line);
+void	open_file(char *av, int *fd, int *fd2);
+void	init_vars(t_pars *pars, int *i);
+void	free_dom(char **s, int count);
 
 /*            execution                */
 

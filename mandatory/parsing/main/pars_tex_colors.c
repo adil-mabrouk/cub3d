@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 16:42:03 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/25 14:31:02 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/25 14:55:36 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_textures_helper2(t_pars *pars, char *temp, int b, char *line)
 				b - pars->utils.first_i);
 		pars->utils.fd = open(pars->west, O_RDONLY);
 		if (pars->utils.fd < 0)
-			return (free(pars->west), ft_putstr_fd("invalid texture\n", 2), -1);
+			return (free(pars->west), -1);
 	}
 	else if (ft_strcmp("SO", temp) == 0)
 	{
@@ -34,8 +34,7 @@ int	check_textures_helper2(t_pars *pars, char *temp, int b, char *line)
 				b - pars->utils.first_i);
 		pars->utils.fd = open(pars->south, O_RDONLY);
 		if (pars->utils.fd < 0)
-			return (free(pars->south),
-				ft_putstr_fd("invalid texture\n", 2), -1);
+			return (free(pars->south), -1);
 	}
 	close(pars->utils.fd);
 	return (0);
@@ -52,7 +51,7 @@ int	check_textures_helper(t_pars *pars, char *temp, int b, char *line)
 				b - pars->utils.first_i);
 		pars->utils.fd = open(pars->east, O_RDONLY);
 		if (pars->utils.fd < 0)
-			return (free(pars->east), ft_putstr_fd("invalid texture\n", 2), -1);
+			return (free(pars->east), -1);
 	}
 	close(pars->utils.fd);
 	if (check_textures_helper2(pars, temp, b, line) == -1)
@@ -75,8 +74,7 @@ int	check_textures(t_pars *pars, char *temp, int b, char *line)
 				b - pars->utils.first_i);
 		pars->utils.fd = open(pars->north, O_RDONLY);
 		if (pars->utils.fd < 0)
-			return (free(pars->north),
-				ft_putstr_fd("invalid texture\n", 2), -1);
+			return (free(pars->north), -1);
 		close(pars->utils.fd);
 	}
 	if (check_textures_helper(pars, temp, b, line) == -1)

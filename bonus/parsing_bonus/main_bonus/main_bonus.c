@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:30:56 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/24 15:01:42 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/25 14:44:33 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,17 @@ int	parse_name(char *av)
 
 void	copy_to_2d(int len, char ***line, int fd2, t_pars *pars)
 {
-	char	*temp;
-	int		i;
-
-	i = 0;
-	temp = NULL;
 	if (len > 0)
 	{
 		*line = malloc(sizeof(char *) * (len + 1));
 		if (!*line)
-			return ;
+		{
+			close(fd2);
+			ft_error("allocation failed\n", 2);
+		}
 		(*line)[len] = NULL;
 	}
-	while (i < len)
-	{
-		temp = get_next_line(fd2);
-		if (temp == NULL)
-			break ;
-		(*line)[i] = ft_strdup(temp);
-		free(temp);
-		i++;
-	}
+	read_file(fd2, len, line);
 	close(fd2);
 	pars_file(*line, pars);
 }
@@ -73,13 +63,8 @@ int	first_half(char *av, t_pars	*pars)
 	int		fd2;
 	int		len;
 
+	open_file(av, &fd, &fd2);
 	len = 0;
-	fd = open(av, O_RDWR);
-	if (fd < 0)
-		ft_error("open error\n", 2);
-	fd2 = open(av, O_RDWR);
-	if (fd2 < 0)
-		ft_error("open error\n", 2);
 	line = NULL;
 	temp = NULL;
 	while (1)

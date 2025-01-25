@@ -6,7 +6,7 @@
 #    By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:25:25 by amabrouk          #+#    #+#              #
-#    Updated: 2025/01/25 14:34:06 by isrkik           ###   ########.fr        #
+#    Updated: 2025/01/25 14:42:33 by isrkik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,8 @@ SRC_BONUS = bonus/cub3d_bonus.c \
 			bonus/parsing_bonus/main_bonus/map_pars2_bonus.c \
 			bonus/parsing_bonus/main_bonus/map_pars3_bonus.c \
 			bonus/parsing_bonus/main_bonus/map_pars4_bonus.c \
+			bonus/parsing_bonus/main_bonus/main2_bonus.c \
+			bonus/parsing_bonus/main_bonus/pars_tex_colors3_bonus.c \
 
 OBJ_MAN = $(SRC_MAN:.c=.o)
 

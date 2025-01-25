@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:40:00 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/23 16:10:51 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/25 14:46:16 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,42 +64,37 @@ void	ft_free_all(char **line)
 	free(line);
 }
 
-void	init_vars(t_pars *pars)
+void	helper_func(char **line)
 {
-	pars->utils.flag_ea = 0;
-	pars->utils.flag_we = 0;
-	pars->utils.flag_no = 0;
-	pars->utils.flag_so = 0;
-	pars->utils.colors = 0;
-	pars->utils.half = 0;
-	pars->map = NULL;
+	ft_free_all(line);
+	ft_error("Error\n", 2);
 }
 
 void	pars_file(char **line, t_pars *pars)
 {
 	int	i;
 
-	i = 0;
-	init_vars(pars);
+	init_vars(pars, &i);
 	while (line && line[i])
 	{
 		if (line[i] && line[i][0] == '\n')
 			i++;
 		if (pars_line(line[i], pars) == -1)
-		{
-			ft_error("Error\n", 2);
-			ft_free_all(line);
-			break ;
-		}
+			helper_func(line);
 		if (pars->utils.half == 6)
 		{
 			while (line[++i] && line[i][0] == '\n')
 				;
 			if (pars_map(line, pars, i) == -1)
+			{
+				ft_free_all(line);
 				ft_error("Error\n", 2);
+			}
 			ft_free_all(line);
 			break ;
 		}
 		i++;
 	}
+	if (!pars->map)
+		ft_error("Error\n", 2);
 }

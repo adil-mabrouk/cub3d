@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:02 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/24 18:49:24 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/25 14:41:07 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ void load_texture(mlx_texture_t **texture, char *path)
     *texture = mlx_load_png(path);
 	if (!*texture)
 	{
-		printf("error loading texture\n");
+        ft_putstr_fd("Error loading texture\n", 2);
 		exit(1);
 	}
 }
@@ -193,7 +193,7 @@ void	init_game(t_game *game)
 	mlx_close_hook(game->mlx, &x_button, game);
 	if (!game->mlx)
 	{
-		printf("error initializing mlx\n");
+        ft_putstr_fd("Error init mlx\n", 2);
 		exit(1);
 	}
     game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
@@ -204,6 +204,6 @@ void	init_game(t_game *game)
     load_texture(&game->textures.south, game->pars->south);
     load_texture(&game->textures.east, game->pars->east);
     load_texture(&game->textures.west, game->pars->west);
-	load_texture(&game->textures.door, "/home/amabrouk/Desktop/cub3d/bonus/parsing_bonus/textures_bonus/door.png");
+	load_texture(&game->textures.door, "/Users/isrkik/Desktop/cub3d/bonus/parsing_bonus/textures_bonus/door.png");
 	init_sprite(game);
 }
