@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pars_tex_colors2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 11:49:12 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/23 18:38:15 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/25 15:58:19 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-int	create_rgb(int r, int g, int b)
+int	get_rgb(int r, int g, int b)
 {
 	return (r << 24 | g << 16 | b << 8 | 255);
 }
@@ -20,9 +20,9 @@ int	create_rgb(int r, int g, int b)
 void	store_colors(t_pars *pars, int color, unsigned int *temp)
 {
 	if (color == 0)
-		pars->f_color = create_rgb(temp[0], temp[1], temp[2]);
+		pars->f_color = get_rgb(temp[0], temp[1], temp[2]);
 	else
-		pars->c_color = create_rgb(temp[0], temp[1], temp[2]);
+		pars->c_color = get_rgb(temp[0], temp[1], temp[2]);
 }
 
 int	skip_space_color(char *line, int *i)

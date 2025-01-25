@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/25 14:50:24 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/25 21:08:54 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
 
-# include "MLX42.h"
+# include "../MLX42.h"
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
@@ -28,7 +28,7 @@
 # define MINI_MAP_WIDTH 160
 # define MINI_MAP_HEIGHT 160
 # define SPEED 5
-# define FOV M_PI / 3
+# define FOV (M_PI / 3)
 # define BUFFER_SIZE 4
 # define DOOR_OPEN 3
 
@@ -115,18 +115,31 @@ typedef struct s_game
 typedef struct s_ray
 {
 	double			angle;
-	int				is_facing_down;
-	int				is_facing_up;
-	int				is_facing_right;
-	int				is_facing_left;
+	bool			is_facing_down;
+	bool			is_facing_up;
+	bool			is_facing_right;
+	bool			is_facing_left;
 	double			hor_wall_hit_x;
 	double			hor_wall_hit_y;
 	double			vert_wall_hit_x;
 	double			vert_wall_hit_y;
 	double			horz;
 	double			vert;
+	double			x_inter;
+	double			y_inter;
+	double			x_step;
+	double			y_step;
 	mlx_texture_t	*wall_texture;
-}				t_ray;
+}	t_ray;
+
+typedef struct s_coordinate
+{
+	int		j;
+	int		k;
+	int		y;
+	int		x;
+	bool	f;
+}	t_cordinate;
 
 /*             parsing                 */
 
@@ -185,6 +198,14 @@ void	init_sprite(t_game *game);
 void	key_handler(mlx_key_data_t keydata, void *param);
 void	mouse_hook(double curr_x_pos, double curr_y_pos, void *param);
 int		hit_wall(t_game *game, double x, double y);
-int		create_rgb(int r, int g, int b);
+int		get_rgb(int r, int g, int b);
+double	ver_inter(t_game *game, t_ray *ray);
+double	horz_inter(t_game *game, t_ray *ray);
+double	norm_angle(t_ray *ray);
+double	distance(t_game *game, double x, double y);
+int		get_color(t_game *game, int x, int y);
+void	render_floor(t_game *game, int column, double wall_bottom);
+void	render_ceiling(t_game *game, int column, double wall_height);
+void	render_minimap(t_game *game);
 
 #endif

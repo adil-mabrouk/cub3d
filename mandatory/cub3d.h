@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/25 14:35:02 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/25 20:34:09 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "MLX42.h"
+# include "../MLX42.h"
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
@@ -96,16 +96,20 @@ typedef struct s_game
 typedef struct s_ray
 {
 	double			angle;
-	int				is_facing_down;
-	int				is_facing_up;
-	int				is_facing_right;
-	int				is_facing_left;
+	bool			is_facing_down;
+	bool			is_facing_up;
+	bool			is_facing_right;
+	bool			is_facing_left;
 	double			hor_wall_hit_x;
 	double			hor_wall_hit_y;
 	double			vert_wall_hit_x;
 	double			vert_wall_hit_y;
 	double			horz;
 	double			vert;
+	double			x_inter;
+	double			y_inter;
+	double			x_step;
+	double			y_step;
 	mlx_texture_t	*wall_texture;
 }				t_ray;
 
@@ -159,6 +163,12 @@ void	init_game(t_game *game);
 void	render_textured_wall(t_game *game, t_ray *ray,
 			int column, double wall_height);
 void	loop_hook(void *param);
-int		create_rgb(int r, int g, int b);
+int		get_rgb(int r, int g, int b);
+void	handle_keys(t_game *game);
+double	horz_inter(t_game *game, t_ray *ray);
+double	distance(t_game *game, double x, double y);
+double	norm_angle(t_ray *ray);
+double	ver_inter(t_game *game, t_ray *ray);
+int		hit_wall(t_game *game, double x, double y);
 
 #endif
