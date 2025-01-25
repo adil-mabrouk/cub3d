@@ -6,7 +6,7 @@
 #    By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:25:25 by amabrouk          #+#    #+#              #
-#    Updated: 2025/01/25 14:42:33 by isrkik           ###   ########.fr        #
+#    Updated: 2025/01/25 15:11:34 by isrkik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ BONUS_NAME = cub3D_bonus
 CC = gcc
 
 CFLAGS = -Werror -Wextra -Wall -I/Users/$(USER)/Desktop/MLX42/include/MLX42/ -g #-fsanitize=address
-DFLAGS = .MLX42/build/libmlx42.a -lglfw -L /Users/$(USER)/brew/opt/glfw/lib
+DFLAGS = MLX42/build/libmlx42.a -lglfw -L /Users/$(USER)/brew/opt/glfw/lib
 
 SRC_MAN = mandatory/cub3d.c \
 		mandatory/raycasting.c \
@@ -79,16 +79,16 @@ bonus : mlx $(BONUS_NAME)
 
 clean:
 	rm -rf $(OBJ_MAN) $(OBJ_BONUS)
-	@if [ -d .MLX42/build ]; then \
-		cd .MLX42/build && make clean; \
+	@if [ -d MLX42/build ]; then \
+		cd MLX42/build && make clean; \
 	fi
 
 fclean: clean
-	rm -rf $(NAME) $(BONUS_NAME) .MLX42/build
+	rm -rf $(NAME) $(BONUS_NAME) MLX42/build
 
 re: fclean all
 
 mlx:
-	cd .MLX42 && cmake -B build && cmake --build build -j4
+	cd MLX42 && cmake -B build && cmake --build build -j4
 
 .PHONY: fclean all clean re bonus mlx
