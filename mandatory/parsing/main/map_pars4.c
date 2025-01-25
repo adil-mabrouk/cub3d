@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 14:23:39 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/23 14:24:10 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/25 14:33:06 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	check_mofm(t_pars *pars)
 		while (pars->map[i][j])
 		{
 			if (check_mofm_utils(pars, i, &j, &dupl) == -1)
-				return (-1);
+				return (ft_free_all(pars->map), -1);
 		}
 		i++;
 	}
 	if (dupl == 0)
-		return (-1);
+		return (ft_free_all(pars->map), -1);
 	return (0);
 }
 
@@ -87,7 +87,7 @@ int	mofm(char **line, int i, t_pars *pars)
 	{
 		pars->map[n] = malloc(sizeof(char) * (j + 2));
 		if (!pars->map[n])
-			return (-1);
+			return (free_dom(pars->map, n), -1);
 		pars->map[n][j] = '\0';
 		pars->map[n++][j + 1] = '\0';
 	}

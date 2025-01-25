@@ -6,7 +6,7 @@
 #    By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:25:25 by amabrouk          #+#    #+#              #
-#    Updated: 2025/01/25 10:51:27 by isrkik           ###   ########.fr        #
+#    Updated: 2025/01/25 14:34:06 by isrkik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ BONUS_NAME = cub3D_bonus
 
 CC = gcc
 
-CFLAGS = -Werror -Wextra -Wall -I/Users/$(USER)/Desktop/MLX42/include/MLX42/  -fsanitize=address
+CFLAGS = -Werror -Wextra -Wall -I/Users/$(USER)/Desktop/MLX42/include/MLX42/ -g #-fsanitize=address
 DFLAGS = .MLX42/build/libmlx42.a -lglfw -L /Users/$(USER)/brew/opt/glfw/lib
 
 SRC_MAN = mandatory/cub3d.c \
@@ -34,6 +34,8 @@ SRC_MAN = mandatory/cub3d.c \
 		mandatory/parsing/main/map_pars2.c \
 		mandatory/parsing/main/map_pars3.c \
 		mandatory/parsing/main/map_pars4.c \
+		mandatory/parsing/main/main2.c \
+		mandatory/parsing/main/pars_tex_colors3.c \
 	  
 
 SRC_BONUS = bonus/cub3d_bonus.c \

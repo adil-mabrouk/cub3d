@@ -1,15 +1,14 @@
-NO /Users/isrkik/Desktop/leaks/mandatory/parsing/textures/text.png
-SO /Users/isrkik/Desktop/leaks/mandatory/parsing/textures/text.png  
-WE /Users/isrkik/Desktop/leaks/mandatory/parsing/textures/text.png 
-EA /Users/isrkik/Desktop/leaks/mandatory/parsing/textures/text.png
+WE /Users/isrkik/Desktop/cub3d/mandatory/parsing/textures/text.png
+SO /Users/isrkik/Desktop/cub3d/mandatory/parsing/textures/text.png  
+NO /Users/isrkik/Desktop/cub3d/mandatory/parsing/textures/text.png
+EA /Users/isrkik/Desktop/cub3d/mandatory/parsing/textures/text.png
+
 
 F 255,250,205
 C 238,232,170
 
 
-1111111111111111
-1000000000000001
-100000E000000001
-1000000000000001
-1000000000000001
-1111111111111111
+ 11111111
+1000S00001
+1000000001
+ 11111111

@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:37:57 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/23 11:33:32 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/25 13:08:59 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_atoi(const char	*str)
 		i++;
 	}
 	if (check_space(str, i) == 1)
-		ft_error("space between colors\n", 2);
+		ft_error("Error\n", 2);
 	return (result * sign);
 }
 
