@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 14:32:03 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/26 17:22:47 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 20:34:54 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	read_file(int fd2, int len, char ***line)
 			break ;
 		(*line)[i] = ft_strdup(temp);
 		if (!(*line)[i])
+		{
+			close(fd2);
 			ft_error("allocation failed\n", 2);
+		}
 		free(temp);
 		i++;
 	}
