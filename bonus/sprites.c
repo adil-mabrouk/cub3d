@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:30:08 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/26 12:48:29 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 15:51:18 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	update_frame_counter(t_game *game)
 	if (game->sprite.show_sprite)
 	{
 		game->sprite.frame_counter++;
-		if (game->sprite.frame_counter >= 2)
+		if (game->sprite.frame_counter >= 3)
 		{
 			game->sprite.current_frame = (game->sprite.current_frame + 1) % 10;
 			game->sprite.frame_counter = 0;
