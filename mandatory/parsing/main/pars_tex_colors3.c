@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 14:30:20 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/26 13:50:07 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 17:26:06 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	check_colors(char *line, int *i, t_pars *pars)
 {
 	if (line[*i] == 'F')
 	{
+		pars->utils.f_color++;
 		(*i)++;
 		if (ft_isspace(line[*i]) && line[*i] != '\0')
 		{
@@ -27,6 +28,7 @@ int	check_colors(char *line, int *i, t_pars *pars)
 	}
 	else if (line[*i] == 'C')
 	{
+		pars->utils.c_color++;
 		(*i)++;
 		if (ft_isspace(line[*i]) == 1 && line[*i] != '\0')
 		{

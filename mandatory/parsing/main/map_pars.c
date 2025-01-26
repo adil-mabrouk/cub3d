@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:40:00 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/26 13:59:59 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 17:25:45 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	pars_file(char **line, t_pars *pars)
 			helper_func(line);
 		if (pars->utils.half == 6)
 		{
+			if (pars->utils.f_color == 0 || pars->utils.c_color == 0)
+				ft_error("Error\n", 2);
 			while (line[++i] && line[i][0] == '\n')
 				;
 			if (pars_map(line, pars, i) == -1)

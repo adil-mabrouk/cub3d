@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/26 13:53:40 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 17:28:43 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct s_utils
 	int	flag_we;
 	int	flag_so;
 	int	flag_no;
+	int	f_color;
+	int	c_color;
 	int	colors;
 	int	half;
 	int	first_i;

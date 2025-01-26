@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 14:43:12 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/25 14:43:57 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 17:26:50 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	open_file(char *av, int *fd, int *fd2)
 
 void	init_vars(t_pars *pars, int *i)
 {
+	pars->utils.f_color = 0;
+	pars->utils.c_color = 0;
 	pars->utils.flag_ea = 0;
 	pars->utils.flag_we = 0;
 	pars->utils.flag_no = 0;
