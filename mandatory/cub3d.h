@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/26 17:16:32 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 18:48:56 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "/home/isrkik/Desktop/cub3d/MLX42/include/MLX42/MLX42.h"
+# include "/home/amabrouk/Desktop/cub3d/MLX42/include/MLX42/MLX42.h"
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
