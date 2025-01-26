@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:44:23 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/23 16:22:48 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 13:53:11 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ size_t	ft_strnewlen(char *str)
 
 void	skip_spaces(char *line, int *i)
 {
+	if (!line)
+		return ;
 	while (line[*i])
 	{
 		if (ft_isspace(line[*i]))

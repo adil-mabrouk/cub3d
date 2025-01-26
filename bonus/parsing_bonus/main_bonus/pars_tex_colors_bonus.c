@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 16:42:03 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/26 12:52:50 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 13:51:59 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	check_textures(t_pars *pars, char *temp, int b, char *line)
 	pars->utils.first_i = b;
 	while (line[b] && !ft_isspace(line[b]) && line[b] != '\n')
 		b++;
+	if (space_error(line, b) == -1)
+		return (-1);
 	if (ft_strcmp("NO", temp) == 0)
 	{
 		pars->utils.flag_no++;
@@ -114,6 +116,8 @@ int	pars_line(char *line, t_pars *pars)
 
 	i = 0;
 	skip_spaces(line, &i);
+	if (!line)
+		return (-1);
 	if (line[i] == '\0')
 		return (0);
 	if (check_colors(line, &i, pars) == -1)

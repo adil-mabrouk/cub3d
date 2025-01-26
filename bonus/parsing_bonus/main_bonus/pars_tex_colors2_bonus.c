@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_tex_colors2_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:51:08 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/25 15:58:19 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/26 13:52:26 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ int	valid_colors(char *line, int *i, t_pars *pars, bool color)
 		while (line[*i] && (line[*i] >= '0' || line[*i] == ' ')
 			&& line[*i] != '\n')
 			(*i)++;
-		if (line[*i] == ',')
+		if (b + 1 < 3 && line[*i] == ',')
 			(*i)++;
 		b++;
 	}
-	if (line[*i] == '\0')
+	if (line[*i] == '\0' || (b == 3 && line[*i] != '\n'))
 		return (-1);
 	if (check_rgb(pars, color, temp) == -1)
 		return (-1);
