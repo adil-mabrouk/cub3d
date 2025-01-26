@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*   loop_hook.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 11:50:50 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/26 11:57:53 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/26 13:19:20 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,14 @@ void	key_handler(mlx_key_data_t keydata, void *param)
 	game = (t_game *)param;
 	if (keydata.key == MLX_KEY_Y && keydata.action == MLX_PRESS)
 		game->sprite.show_sprite = !game->sprite.show_sprite;
+	if (keydata.key == MLX_KEY_LEFT_ALT && keydata.action == MLX_PRESS)
+	{
+		game->pars->lock = !game->pars->lock;
+		if (game->pars->lock)
+			mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
+		else
+			mlx_set_cursor_mode(game->mlx, MLX_MOUSE_NORMAL);
+	}
 }
 
 void	x_button(void *param)

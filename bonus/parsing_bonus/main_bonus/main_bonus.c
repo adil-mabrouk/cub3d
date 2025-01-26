@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:30:56 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/25 14:44:33 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 13:09:14 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	first_half(char *av, t_pars	*pars)
 void	ft_execute(t_game *game, t_pars *pars)
 {
 	game->pars = pars;
+	game->pars->lock = false;
 	init_game(game);
 	ft_raycast(game);
 	mlx_image_to_window(game->mlx, game->img, 0, 0);

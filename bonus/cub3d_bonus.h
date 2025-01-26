@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/26 12:51:01 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 13:00:33 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_pars
 	int			c_color;
 	int			len_columns;
 	int			len_rows;
+	bool		lock;
 	t_player	player;
 	t_utils		utils;
 }	t_pars;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:02 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/26 12:09:43 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/26 13:19:28 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,10 @@ void	mouse_hook(double curr_x_pos, double curr_y_pos, void *param)
 
 	(void)curr_y_pos;
 	game = (t_game *)param;
-	delta_x = curr_x_pos - last_x_pos;
-	game->pars->player.angle += delta_x * 0.005;
-	last_x_pos = curr_x_pos;
+	if (game->pars->lock == true)
+	{
+		delta_x = curr_x_pos - last_x_pos;
+		game->pars->player.angle += delta_x * 0.001;
+		last_x_pos = curr_x_pos;
+	}
 }
