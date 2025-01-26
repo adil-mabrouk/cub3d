@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:44 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/23 14:53:55 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 14:45:01 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,17 @@
 
 void	get_wall_texture(t_game *game, t_ray *ray, double *tex_x)
 {
-	double	hit_x;
-
 	if (ray->horz < ray->vert)
 	{
-		hit_x = ray->hor_wall_hit_x;
 		if (ray->is_facing_up)
 			ray->wall_texture = game->textures.north;
 		else
 			ray->wall_texture = game->textures.south;
-		*tex_x = fmod(hit_x, TILE_SIZE)
+		*tex_x = fmod(ray->hor_wall_hit_x, TILE_SIZE)
 			* (ray->wall_texture->width / TILE_SIZE);
 	}
 	else
 	{
-		hit_x = ray->vert_wall_hit_x;
 		if (ray->is_facing_right)
 			ray->wall_texture = game->textures.east;
 		else

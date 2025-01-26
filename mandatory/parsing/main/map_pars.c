@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:40:00 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/25 14:32:49 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 13:59:59 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	pars_map(char **line, t_pars *pars, int i)
 	while (line[i] && line[i][j] && (ft_isspace(line[i][j])
 		|| line[i][j] == '1'))
 		j++;
-	if (line[i++][j] != '\n')
+	if (!line[i] || line[i++][j] != '\n')
 		return (-1);
 	if (check_right(line, i) == -1)
 		return (-1);

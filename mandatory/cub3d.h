@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/26 12:50:53 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 13:50:20 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ void	read_file(int fd2, int len, char ***line);
 void	open_file(char *av, int *fd, int *fd2);
 void	init_vars(t_pars *pars, int *i);
 void	free_dom(char **s, int count);
+int		space_error(char *line, int b);
 
 /*            execution            */
 

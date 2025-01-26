@@ -6,7 +6,7 @@
 #    By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:25:25 by amabrouk          #+#    #+#              #
-#    Updated: 2025/01/26 12:50:17 by isrkik           ###   ########.fr        #
+#    Updated: 2025/01/26 13:26:41 by isrkik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ BONUS_NAME = cub3D_bonus
 
 CC = gcc
 
-CFLAGS = -Werror -Wextra -Wall -I/Users/$(USER)/Desktop/MLX42/include/MLX42/ -g #-fsanitize=address
+CFLAGS = -Werror -Wextra -Wall -I/Users/$(USER)/Desktop/MLX42/include/MLX42/ -g -fsanitize=address
 DFLAGS = MLX42/build/libmlx42.a -lglfw -L /Users/$(USER)/brew/opt/glfw/lib
 
 SRC_MAN = mandatory/cub3d.c \
