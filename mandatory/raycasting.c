@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:19 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/25 20:35:42 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/26 12:12:27 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	cast_ray(t_game *game, t_ray *ray, int column)
 	else
 		distance = ray->vert;
 	distance *= cos(ray->angle - game->pars->player.angle);
-	wall_height = (TILE_SIZE * (WIDTH / 2) / tan(FOV / 2)) / distance;
+	wall_height = (TILE_SIZE * (WIDTH / 2) / tan((FOV / 3) / 2)) / distance;
 	wall_bottom = (HEIGHT / 2) + (wall_height / 2);
 	render_textured_wall(game, ray, column, wall_height);
 	render_floor(game, column, wall_bottom);
@@ -63,13 +63,13 @@ void	ft_raycast(t_game *game)
 	t_ray	ray;
 	int		i;
 
-	ray.angle = game->pars->player.angle - FOV / 2;
+	ray.angle = game->pars->player.angle - (FOV / 3) / 2;
 	i = 0;
 	while (i < WIDTH)
 	{
 		ray.angle = norm_angle(&ray);
 		cast_ray(game, &ray, i);
-		ray.angle += FOV / WIDTH;
+		ray.angle += ((FOV / 3) / WIDTH);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:16:02 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/25 20:55:23 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/26 12:09:43 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	draw_player(t_game *game, int px, int py, int ray)
 
 int	collide_with_wall(t_game *game, double new_x, double new_y)
 {
-	if (hit_wall(game, new_x, game->pars->player.y)) //horizental
-		new_x = game->pars->player.x; // kan usi lblasa nit d 'y' bach ntchecki biha ghir 'x' rasha
-	if (hit_wall(game, game->pars->player.x, new_y)) //vertical
-		new_y = game->pars->player.y; // kan usi lblasa nit d 'x' bach ntchecki biha ghir 'y' rasha
+	if (hit_wall(game, new_x, game->pars->player.y))
+		new_x = game->pars->player.x;
+	if (hit_wall(game, game->pars->player.x, new_y))
+		new_y = game->pars->player.y;
 	if (hit_wall(game, new_x, new_y))
 		return (1);
 	game->pars->player.x = new_x;
@@ -112,82 +112,7 @@ void	mouse_hook(double curr_x_pos, double curr_y_pos, void *param)
 
 	(void)curr_y_pos;
 	game = (t_game *)param;
-	last_x_pos = 0;
-	delta_x = curr_x_pos - last_x_pos; // kan7seb delta d lmouse bach n3ref chhal dart lmouse 3la fin kant 9bel hadik hya delta
-	game->pars->player.angle += delta_x * 0.005; // hna kanbdel lih l angel b delta li 7sebt w sor3a bach ghaydor
-	last_x_pos = curr_x_pos; // akhir pos kan fiha kanstoriha
-}
-
-void	clear_img(mlx_image_t *img)
-{
-	int	y;
-	int	x;
-
-	y = -1;
-	while (++y < (int)img->height)
-	{
-		x = -1;
-		while (++x < (int)img->width)
-			mlx_put_pixel(img, x, y, get_rgb(255, 255, 255));
-	}
-}
-
-void	loop_hook(void *param)
-{
-	t_game	*game;
-
-	game = (t_game *)param;
-	handle_keys(game);
-	clear_img(game->img);
-	ft_raycast(game);
-	render_sprite(game);
-}
-
-void	load_texture(mlx_texture_t **texture, char *path)
-{
-	*texture = mlx_load_png(path);
-	if (!*texture)
-	{
-		ft_putstr_fd("Error loading texture\n", 2);
-		exit(1);
-	}
-}
-
-void	key_handler(mlx_key_data_t keydata, void *param)
-{
-	t_game	*game;
-
-	game = (t_game *)param;
-	if (keydata.key == MLX_KEY_Y && keydata.action == MLX_PRESS)
-		game->sprite.show_sprite = !game->sprite.show_sprite;
-}
-
-void	x_button(void *param)
-{
-	t_game	*game;
-
-	game = (t_game *)param;
-	mlx_terminate(game->mlx);
-	exit(0);
-}
-
-void	init_game(t_game *game)
-{
-	game->mlx = mlx_init(WIDTH, HEIGHT, "Map", true);
-	mlx_close_hook(game->mlx, &x_button, game);
-	if (!game->mlx)
-	{
-		ft_putstr_fd("Error init mlx\n", 2);
-		exit(1);
-	}
-	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->mini_map = mlx_new_image(game->mlx, MINI_MAP_WIDTH, MINI_MAP_HEIGHT);
-	game->width = game->pars->len_columns * TILE_SIZE;
-	game->height = game->pars->len_rows * TILE_SIZE;
-	load_texture(&game->textures.north, game->pars->north);
-	load_texture(&game->textures.south, game->pars->south);
-	load_texture(&game->textures.east, game->pars->east);
-	load_texture(&game->textures.west, game->pars->west);
-	load_texture(&game->textures.door,);
-	init_sprite(game);
+	delta_x = curr_x_pos - last_x_pos;
+	game->pars->player.angle += delta_x * 0.005;
+	last_x_pos = curr_x_pos;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_pars2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:11:33 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/23 12:13:40 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 12:16:00 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	check_below(char **line, int i)
 	while (line[hold] && line[hold][j]
 		&& (ft_isspace(line[hold][j]) || line[i][j] == '1'))
 		j++;
-	if (line[i][j] != '\n')
-		return (-1);
 	while (line[i] && line[i][0] == '\n')
 		i++;
 	if (line[i] && line[i][0] != '\0')

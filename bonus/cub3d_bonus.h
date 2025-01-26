@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/25 21:08:54 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/26 12:12:46 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define MINI_MAP_WIDTH 160
 # define MINI_MAP_HEIGHT 160
 # define SPEED 5
-# define FOV (M_PI / 3)
+# define FOV M_PI
 # define BUFFER_SIZE 4
 # define DOOR_OPEN 3
 
@@ -197,6 +197,9 @@ void	render_sprite(t_game *game);
 void	init_sprite(t_game *game);
 void	key_handler(mlx_key_data_t keydata, void *param);
 void	mouse_hook(double curr_x_pos, double curr_y_pos, void *param);
+void	load_texture(mlx_texture_t **texture, char *path);
+void	handle_keys(t_game *game);
+void	x_button(void *param);
 int		hit_wall(t_game *game, double x, double y);
 int		get_rgb(int r, int g, int b);
 double	ver_inter(t_game *game, t_ray *ray);

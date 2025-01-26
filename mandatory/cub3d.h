@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/25 20:34:09 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/26 12:14:31 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # include <limits.h>
 # include <stdbool.h>
 
-# define TILE_SIZE 160
+# define TILE_SIZE 32
 # define WIDTH 1920
 # define HEIGHT 1080
-# define SPEED 50
-# define FOV (M_PI / 3)
+# define SPEED 5
+# define FOV M_PI
 # define BUFFER_SIZE 4
 
 typedef struct s_player

@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 20:22:13 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/25 20:37:28 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/26 12:10:24 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	hit_wall(t_game *game, double x, double y)
 
 static int	collide_with_wall(t_game *game, double new_x, double new_y)
 {
-	if (hit_wall(game, new_x, game->pars->player.y)) //horizental
-		new_x = game->pars->player.x; // kan usi lblasa nit d 'y' bach ntchecki biha ghir 'x' rasha
-	if (hit_wall(game, game->pars->player.x, new_y)) //vertical
-		new_y = game->pars->player.y; // kan usi lblasa nit d 'x' bach ntchecki biha ghir 'y' rasha
+	if (hit_wall(game, new_x, game->pars->player.y))
+		new_x = game->pars->player.x;
+	if (hit_wall(game, game->pars->player.x, new_y))
+		new_y = game->pars->player.y;
 	if (hit_wall(game, new_x, new_y))
 		return (1);
 	game->pars->player.x = new_x;
