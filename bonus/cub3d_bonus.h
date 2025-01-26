@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 13:17:54 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/26 12:12:46 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/26 12:51:01 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
 
-# include "../MLX42.h"
+# include "/home/isrkik/Desktop/cub3d/MLX42/include/MLX42/MLX42.h"
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>

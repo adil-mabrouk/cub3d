@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 11:58:21 by amabrouk          #+#    #+#             */
-/*   Updated: 2025/01/26 12:01:27 by amabrouk         ###   ########.fr       */
+/*   Updated: 2025/01/26 12:48:40 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_game(t_game *game)
 	load_texture(&game->textures.south, game->pars->south);
 	load_texture(&game->textures.east, game->pars->east);
 	load_texture(&game->textures.west, game->pars->west);
-	load_texture(&game->textures.door, "/home/amabrouk/Desktop/cub3d/bonus/\
+	load_texture(&game->textures.door, "/home/isrkik/Desktop/cub3d/bonus/\
 parsing_bonus/textures_bonus/door.png");
 	init_sprite(game);
 }

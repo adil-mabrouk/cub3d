@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 16:42:03 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/25 14:56:28 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 12:52:50 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int	check_directions(char *line, int i, t_pars *pars)
 		temp[1] = line[i + 1];
 	}
 	b = i + 2;
+	if (!ft_isspace(line[b]))
+		return (-1);
 	while (line[b] && ft_isspace(line[b]))
 		b++;
 	if (check_textures(pars, temp, b, line) == -1)

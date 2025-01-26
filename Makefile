@@ -6,7 +6,7 @@
 #    By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 10:25:25 by amabrouk          #+#    #+#              #
-#    Updated: 2025/01/25 15:11:34 by isrkik           ###   ########.fr        #
+#    Updated: 2025/01/26 12:50:17 by isrkik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,9 @@ DFLAGS = MLX42/build/libmlx42.a -lglfw -L /Users/$(USER)/brew/opt/glfw/lib
 
 SRC_MAN = mandatory/cub3d.c \
 		mandatory/raycasting.c \
+		mandatory/collision.c \
+		mandatory/horz_inter.c \
+		mandatory/vert_inter.c \
 		mandatory/parsing/main/main.c \
 		mandatory/parsing/utils/utils.c \
 	  	mandatory/parsing/gnl.c \
@@ -40,6 +43,11 @@ SRC_MAN = mandatory/cub3d.c \
 
 SRC_BONUS = bonus/cub3d_bonus.c \
 			bonus/raycasting_bonus.c \
+			bonus/horz_inter_bonus.c \
+			bonus/init_mlx.c \
+			bonus/loop_hook.c \
+			bonus/render.c \
+			bonus/vert_inter_bonus.c \
 			bonus/parsing_bonus/gnl_bonus.c \
 			bonus/textures_bonus.c \
 			bonus/sprites.c\
