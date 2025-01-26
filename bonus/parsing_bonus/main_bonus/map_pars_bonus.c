@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 09:40:00 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/26 17:27:54 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 18:33:36 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,4 @@ void	pars_file(char **line, t_pars *pars)
 		}
 		i++;
 	}
-	if (!pars->map)
-		ft_error("Error\n", 2);
 }

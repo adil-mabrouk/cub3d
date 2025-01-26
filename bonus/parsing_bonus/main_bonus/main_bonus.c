@@ -6,7 +6,7 @@
 /*   By: isrkik <isrkik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:30:56 by isrkik            #+#    #+#             */
-/*   Updated: 2025/01/26 14:25:30 by isrkik           ###   ########.fr       */
+/*   Updated: 2025/01/26 18:33:32 by isrkik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	copy_to_2d(int len, char ***line, int fd2, t_pars *pars)
 	read_file(fd2, len, line);
 	close(fd2);
 	pars_file(*line, pars);
+	if (!pars->map)
+		ft_error("Error\n", 2);
 }
 
 int	first_half(char *av, t_pars	*pars)
