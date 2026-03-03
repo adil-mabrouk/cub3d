@@ -29,7 +29,7 @@ void	init_game(t_game *game)
 	load_texture(&game->textures.south, game->pars->south);
 	load_texture(&game->textures.east, game->pars->east);
 	load_texture(&game->textures.west, game->pars->west);
-	load_texture(&game->textures.door, "/home/amabrouk/Desktop/cub3d/bonus/\
+	load_texture(&game->textures.door, "/home/amabrouk/cub3d/bonus/\
 parsing_bonus/textures_bonus/door.png");
 	init_sprite(game);
 }

@@ -88,25 +88,25 @@ void	init_sprite(t_game *game)
 	int	i;
 
 	i = 0;
-	game->sprite.frames[0] = mlx_load_png("/home/amabrouk/Desktop/cub3d\
+	game->sprite.frames[0] = mlx_load_png("/home/amabrouk/cub3d\
 /bonus/parsing_bonus/textures_bonus/frames/frame1.png");
-	game->sprite.frames[1] = mlx_load_png("/home/amabrouk/Desktop/cub3d\
+	game->sprite.frames[1] = mlx_load_png("/home/amabrouk/cub3d\
 /bonus/parsing_bonus/textures_bonus/frames/frame2.png");
-	game->sprite.frames[2] = mlx_load_png("/home/amabrouk/Desktop/cub3d\
+	game->sprite.frames[2] = mlx_load_png("/home/amabrouk/cub3d\
 /bonus/parsing_bonus/textures_bonus/frames/frame3.png");
-	game->sprite.frames[3] = mlx_load_png("/home/amabrouk/Desktop/cub3d\
+	game->sprite.frames[3] = mlx_load_png("/home/amabrouk/cub3d\
 /bonus/parsing_bonus/textures_bonus/frames/frame4.png");
-	game->sprite.frames[4] = mlx_load_png("/home/amabrouk/Desktop/cub3d\
+	game->sprite.frames[4] = mlx_load_png("/home/amabrouk/cub3d\
 /bonus/parsing_bonus/textures_bonus/frames/frame5.png");
-	game->sprite.frames[5] = mlx_load_png("/home/amabrouk/Desktop/cub3d\
+	game->sprite.frames[5] = mlx_load_png("/home/amabrouk/cub3d\
 /bonus/parsing_bonus/textures_bonus/frames/frame6.png");
-	game->sprite.frames[6] = mlx_load_png("/home/amabrouk/Desktop/cub3d\
+	game->sprite.frames[6] = mlx_load_png("/home/amabrouk/cub3d\
 /bonus/parsing_bonus/textures_bonus/frames/frame7.png");
-	game->sprite.frames[7] = mlx_load_png("/home/amabrouk/Desktop/cub3d\
+	game->sprite.frames[7] = mlx_load_png("/home/amabrouk/cub3d\
 /bonus/parsing_bonus/textures_bonus/frames/frame8.png");
-	game->sprite.frames[8] = mlx_load_png("/home/amabrouk/Desktop/cub3d\
+	game->sprite.frames[8] = mlx_load_png("/home/amabrouk/cub3d\
 /bonus/parsing_bonus/textures_bonus/frames/frame9.png");
-	game->sprite.frames[9] = mlx_load_png("/home/amabrouk/Desktop/cub3d\
+	game->sprite.frames[9] = mlx_load_png("/home/amabrouk/cub3d\
 /bonus/parsing_bonus/textures_bonus/frames/frame10.png");
 	while (i < 10)
 	{
